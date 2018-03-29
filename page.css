@@ -1,0 +1,150 @@
+/* CSS général */
+h1 {
+    font-family: 'Croissant One', cursive;
+    font-size: 30px;
+    text-align: center;
+    color: #0d153c;
+}
+
+h2 {
+    font-family: 'Croissant One', cursive;
+    font-size: 25px;
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+}
+
+hr {
+    border-color : #dbb875;
+    margin-left:auto;
+    margin-right:auto;
+    width:60%;
+}
+
+
+section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.element {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    text-align: justify;
+}
+
+.illustration {
+    float: note;
+    text-align: center;
+}
+
+/* Header */
+.logo {
+  height: 110px;
+  margin-top: -7px;
+}
+
+.navbar {
+  font-size: 1,5uw;
+  font-family: 'Croissant One', cursive;
+  background-color: white;
+}
+.navbar-default .navbar-nav>li>a {
+  color: #0d153c;
+  height: 130px;
+  padding-top: 50px;
+}
+.collapse .navbar-nav>li>a:hover {
+  background-color: ;
+  color : #dbb875;
+}
+.drapeauEurope {
+    height: 20px;
+    margin-top: -3px;
+}
+
+
+/* Carrousel */
+.carousel{
+    background: #2f4357;
+    margin-top: 130px;
+    margin-right : 0 auto;
+    margin-left: 0 auto;
+}
+.carousel .item{
+    min-height: 600px; /* Prevent carousel from being distorted if for some reason image doesn't load */
+}
+.carousel .item img{
+    margin: 0 auto; /* Align slide image horizontally center */
+}
+.slider{
+	margin: 0px;
+}
+
+
+
+/*Footer*/
+
+footer {
+  bottom: 0;
+  width: 100%;
+  height: 120px;
+  background: transparent;
+  text-align: center;
+}
+
+footer p {
+  color: white;
+}
+
+.footerLogo {
+  padding-top: 20px;
+  width: 100px;
+}
+
+.mentionsLegales {
+  font-size: 10px;
+  color: grey;
+}
+
+/*Footer version mobile*/
+
+@media only screen and (max-width: 767px) {
+  footer {
+    height: 280px;
+  }
+  footer p {
+    text-align: center;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/* Version mobile */
+@media only screen and (max-width: 767px) {
+  body {
+    padding-top: 80px;
+    padding-bottom: 200px;
+  }
+  .logo {
+    height: 40px;
+    margin-top: -10px;
+  }
+  .navbar-text {
+    padding-top: 0px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .navbar-default .navbar-nav>li>a {
+    height: 60px;
+    padding-top: 20px;
+  }
+}
