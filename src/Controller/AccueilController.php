@@ -8,8 +8,8 @@
 
 namespace Controller;
 
-use Model\Accueil;
-use Model\AccueilManager;
+//use Model\Accueil;
+//use Model\AccueilManager;
 
 /**
  * Class AccueilController
@@ -21,7 +21,7 @@ class AccueilController extends AbstractController
     /**
      * @return string
      */
-    public function index()
+  public function index()
     {
 
 
