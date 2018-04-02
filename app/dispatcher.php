@@ -8,7 +8,7 @@
 
 
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
-    $r->addRoute('GET', '/', 'Item/index');
+    $r->addRoute('GET', '/', 'Accueil/index');
     // {id} must be a number (\d+)
     $r->addRoute('GET', '/item/{id:\d+}', 'Item/show');
     $r->addRoute('GET', '/item/add', 'Item/add');

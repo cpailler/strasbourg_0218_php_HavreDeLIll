@@ -8,8 +8,8 @@
 
 namespace Controller;
 
-//use Model\Accueil;
-//use Model\AccueilManager;
+use Model\Accueil;
+use Model\AccueilManager;
 
 /**
  * Class AccueilController
@@ -23,7 +23,8 @@ class AccueilController extends AbstractController
      */
   public function index()
     {
-
+        $itemManager = new AccueilManager();
+        $items = $itemManager->findAll();
 
         return $this->twig->render('Pages/accueil.html.twig', ['accueil' => $infos]);
     }
