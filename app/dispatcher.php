@@ -10,6 +10,7 @@
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/', 'Accueil/index');
     $r->addRoute('GET', '/Chambres', 'Chambre/index');
+    $r->addRoute('POST', '/Chambres', 'Chambre/index');
     // {id} must be a number (\d+)
     /*
     $r->addRoute('GET', '/item/{id:\d+}', 'Item/show');
