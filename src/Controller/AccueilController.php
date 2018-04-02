@@ -23,10 +23,10 @@ class AccueilController extends AbstractController
      */
   public function index()
     {
-        $itemManager = new AccueilManager();
-        $items = $itemManager->findAll();
+        $accueilManager = new AccueilManager();
+        $accueil = $accueilManager->findAll();
 
-        return $this->twig->render('Pages/accueil.html.twig', ['accueil' => $infos]);
+        return $this->twig->render('Pages/accueil.html.twig', ['accueil' => $accueil]);
     }
 
   }
