@@ -12,10 +12,10 @@ namespace Controller;
 //use Model\AccueilManager;
 
 /**
- * Class AccueilController
+ * Class LocalisationController
  * @package Controller
  */
-class AccueilController extends AbstractController
+class LocalisationController extends AbstractController
 {
 
     /**
@@ -25,7 +25,7 @@ class AccueilController extends AbstractController
     {
 
 
-        return $this->twig->render('Accueil/Accueil.html.twig', ['accueil' => $infos]);
+        return $this->twig->render('Localisation/Localisation.html.twig', ['localisation' => $local]);
     }
 
   }

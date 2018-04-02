@@ -15,7 +15,7 @@ namespace Controller;
  * Class AccueilController
  * @package Controller
  */
-class AccueilController extends AbstractController
+class LoginController extends AbstractController
 {
 
     /**
@@ -25,7 +25,7 @@ class AccueilController extends AbstractController
     {
 
 
-        return $this->twig->render('Accueil/Accueil.html.twig', ['accueil' => $infos]);
+        return $this->twig->render('Login/Login.html.twig', ['Utilisateurs' => $Utilisateur]);
     }
 
   }
