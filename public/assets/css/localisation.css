@@ -22,3 +22,10 @@ p {
 #contenu.col-md-4 > button.btn.btn-default{
   text-align: center;
 }
+
+.btn.btn-localisation.btn-lg{
+    background-color: #dcba79;
+}
+span.glyphicon {
+    color: white;
+}
