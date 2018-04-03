@@ -1,3 +1,4 @@
+
 /* Header */
 .logo {
   height: 110px;
@@ -21,4 +22,21 @@
 .drapeauEurope {
     height: 20px;
     margin-top: -3px;
+}
+
+/* Header version mobile */
+@media only screen and (max-width: 767px) {
+  .logo {
+    height: 40px;
+    margin-top: -10px;
+  }
+  .navbar-text {
+    padding-top: 0px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .navbar-default .navbar-nav>li>a {
+    height: 60px;
+    padding-top: 20px;
+  }
 }
