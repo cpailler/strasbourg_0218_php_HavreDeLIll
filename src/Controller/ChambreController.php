@@ -22,10 +22,10 @@ class ChambreController extends AbstractController
      */
   public function index()
     {
-        $chambreManager = new ChambreManager();
-        $chambres = $chambreManager->findAll();
+        //$chambreManager = new ChambreManager();
+        //$chambres = $chambreManager->findAll();
 
-        return $this->twig->render('Pages/chambres.html.twig', ['chambres' => $chambres]);
+    return $this->twig->render('Pages/chambres.html.twig'/*, ['chambres' => $chambres]*/);
     }
 
   }

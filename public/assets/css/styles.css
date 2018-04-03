@@ -10,12 +10,6 @@ h2 {
     font-family: 'Croissant One', cursive;
     font-size: 25px;
 }
-h3 {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 22px;
-
-
-}
 
 p {
     font-family: 'Open Sans', sans-serif;
@@ -61,21 +55,4 @@ section {
 }
 .slider{
 	margin: 0px;
-}
-/* Carrousels Chambres*/
-.carchambres{
-    background: #ffffff;
-    margin-top: 0px;
-    margin-right : 0 auto;
-    margin-left: 0 auto;
-}
-.carchambres .item{
-    min-height: 0px; /* Prevent carousel from being distorted if for some reason image doesn't load */
-}
-.carchambres .item img{
-    margin: 0 auto; /* Align slide image horizontally center */
-}
-/*Formulaire de critères*/
-.critere{
-    text-align: center;
 }
