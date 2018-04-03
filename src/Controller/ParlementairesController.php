@@ -8,14 +8,13 @@
 
 namespace Controller;
 
-//use Model\Accueil;
-//use Model\AccueilManager;
+use Model\ParlementairesManager;
 
 /**
  * Class AccueilController
  * @package Controller
  */
-class ChambresController extends AbstractController
+class ParlementairesController extends AbstractController
 {
 
     /**
@@ -23,9 +22,7 @@ class ChambresController extends AbstractController
      */
   public function index()
     {
-
-
-        return $this->twig->render('Chambres/Chambres.html.twig', ['chambres' => $chambre]);
+        return $this->twig->render('Parlementaires/Parlementaires.html.twig');
     }
 
   }

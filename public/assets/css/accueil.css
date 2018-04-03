@@ -1,45 +1,3 @@
-/* CSS général */
-h1 {
-    font-family: 'Croissant One', cursive;
-    font-size: 30px;
-    text-align: center;
-    color: #0d153c;
-}
-
-h2 {
-    font-family: 'Croissant One', cursive;
-    font-size: 25px;
-}
-
-p {
-    font-family: 'Open Sans', sans-serif;
-}
-
-hr {
-    border-color : #dbb875;
-    margin-left:auto;
-    margin-right:auto;
-    width:60%;
-}
-
-
-section {
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-
-.element {
-    padding-top: 70px;
-    padding-bottom: 70px;
-    text-align: justify;
-}
-
-.illustration {
-    float: note;
-    text-align: center;
-}
-
-
 /* Carrousel */
 .carousel{
     background: #2f4357;
@@ -48,7 +6,8 @@ section {
     margin-left: 0 auto;
 }
 .carousel .item{
-    min-height: 600px; /* Prevent carousel from being distorted if for some reason image doesn't load */
+    max-height: 600px; /* Prevent carousel from being distorted if for some reason image doesn't load */
+    min-width: 100%;
 }
 .carousel .item img{
     margin: 0 auto; /* Align slide image horizontally center */
@@ -56,3 +15,8 @@ section {
 .slider{
 	margin: 0px;
 }
+
+ /* Page accueil version mobile */
+@media only screen and (max-width: 767px) {
+/* Rien pour l'instant */
+  }

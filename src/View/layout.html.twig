@@ -1,122 +1,122 @@
 <!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <html lang="fr">
+        <head>
+          <meta charset="utf-8">
+          <meta http-equiv="x-ua-compatible" content="ie=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>{% block title %}{% endblock %}</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-  <link rel="stylesheet" href="/assets/css/header.css">
-  <link rel="stylesheet" href="/assets/css/footer.css">
-  <link rel="stylesheet" href="/assets/css/style.css">
-  {% block stylesheet %}{% endblock %}
-  <link rel="icon" href="/assets/images/favicon.png">
-</head>
+          <title>{% block title %}{% endblock %}</title>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+          <!-- Optional theme -->
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Croissant+One|Open+Sans">
+          <link rel="stylesheet" href="/assets/css/header.css">
+          <link rel="stylesheet" href="/assets/css/footer.css">
+          <link rel="stylesheet" href="/assets/css/styles.css">
+          {% block stylesheet %}{% endblock %}
+          <link rel="icon" href="/assets/images/favicon.png">
+        </head>
 
-<body>
-  <header>
-    <nav class="navbar navbar-default navbar-fixed-top nav-justified">
-      <div class="container-fluid">
-        <!-- Brand and toggle(burger menu) get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Burger menu</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+        <body>
+          <header>
+            <nav class="navbar navbar-default navbar-fixed-top nav-justified">
+              <div class="container-fluid">
+                <!-- Brand and toggle(burger menu) get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Burger menu</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
 
-          <a class="navbar-brand" href="#"><img class="logo" src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1521752198/Havre_de_l_Ill_ucmji1.png" alt="logo"></a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="Accueil">ACCUEIL</a></li>
-            <li><a href="Chambres">NOS CHAMBRES</a></li>
-            <li><a href="Reservation">RÉSERVATION</a></li>
-            <li><a href="Localisation">LOCALISATION</a></li>
-            <li><a href="Parlementaire"><img class="drapeauEurope" src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1521753995/Drapeau-Europe_k876hd.png" alt="drapeauEurope"> PARLEMENTAIRE</a></li>
-          </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container-fluid -->
-    </nav>
-  </header>
-  <!-- END HEADER-->
-  {% block content %}{% endblock %}
+                  <a class="navbar-brand" href="#"><img class="logo" src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1522689405/Havre_de_l_Ill_rsg526.png" alt="logo"></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a href="Accueil">ACCUEIL</a></li>
+                    <li><a href="Chambres">NOS CHAMBRES</a></li>
+                    <li><a href="Reservation">RÉSERVATION</a></li>
+                    <li><a href="Localisation">LOCALISATION</a></li>
+                    <li><a href="Parlementaires"><img class="drapeauEurope" src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1521753995/Drapeau-Europe_k876hd.png" alt="drapeauEurope"> PARLEMENTAIRE</a></li>
+                  </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+              </div>
+              <!-- /.container-fluid -->
+            </nav>
+          </header>
+          <!-- END HEADER-->
+          {% block content %}{% endblock %}
 
-  <button onclick="topFunction()" id="myBtn" title="haut de page"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>
-  <button onclick="topFunction()" id="form" title="Message" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-envelope" aria-hidden="true" ></span></button>
+          <button onclick="topFunction()" id="myBtn" title="haut de page"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>
+          <button onclick="topFunction()" id="form" title="Message" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-envelope" aria-hidden="true" ></span></button>
 
 
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Notre formulaire</h4>
-        </div>
-        <div class="modal-body">
-          <h6 class="modal-title" id="myModalLabel">Pour toute information, ou toutes questions, n'hesitez pas à nous contacter via notre formulaire ci dessous</h6></br>
-          <form >
-            <div class="form-group">
-              <label class="sr-only" for="exampleInputAmount"></label>
-              <div class="input-group">
-                <div class="input-group-addon">N</div>
-                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Nom">
-              </div></br>
-              <div class="form-group">
-                <label class="sr-only" for="exampleInputAmount"></label>
-                <div class="input-group">
-                  <div class="input-group-addon">P</div>
-                  <input type="text" class="form-control" id="exampleInputAmount" placeholder="Prenom">
-                </div></br>
-                <div class="form-group">
-                  <label class="sr-only" for="exampleInputAmount"></label>
-                  <div class="input-group">
-                    <div class="input-group-addon">@</div>
-                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="E-mail">
-                  </div></br>
-                  <div class="form-group">
-                    <label class="sr-only" for="exampleInputAmount"></label>
-                    <div class="input-group">
-                      <div class="input-group-addon">@</div>
-                      <textarea class="form-control" rows="3" placeholder="Tapez votre message ici"></textarea>
-                    </div></br>
-                    <button type="submit" class="btn btn-primary">Envoyer</button>
-
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h1 class="modal-title" id="myModalLabel">Notre formulaire</h1>
+                </div>
+                <div class="modal-body">
+                  <h6 class="modal-title" id="myModalLabel">Pour toute information, ou toutes questions, n'hesitez pas à nous contacter via notre formulaire ci dessous</h6></br>
+                  <form >
+                    <div class="form-group">
+                      <label class="sr-only" for="exampleInputAmount"></label>
+                      <div class="input-group">
+                        <div class="input-group-addon">N</div>
+                        <input type="text" class="form-control" id="exampleInputAmount" placeholder="Nom">
+                      </div></br>
+                      <div class="form-group">
+                        <label class="sr-only" for="exampleInputAmount"></label>
+                        <div class="input-group">
+                          <div class="input-group-addon">P</div>
+                          <input type="text" class="form-control" id="exampleInputAmount" placeholder="Prenom">
+                        </div></br>
+                        <div class="form-group">
+                          <label class="sr-only" for="exampleInputAmount"></label>
+                          <div class="input-group">
+                            <div class="input-group-addon">@</div>
+                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="E-mail">
+                          </div></br>
+                          <div class="form-group">
+                            <label class="sr-only" for="exampleInputAmount"></label>
+                            <div class="input-group">
+                              <div class="input-group-addon">@</div>
+                              <textarea class="form-control" rows="3" placeholder="Tapez votre message ici"></textarea>
+                            </div></br>
+                            <button type="submit"class="btn btn-localisation">Envoyer</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                   </form>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!--Button  -->
-  <footer>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-12 center-block">
-          <img class="footerLogo" src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1521752198/Havre_de_l_Ill_ucmji1.png" alt="logo">
-        </div>
-      </div>
-    </br>
-    <div class="row">
-      <div class="col-xs-12 ">
-        <p class="mentionsLegales">LE HAVRE DE L'ILL © 2018 - Tous droits réservés - Adresse - Tél. : ... <br> Réalisation Clément, Zak Tiffany</p>
-      </div>
-    </div>
-  </div>
-</footer>
+          <!--Button  -->
+          <footer>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-12 center-block">
+                  <img class="footerLogo" src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1522689405/Havre_de_l_Ill_rsg526.png" alt="logo">
+                </div>
+              </div>
+            </br>
+            <div class="row">
+              <div class="col-xs-12 ">
+                <p class="mentionsLegales">LE HAVRE DE L'ILL © 2018 - Tous droits réservés - Adresse - Tél. : ... <br> Réalisation Clément, Zak Tiffany</p>
+              </div>
+            </div>
+          </div>
+        </footer>
 
-{% block javascript %}{% endblock %}
+        {% block javascript %}{% endblock %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -142,5 +142,5 @@ $(document).ready(function(){
 
 });</script>
 
-</body>
+    </body>
 </html>
