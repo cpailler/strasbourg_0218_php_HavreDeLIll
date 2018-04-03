@@ -1,0 +1,31 @@
+h1 {
+    font-family: 'Croissant One', cursive;
+    font-size: 30px;
+    text-align: center;
+    color: #0d153c;
+}
+
+h2 {
+    font-family: 'Croissant One', cursive;
+    font-size: 25px;
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+}
+#titre{
+  padding-top: 150px;
+}
+.col-md-4{
+  text-align:center !important;
+}
+#contenu.col-md-4 > button.btn.btn-default{
+  text-align: center;
+}
+
+.btn.btn-localisation.btn-lg{
+    background-color: #dcba79;
+}
+span.glyphicon {
+    color: white;
+}

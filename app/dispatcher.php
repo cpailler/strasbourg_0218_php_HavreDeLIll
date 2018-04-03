@@ -12,13 +12,15 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/Chambres', 'Chambre/index');
     $r->addRoute('POST', '/Chambres', 'Chambre/index');
     $r->addRoute('GET', '/Parlementaires', 'Parlementaires/index');
+    $r->addRoute('GET', '/Localisation', 'Localisation/index');
+    $r->addRoute('GET', '/Accueil', 'Accueil/index');
+    $r->addRoute('GET', '/Login', 'Login/index');
     // {id} must be a number (\d+)
     /*
     $r->addRoute('GET', '/item/{id:\d+}', 'Item/show');
     $r->addRoute('GET', '/item/add', 'Item/add');
     $r->addRoute('GET', '/item/edit/{id:\d+}', 'Item/edit');
     $r->addRoute('GET', '/admin', 'Admin/index');
-    $r->addRoute('GET', '/Pages', 'Accueil/index');
     */
 });
 

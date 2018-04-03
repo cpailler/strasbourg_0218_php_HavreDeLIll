@@ -8,13 +8,14 @@
 
 namespace Controller;
 
-use Model\ParlementairesManager;
+//use Model\Accueil;
+//use Model\AccueilManager;
 
 /**
  * Class AccueilController
  * @package Controller
  */
-class ParlementairesController extends AbstractController
+class LoginController extends AbstractController
 {
 
     /**
@@ -22,7 +23,9 @@ class ParlementairesController extends AbstractController
      */
   public function index()
     {
-        return $this->twig->render('Parlementaires/Parlementaires.html.twig');
+
+
+        return $this->twig->render('Login/Login.html.twig', ['Utilisateurs' => $Utilisateur]);
     }
 
   }

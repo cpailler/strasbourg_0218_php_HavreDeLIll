@@ -25,7 +25,7 @@ class ChambreController extends AbstractController
         //$chambreManager = new ChambreManager();
         //$chambres = $chambreManager->findAll();
 
-    return $this->twig->render('Pages/chambres.html.twig'/*, ['chambres' => $chambres]*/);
+    return $this->twig->render('Chambres/Chambres.html.twig'/*, ['chambres' => $chambres]*/);
     }
 
   }
