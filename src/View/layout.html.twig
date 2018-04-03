@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/header.css">
+    <link rel="stylesheet" href="/assets/css/footer.css">
+    {% block stylesheet %}{% endblock %}
+    <link rel="icon" href="/assets/images/favicon.png">
+</head>
+
+<body>
+  <header>
+      <nav class="navbar navbar-default navbar-fixed-top nav-justified">
+          <div class="container-fluid">
+              <!-- Brand and toggle(burger menu) get grouped for better mobile display -->
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Burger menu</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+                  <a class="navbar-brand" href="#"><img class="logo" src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1521752198/Havre_de_l_Ill_ucmji1.png" alt="logo"></a>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav navbar-right">
+                      <li><a href="">ACCUEIL</a></li>
+                      <li><a href="">NOS CHAMBRES</a></li>
+                      <li><a href="">RÉSERVATION</a></li>
+                      <li><a href="">LOCALISATION</a></li>
+                      <li><a href=""><img class="drapeauEurope" src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1521753995/Drapeau-Europe_k876hd.png" alt="drapeauEurope"> PARLEMENTAIRE</a></li>
+                  </ul>
+              </div>
+              <!-- /.navbar-collapse -->
+          </div>
+          <!-- /.container-fluid -->
+      </nav>
+  </header>
+  <!-- END HEADER-->
+    {% block content %}{% endblock %}
+    <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 center-block">
+                    <img class="footerLogo" src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1521752198/Havre_de_l_Ill_ucmji1.png" alt="logo">
+                </div>
+            </div>
+            </br>
+            <div class="row">
+                <div class="col-xs-12 ">
+                    <p class="mentionsLegales">LE HAVRE DE L'ILL © 2018 - Tous droits réservés - Adresse - Tél. : ... <br> Réalisation Clément, Zak Tiffany</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+{% block javascript %}
+<!--Jquery-->
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+{% endblock %}
+</html>
