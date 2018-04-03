@@ -1,24 +1,25 @@
 /* CSS général */
 h1 {
+    color: #0d153c;
     font-family: 'Croissant One', cursive;
     font-size: 30px;
     text-align: center;
-    color: #0d153c;
 }
 
 h2 {
     font-family: 'Croissant One', cursive;
     font-size: 25px;
+    color: #0d153c;
 }
 h3 {
     font-family: 'Open Sans', sans-serif;
     font-size: 22px;
-
-
+    color: #0d153c;
 }
 
 p {
     font-family: 'Open Sans', sans-serif;
+    color:#0d153c;
 }
 
 hr {
@@ -27,7 +28,6 @@ hr {
     margin-right:auto;
     width:60%;
 }
-
 
 section {
     padding-top: 40px;
@@ -43,25 +43,10 @@ section {
 .illustration {
     float: note;
     text-align: center;
+    width: 250px;
 }
 
 
-/* Carrousel Acceuil*/
-.carousel{
-    background: #2f4357;
-    margin-top: 130px;
-    margin-right : 0 auto;
-    margin-left: 0 auto;
-}
-.carousel .item{
-    min-height: 600px; /* Prevent carousel from being distorted if for some reason image doesn't load */
-}
-.carousel .item img{
-    margin: 0 auto; /* Align slide image horizontally center */
-}
-.slider{
-	margin: 0px;
-}
 /* Carrousels Chambres*/
 .carchambres{
     background: #ffffff;
