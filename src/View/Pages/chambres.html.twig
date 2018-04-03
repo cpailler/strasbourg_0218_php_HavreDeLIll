@@ -1,0 +1,130 @@
+{% extends 'layout.html.twig' %}
+    {% block content %}
+
+    <section>
+
+    </section>
+
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>LES CHAMBRES DU HAVRE DE L'ILL</h1>
+                </div>
+            </div>
+
+            <!--Selection de critères-->
+            <div class="row">
+                <div class="container-fluid center-block">
+                    <form class="center-block critere" action="Chambres" method="post">
+                        <select name="Style" class="">
+                            <option value="style">Style</option>
+                            <option value="classique">Classique</option>
+                            <option value="moderne">Moderne</option>
+                        </select>
+                        <select name="Literie">
+                            <option value="literie">Literie</option>
+                            <option value="simple">Lits simples</option>
+                            <option value="double">Lit double</option>
+                        </select>
+                        <select name="SdB">
+                            <option value="SbB">Salle de bain</option>
+                            <option value="baignoire">Baignoire</option>
+                            <option value="douche">Douche</option>
+                        </select>
+                        <input type="checkbox" name="PMR" value="pmr">Accessibilité PMR
+                        <input type="submit" value="Valider">
+
+                    </form>
+                </div>
+
+            </div>
+            <!--Chambre 1-->
+
+            <div class="row element">
+                <div class="col-xs-3 col-xs-offset-1">
+                    <div class="slider">
+                        <div id="myCarousel" class="carousel slide carchambres" data-ride="carousel">
+                            <!-- Carousel indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                            </ol>
+                            <!-- Wrapper for carousel items -->
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img src="http://via.placeholder.com/375x250" alt="First Slide">
+                                </div>
+                                <div class="item">
+                                    <img src="http://via.placeholder.com/375x250" alt="Second Slide">
+                                </div>
+                                <div class="item">
+                                    <img src="http://via.placeholder.com/375x250" alt="Third Slide">
+                                </div>
+                            </div>
+                            <!-- Carousel controls -->
+                            <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                               <span class="glyphicon glyphicon-chevron-left"></span>
+                           </a>
+                            <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                               <span class="glyphicon glyphicon-chevron-right"></span>
+                           </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-7">
+                    <h2>Chambre 1</h2>
+                    <h3>100€TTC/nuit</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div class="col-xs-1"></div>
+            </div>
+
+            <hr>
+
+            <div class="row element">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-7">
+                    <h2>Notre politique</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                <div class="col-xs-3">
+                    <div class="slider">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                            <!-- Carousel indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                            </ol>
+                            <!-- Wrapper for carousel items -->
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img src="" alt="First Slide">
+                                </div>
+                                <div class="item">
+                                    <img src="/examples/images/slide2.png" alt="Second Slide">
+                                </div>
+                                <div class="item">
+                                    <img src="/examples/images/slide3.png" alt="Third Slide">
+                                </div>
+                            </div>
+                            <!-- Carousel controls -->
+                            <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                               <span class="glyphicon glyphicon-chevron-left"></span>
+                           </a>
+                            <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                               <span class="glyphicon glyphicon-chevron-right"></span>
+                           </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-1"></div>
+            </div>
+    </section>
+
+
+    {% endblock %}
