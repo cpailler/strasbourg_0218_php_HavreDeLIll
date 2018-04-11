@@ -13,6 +13,8 @@ h3 {
     margin-top: 0px;
     margin-right : 0 auto;
     margin-left: 0 auto;
+    height: 250px;
+    width: 250px;
 }
 .carchambres .item{
     min-height: 0px; /* Prevent carousel from being distorted if for some reason image doesn't load */
