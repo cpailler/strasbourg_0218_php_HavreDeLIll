@@ -20,6 +20,7 @@ class ItemController extends AbstractController
 
     /**
      * @return string
+     * @throws \Twig_Error_Loader
      */
     public function index()
     {
