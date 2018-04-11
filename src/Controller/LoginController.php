@@ -8,8 +8,8 @@
 
 namespace Controller;
 
-//use Model\Accueil;
-//use Model\AccueilManager;
+//use Model\Login;
+//use Model\LoginManager;
 
 /**
  * Class AccueilController
@@ -25,7 +25,7 @@ class LoginController extends AbstractController
     {
 
 
-        return $this->twig->render('Login/Login.html.twig', ['Utilisateurs' => $Utilisateur]);
+        return $this->twig->render('Login/Login.html.twig', ['Utilisateurs' => $utilisateur]);
     }
 
   }

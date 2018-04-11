@@ -1,0 +1,39 @@
+
+{% extends 'layout.html.twig' %}
+{% block title %}Page de localisation{% endblock %}
+  {% block content %}
+<div class="col-md-6">
+    <div class="row">
+        <div class="col-md-8">
+        <h1>{{ monthTS }}</h1>
+        </div>
+        <div class="col-md-4">
+           <p></p> <a href="/Reservation/{{ previousMonth }}/{{ previousYear }}" class="btn-calender">&lt;</a>
+            <a href="/Reservation/{{ nextMonth }}/{{ nextYear }}" class="btn-calender">&gt;</a></p>
+        </div>
+
+    </div>
+    <table class="calendar__table calendar__table--{{ month.getweeks() }}weeks">
+    {% set date = cloneStart.modify("-1 day") %}
+    {% for i in 0..weeks %}
+    <tr>
+        {% for k, day in days %}
+            {% if i == 0 %}
+                <td class="{% if (month.withinMonth(date)) %}{% else %}calendar__otherMonth{% endif %}">
+                    <div class="calendar__weekday">{{ day }}</div>
+            {% else %}
+            {% set date = date.modify("+1 day")%}
+
+                <td class="{% if (month.withinMonth(date)) %}  {% else %}calendar__otherMonth{% endif %}">
+                    <div class="calendar__day">{{ date.format('d') }}</div>
+            {% endif %}
+
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+</div>
+      <div class="col-md-6">
+      </div>
+  {% endblock %}

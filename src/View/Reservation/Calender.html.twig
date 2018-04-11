@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <table class="calendar__table calendar__table--{{ myDate.nbWeeks }}weeks">
+        {% for day in myDate['days'] %}
+        <tr>   {{ day }}
+        {% endfor %}
+    </table>
+
+    <td class="">
+        <?php if ($i === 0):?>
+        <div class="calendar__weekday"><?=$day;?></div>
+        <?php endif;?>
+        <div class="calendar__day"><?=$date->format('d');?></div>
+    </td>
+{% endblock %}
+</tr>
