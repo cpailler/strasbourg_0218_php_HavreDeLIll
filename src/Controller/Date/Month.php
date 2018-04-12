@@ -76,7 +76,12 @@ class Month {
 
         $debutWeek = $this->getStartingDay();
         $fin = (clone $debutWeek)->modify('+1 month -1 day');
-        $weeks = (int)$fin->format('W') - (int)$debutWeek->format('W')+1;
+        $startWeek = (int)($debutWeek->format('W'));
+        $finWeek = (int)($fin->format('W'));
+        if($finWeek === 1){
+            $finWeek = (int)(clone $fin)->modify('-7 days')->format('W')+1;
+        }
+        $weeks = $finWeek - $startWeek +1;
         if($weeks < 0){
             $weeks = (int)$fin->format('W');
         }
