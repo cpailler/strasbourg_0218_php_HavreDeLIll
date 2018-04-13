@@ -9,9 +9,9 @@
 namespace Model;
 
 
-class ChambreManager extends EntityManager
+class ReservationAttenteManager extends EntityManager
 {
-    const TABLE = 'Chambres';
+    const TABLE = '';
 
 
     public function __construct()

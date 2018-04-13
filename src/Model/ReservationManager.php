@@ -19,4 +19,20 @@ class ReservationManager extends EntityManager
         parent::__construct(self::TABLE);
     }
 
+    public function findAll()
+    {
+    }
+
+    public function delete($id)
+    {
+    }
+
+    public function update($id, $data)
+    {
+    }
+
+    public function insert($data)
+    {
+    }
+
 }

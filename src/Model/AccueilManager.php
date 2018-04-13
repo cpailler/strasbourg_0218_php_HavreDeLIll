@@ -19,4 +19,6 @@ class AccueilManager extends EntityManager
         parent::__construct(self::TABLE);
     }
 
+
+
 }
