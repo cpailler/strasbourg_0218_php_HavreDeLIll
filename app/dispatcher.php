@@ -17,6 +17,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/Login', 'Login/index');
     $r->addRoute('GET', '/Reservation/{initMonth:\d+}/{initYear:\d+}', 'Reservation/init');
     $r->addRoute('GET', '/Reservation', 'Reservation/init');
+    $r->addRoute('GET', '/Administration', 'Administration/index');
     // {id} must be a number (\d+)
     /*
     $r->addRoute('GET', '/item/{id:\d+}', 'Item/show');
