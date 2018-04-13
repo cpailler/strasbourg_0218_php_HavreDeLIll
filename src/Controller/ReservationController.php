@@ -68,7 +68,8 @@ class ReservationController extends AbstractController
                 'weeks' => $month->getWeeks(),
                 'fullCalendar' => $fullCalendar,
                 'cloneStart' => clone $start,
-                'days'=>$days
+                'daysEn'=>$daysEn,
+                'days'=>$days,
             ]);
 
     }
