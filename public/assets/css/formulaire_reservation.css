@@ -1,0 +1,19 @@
+header, form{
+    padding: 4em 10%;
+}
+
+.form-group{
+    margin-bottom: 20px;
+}
+
+.controls {
+    text-align: left;
+}
+
+.input-group-addon {
+    background-color: #dbb875;
+    min-width: 150px;
+    color: #000;olor: white;
+}
+
+.input-group { width: 100%; }
