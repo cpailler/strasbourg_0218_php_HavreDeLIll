@@ -12,4 +12,13 @@ namespace Model;
 class LocalisationManager extends EntityManager
 {
 
+    const TABLE = 'Localisation';
+
+
+    public function __construct()
+    {
+        parent::__construct(self::TABLE);
+    }
+
+
 }

@@ -11,7 +11,7 @@ namespace Model;
 
 class ReservationAttenteManager extends EntityManager
 {
-    const TABLE = '';
+    const TABLE = 'ReservationEnAttente';
 
 
     public function __construct()
