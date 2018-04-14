@@ -24,7 +24,7 @@ class Month {
      * @throws \Exception
      */
 
-    public function __construct ( ?int $month = null, ?int $year = null)
+    public function __construct ( int $month = null, int $year = null)
     {
         if ($month === null){
             $month = (int)date('m');
