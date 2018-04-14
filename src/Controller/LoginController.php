@@ -22,12 +22,32 @@ class LoginController extends AbstractController
     /**
      * @return string
      */
-  public function index()
+    public function index()
     {
-        $adminManager=new AdminManager();
+        $adminManager = new AdminManager();
         $admin = $adminManager->findAll();
 
-        return $this->twig->render('Login/Login.html.twig', ['admin' => $admin]);
-    }
 
-  }
+        $errors = [];
+        if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+
+            if (!isset($_POST['user']) || $_POST['user']=='') {
+                $errors['user'] = "Veuillez saisir votre nom d'utilisateur";
+            }
+
+            if (!isset($_POST['password']) || empty($_POST['password'])) {
+                $errors['password'] = "Veuillez saisir votre mot de passe";
+            }
+
+            elseif ($_POST['user'] != $admin['0']['name'] && $_POST['password'] != $admin['0']['password']) {
+                $errors['login'] = "Votre mot de passe ou votre nom d'utilisateur est incorrect";
+            }
+            elseif ($_POST['user'] === $admin['0']['name'] && $_POST['password'] === $admin['0']['password']) {
+                header('Location: /Administration');
+            }
+        }
+        return $this->twig->render('Login/Login.html.twig', ['admin' => $admin, 'errors' => $errors]);
+
+
+    }
+}

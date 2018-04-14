@@ -22,4 +22,10 @@ abstract class AbstractController
         $this->twig = new Twig_Environment($loader, ['cache' => false, 'debug' => APP_DEV]);
         $this->twig->addExtension(new \Twig_Extension_Debug());
     }
+    protected function securisation($infos){
+        $infos = trim($infos);
+        $infos= stripslashes($infos);
+        $infos = strip_tags($infos);
+        return $infos;
+    }
 }
