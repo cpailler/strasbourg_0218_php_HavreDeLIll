@@ -1,0 +1,42 @@
+
+/* Header */
+.logo {
+  height: 110px;
+  margin-top: -7px;
+}
+
+.navbar {
+  font-size: 1,5uw;
+  font-family: 'Croissant One', cursive;
+  background-color: white;
+}
+.navbar-default .navbar-nav>li>a {
+  color: #0d153c;
+  height: 130px;
+  padding-top: 50px;
+}
+.collapse .navbar-nav>li>a:hover {
+  background-color: ;
+  color : #dbb875;
+}
+.drapeauEurope {
+    height: 20px;
+    margin-top: -3px;
+}
+
+/* Header version mobile */
+@media only screen and (max-width: 767px) {
+  .logo {
+    height: 40px;
+    margin-top: -10px;
+  }
+  .navbar-text {
+    padding-top: 0px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .navbar-default .navbar-nav>li>a {
+    height: 60px;
+    padding-top: 20px;
+  }
+}
