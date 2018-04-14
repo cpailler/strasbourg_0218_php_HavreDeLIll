@@ -10,6 +10,7 @@ namespace Controller;
 
 //use Model\Login;
 //use Model\LoginManager;
+use Model\AdminManager;
 
 /**
  * Class AccueilController
@@ -23,9 +24,10 @@ class LoginController extends AbstractController
      */
   public function index()
     {
+        $adminManager=new AdminManager();
+        $admin = $adminManager->findAll();
 
-
-        return $this->twig->render('Login/Login.html.twig', ['Utilisateurs' => $utilisateur]);
+        return $this->twig->render('Login/Login.html.twig', ['admin' => $admin]);
     }
 
   }
