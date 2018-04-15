@@ -23,12 +23,16 @@ class AdministrationController extends AbstractController
      * @return string
      */
     public function index()
-    {
-        //$accueilManager = new AccueilManager();
-        //$accueil = $accueilManager->findAll();
+    {   session_start();
+        if($_SESSION['user'] != $_SESSION['name'] && $_SESSION['password'] !=  $_SESSION['pwd']){
+            header('Location: /Login');
+        }
 
 
-        return $this->twig->render('Administration/Administration.html.twig'/*, ['accueil' => $infos]*/);
+
+
+
+        return $this->twig->render('Administration/Administration.html.twig');
     }
 
 }
