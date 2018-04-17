@@ -12,4 +12,14 @@ namespace Model;
 class DiapoAccueilManager extends EntityManager
 {
 
+    const TABLE = 'DiapoAccueil';
+
+
+    public function __construct()
+    {
+        parent::__construct(self::TABLE);
+    }
+
 }
+
+
