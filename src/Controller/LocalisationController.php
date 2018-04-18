@@ -26,7 +26,8 @@ class LocalisationController extends AbstractController
         $LocalisationManager = new LocalisationManager();
         $Local = $LocalisationManager->findAll();
 
-        return $this->twig->render('Localisation/Localisation.html.twig', ['Local' => $Local]);
+
+        return $this->twig->render('Localisation/Localisation.html.twig', ['Local' => $Local[0]]);
     }
 
   }

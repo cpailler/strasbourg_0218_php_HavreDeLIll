@@ -4,16 +4,15 @@
     <link rel="stylesheet" href="/assets/css/localisation.css">{% endblock %}
   {% block content %}
       <section>
+          </br></br></br></br></br>
           <div class="row" id="titre">
               <div class="col-md-6 col-md-offset-3">
                   <h1>LOCALISATION</h1></br>
-                  <h4>Vous souhaitez passer un sejour agreable, reposant, au coeur de l'Alsace ? venez d'ecouvrir Notre
-                      maison d'hôte à (nom de village)
-                      dans un cadre luxuriant et autentique.
+                  <h4>{{ Local.texte }}
                   </h4>
               </div>
           </div>
-          </br></br></br></br></br>
+
           <div class="row" id="contenu">
               <div class="col-md-6" style="text-align:center;">
                   <h1>ADRESSE</h1></br>
@@ -30,8 +29,8 @@
                       <span class=" glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
                   </button>
                   </br></br>
-                  <p>teléphone Portable :06.06.06.06.06</p>
-                  <p>teléphone Portable :03.03.03.03.03</p>
+                  <p>Num.Fixe :<a href="tel:+33308990404"> {{ Local.numFixe }}</a></p>
+                  <p>Num.Tél. : <a href="tel:+33678490000">{{ Local.numPortable }}</a></p>
               </div>
           </div>
           </br>
