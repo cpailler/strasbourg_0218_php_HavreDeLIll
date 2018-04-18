@@ -18,7 +18,7 @@
                   </ol>
                   <!-- Wrapper for carousel items -->
                   <div class="carousel-inner">
-                      {% for entity in diapoAccueil[1:] %}
+                      {% for entity in diapoAccueil %}
                           <div class="item {% if loop.index == 1 %} active {% endif %}">
                               <!-- le reste des images -->
                               <img src="{{ entity.urlImage }}" alt="First Slide">
@@ -45,7 +45,7 @@
                       </div>
                   </div>
                   {% for value in accueil %}
-                      {% if value.id%2==0 %}
+                      {% if value.id%2==1 %}
                           <div class="row element">
                               <div class="col-xs-12 col-md-1"></div>
                               <div class="col-xs-12 col-md-3">
@@ -59,7 +59,6 @@
                           </div>
 
                       {% else %}
-
                           <hr>
 
                           <div class="row element">
