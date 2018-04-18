@@ -10,6 +10,7 @@ namespace Controller;
 
 use Model\Accueil;
 use Model\AccueilManager;
+use Model\DiapoAccueilManager;
 
 /**
  * Class AccueilController
@@ -23,11 +24,16 @@ class AccueilController extends AbstractController
      */
   public function index()
     {
-        //$accueilManager = new AccueilManager();
-        //$accueil = $accueilManager->findAll();
+        $accueilManager = new AccueilManager();
+        $accueil = $accueilManager->findAll();
 
 
-    return $this->twig->render('Accueil/Accueil.html.twig'/*, ['accueil' => $infos]*/);
+        $diapoAccueilManager = new DiapoAccueilManager();
+        $diapoAccueil = $diapoAccueilManager->findAll();
+
+
+        return $this->twig->render('Accueil/Accueil.html.twig', ['accueil' => $accueil,'diapoAccueil' => $diapoAccueil]);
     }
 
   }
+

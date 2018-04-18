@@ -3,6 +3,8 @@
     background: #2f4357;
     margin-right : 0 auto;
     margin-left: 0 auto;
+    max-height: 600px;
+    overflow: hidden;
 }
 .carousel .item{
     max-height: 600px; /* Prevent carousel from being distorted if for some reason image doesn't load */
@@ -17,5 +19,10 @@
 
  /* Page accueil version mobile */
 @media only screen and (max-width: 767px) {
-/* Rien pour l'instant */
+
+    .carousel{
+        max-height: 300px;
+        overflow: hidden;
+    }
+
   }

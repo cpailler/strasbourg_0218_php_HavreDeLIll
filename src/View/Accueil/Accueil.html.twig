@@ -1,74 +1,79 @@
 {% extends 'layout.html.twig' %}
 {% block title %}Page d'accueil{% endblock %}
-{% block stylesheet %}<link rel="stylesheet" href="/assets/css/accueil.css">{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/accueil.css">{% endblock %}
   {% block content %}
 
 
-<section>
-  <!--Carrousel-->
-  <div class="slider">
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
-          <!-- Carousel indicators -->
-          <ol class="carousel-indicators">
-              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-              <li data-target="#myCarousel" data-slide-to="1"></li>
-              <li data-target="#myCarousel" data-slide-to="2"></li>
-          </ol>
-          <!-- Wrapper for carousel items -->
-          <div class="carousel-inner">
-              <div class="item active">
-                  <img src="http://via.placeholder.com/1200x600" alt="First Slide">
+      <section>
+          <!--Carrousel-->
+          <div class="slider">
+              <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                  <!-- Carousel indicators -->
+                  <ol class="carousel-indicators">
+                      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                      <li data-target="#myCarousel" data-slide-to="1"></li>
+                      <li data-target="#myCarousel" data-slide-to="2"></li>
+                      <li data-target="#myCarousel" data-slide-to="3"></li>
+                  </ol>
+                  <!-- Wrapper for carousel items -->
+                  <div class="carousel-inner">
+                      {% for entity in diapoAccueil %}
+                          <div class="item {% if loop.index == 1 %} active {% endif %}">
+                              <!-- le reste des images -->
+                              <img src="{{ entity.urlImage }}" alt="First Slide">
+                          </div>
+                      {% endfor %}
+                  </div>
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner" role="listbox">
+                      <!-- Carousel controls -->
+                      <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                          <span class="glyphicon glyphicon-chevron-left"></span>
+                      </a>
+                      <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                          <span class="glyphicon glyphicon-chevron-right"></span>
+                      </a>
+                  </div>
               </div>
-              <div class="item">
-                  <img src="http://via.placeholder.com/1200x600" alt="Second Slide">
-              </div>
-              <div class="item">
-                  <img src="http://via.placeholder.com/1200x600" alt="Third Slide">
-              </div>
-          </div>
-          <!-- Carousel controls -->
-          <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-             <span class="glyphicon glyphicon-chevron-left"></span>
-         </a>
-          <a class="carousel-control right" href="#myCarousel" data-slide="next">
-             <span class="glyphicon glyphicon-chevron-right"></span>
-         </a>
-      </div>
-  </div>
 
-      <div class="container-fluid">
-          <div class="row">
-              <div class="col-xs-12">
-                  <h1>PRÉSENTATION</h1>
-              </div>
-          </div>
 
-          <div class="row element">
-              <div class="col-xs-12 col-md-1"></div>
-              <div class="col-xs-12 col-md-3">
-                  <img class="illustration center-block" src="http://via.placeholder.com/250x250">
-              </div>
-              <div class="col-xs-12 col-md-7">
-                  <h2>HISTOIRE</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              </div>
-              <div class="col-xs-12 col-md-1"></div>
-          </div>
+              <div class="container-fluid">
+                  <div class="row">
+                      <div class="col-xs-12">
+                          <h1>PRÉSENTATION</h1>
+                      </div>
+                  </div>
+                  {% for value in accueil %}
+                      {% if value.id%2==1 %}
+                          <div class="row element">
+                              <div class="col-xs-12 col-md-1"></div>
+                              <div class="col-xs-12 col-md-3">
+                                  <img class="illustration center-block" src="{{ value.urlImage }}">
+                              </div>
+                              <div class="col-xs-12 col-md-7">
+                                  <h2>{{ value.titre | upper }}</h2>
+                                  <p>{{ value.texte }}</p>
+                              </div>
+                              <div class="col-xs-12 col-md-1"></div>
+                          </div>
 
-          <hr>
+                      {% else %}
+                          <hr>
 
-          <div class="row element">
-              <div class="col-xs-12 col-md-1"></div>
-              <div class="col-xs-12 col-md-7">
-                  <h2>NOTRE POLITIQUE</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              </div>
-              <div class="col-xs-12 col-md-3">
-                  <img class="illustration center-block" src="http://via.placeholder.com/250x250">
-              </div>
-              <div class="col-xs-12 col-md-1"></div>
-          </div>
-  </section>
+                          <div class="row element">
+                              <div class="col-xs-12 col-md-1"></div>
+                              <div class="col-xs-12 col-md-7">
+                                  <h2>{{ value.titre | upper }}</h2>
+                                  <p>{{ value.texte }}</p>
+                              </div>
+                              <div class="col-xs-12 col-md-3">
+                                  <img class="illustration center-block" src="{{ value.urlImage }}">
+                              </div>
+                              <div class="col-xs-12 col-md-1"></div>
+                          </div>
+                      {% endif %}
+                  {% endfor %}
+
+      </section>
   {% endblock %}
