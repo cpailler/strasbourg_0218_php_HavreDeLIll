@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 14, 2018 at 05:37 PM
+-- Generation Time: Apr 18, 2018 at 11:50 AM
 -- Server version: 5.7.21-0ubuntu0.16.04.1
 -- PHP Version: 7.0.28-0ubuntu0.16.04.1
 
@@ -38,8 +38,8 @@ CREATE TABLE `Accueil` (
 --
 
 INSERT INTO `Accueil` (`id`, `titre`, `texte`, `urlImage`) VALUES
-(1, 'Histoire', 'Construit en 1852, le Havre de l’Ill fut à l’origine un hôtel particulier de la famille Lauth mais celle-ci revendi la bâtisse en 1871 sous l’occupation allemande. Elle changea de main plusieures fois pendant le siècle qui suivit au grès des fortunes et infortunes des propriétaires avant d’être finalement rachetée par M. Jean-Marc Olivier en 1952 tout pile un siècle après sa construction. De nombreuses rénovations sont alors entreprises afin de transformer la bâtisse en habitation confortable en adéquation avec les standards de l’époque. Depuis, le Havre de l’Ill suit l’évolution des équipements domestiques. Depuis 2015 la maison n’est plus habitée que sporadiquement du fait des activités des membres de la famille. C’est alors que M. Franck Olivier décide d’ouvrir ses portes aux visiteurs de passage à Strasbourg.\r\n\r\n', '/assets/images/histoire.png'),
-(2, 'Ambiance', 'Une parenthèse de luxe, une atmosphère relaxante et un confort haut de gamme dans le centre-ville de Strasbourg. C\'est dans sa maison d\'hôte à colombages que Mr Jean-Marc Olivier vous accueille en hôtes de luxe. Le Havre de l’Ill est un lieu de détente et de relaxation. Après avoir posé vos valises et dégusté une tisane de plantes locales ou un rafraîchissement maison, vous pourrez partir à la découverte de la magnifique ville de Strasbourg. Nous sommes à 5 minutes à pieds de notre belle cathédrale et du centre ville (un parking se trouve à 50m de la résidence).\r\nNotre havre vous accueille dans l’une de ces 4 chambres d’hôte de charme allant de 30 à 40 m2, spacieuses et lumineuses, proposant tout le confort nécessaire, ainsi qu’un accueil et des services de qualité.', '/assets/images/ambiance.png');
+(1, 'Histoire', 'Construit en 1852, le Havre de l’Ill fut à l’origine un hôtel particulier de la famille Lauth mais celle-ci revendi la bâtisse en 1871 sous l’occupation allemande. Elle changea de main plusieures fois pendant le siècle qui suivit au grès des fortunes et infortunes des propriétaires avant d’être finalement rachetée par M. Jean-Marc Olivier en 1952 tout pile un siècle après sa construction. De nombreuses rénovations sont alors entreprises afin de transformer la bâtisse en habitation confortable en adéquation avec les standards de l’époque. Depuis, le Havre de l’Ill suit l’évolution des équipements domestiques. Depuis 2015 la maison n’est plus habitée que sporadiquement du fait des activités des membres de la famille. C’est alors que M. Franck Olivier décide d’ouvrir ses portes aux visiteurs de passage à Strasbourg.\r\n\r\n', '/assets/images/histoire.jpg'),
+(2, 'Ambiance', 'Une parenthèse de luxe, une atmosphère relaxante et un confort haut de gamme dans le centre-ville de Strasbourg. C\'est dans sa maison d\'hôte à colombages que Mr Jean-Marc Olivier vous accueille en hôtes de luxe. Le Havre de l’Ill est un lieu de détente et de relaxation. Après avoir posé vos valises et dégusté une tisane de plantes locales ou un rafraîchissement maison, vous pourrez partir à la découverte de la magnifique ville de Strasbourg. Nous sommes à 5 minutes à pieds de notre belle cathédrale et du centre ville (un parking se trouve à 50m de la résidence).\r\nNotre havre vous accueille dans l’une de ces 4 chambres d’hôte de charme allant de 30 à 40 m2, spacieuses et lumineuses, proposant tout le confort nécessaire, ainsi qu’un accueil et des services de qualité.', '/assets/images/ambiance.jpg');
 
 -- --------------------------------------------------------
 
@@ -99,6 +99,16 @@ CREATE TABLE `DiapoAccueil` (
   `urlImage` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `DiapoAccueil`
+--
+
+INSERT INTO `DiapoAccueil` (`id`, `urlImage`) VALUES
+(1, '/assets/images/slider_1.jpg'),
+(2, '/assets/images/slider_2.jpg'),
+(3, '/assets/images/slider_3.jpg'),
+(4, '/assets/images/slider_4.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -116,14 +126,14 @@ CREATE TABLE `DiapoChambres` (
 --
 
 INSERT INTO `DiapoChambres` (`id`, `urlImage`, `chambres_id`) VALUES
-(1, '/assets/images/chambreGretel.png', 1),
-(2, '/assets/images/chambreGretelsdb.png', 1),
-(3, '/assets/images/chambreSimoneVeil.png', 2),
-(4, '/assets/images/chambreSimoneVeilsdb.png', 2),
-(5, '/assets/images/chambreHansel.png', 3),
-(6, '/assets/images/chambreHanselsdb.png', 3),
-(7, '/assets/images/chambreRobertSchuman.png', 4),
-(8, '/assets/images/chambreRobertSchumansdb.png', 4);
+(1, '/assets/images/chambreGretel.jpg', 1),
+(2, '/assets/images/chambreGretelsdb.jpg', 1),
+(3, '/assets/images/chambreSimoneVeil.jpg', 2),
+(4, '/assets/images/chambreSimoneVeilsdb.jpg', 2),
+(5, '/assets/images/chambreHansel.jpg', 3),
+(6, '/assets/images/chambreHanselsdb.jpg', 3),
+(7, '/assets/images/chambreRobertSchuman.jpg', 4),
+(8, '/assets/images/chambreRobertSchumansdb.jpg', 4);
 
 -- --------------------------------------------------------
 
@@ -284,7 +294,7 @@ ALTER TABLE `Chambres`
 -- AUTO_INCREMENT for table `DiapoAccueil`
 --
 ALTER TABLE `DiapoAccueil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `DiapoChambres`
 --
