@@ -33,3 +33,7 @@ h3 {
 .btn:hover{
     color:#0d153c;
 }
+
+.carousel .item {
+    height: 250px;
+}

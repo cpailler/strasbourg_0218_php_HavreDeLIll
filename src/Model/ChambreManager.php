@@ -21,7 +21,7 @@ class ChambreManager extends EntityManager
 
     public function findAll()
     {
-        return $this->conn->query('SELECT * FROM ' . $this->table . ' INNER JOIN DiapoChambres ON Chambres.id  =  DiapoChambres.chambres_id ', \PDO::FETCH_ASSOC)->fetchAll();
+        return $this->conn->query('SELECT DISTINCT * FROM ' . $this->table . ' INNER JOIN DiapoChambres ON Chambres.id  =  DiapoChambres .chambres_id', \PDO::FETCH_ASSOC)->fetchAll();
 
     }
 
