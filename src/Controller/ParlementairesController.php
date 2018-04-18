@@ -24,7 +24,7 @@ class ParlementairesController extends AbstractController
     {
         $ParlementairesManager = new ParlementairesManager();
         $Articles =  $ParlementairesManager->findAll();
-        var_dump($Articles);
+
 
         return $this->twig->render('Parlementaires/Parlementaires.html.twig',['Articles' => $Articles]);
     }
