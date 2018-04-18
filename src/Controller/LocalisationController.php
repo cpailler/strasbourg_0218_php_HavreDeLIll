@@ -8,8 +8,8 @@
 
 namespace Controller;
 
-//use Model\Accueil;
-//use Model\AccueilManager;
+
+use Model\LocalisationManager;
 
 /**
  * Class LocalisationController
@@ -23,9 +23,10 @@ class LocalisationController extends AbstractController
      */
   public function index()
     {
+        $LocalisationManager = new LocalisationManager();
+        $Local = $LocalisationManager->findAll();
 
-
-        return $this->twig->render('Localisation/Localisation.html.twig'/*, ['localisation' => $local]*/);
+        return $this->twig->render('Localisation/Localisation.html.twig', ['Local' => $Local]);
     }
 
   }
