@@ -22,7 +22,11 @@ class ParlementairesController extends AbstractController
      */
   public function index()
     {
-        return $this->twig->render('Parlementaires/Parlementaires.html.twig');
+        $ParlementairesManager = new ParlementairesManager();
+        $Articles =  $ParlementairesManager->findAll();
+        var_dump($Articles);
+
+        return $this->twig->render('Parlementaires/Parlementaires.html.twig',['Articles' => $Articles]);
     }
 
   }
