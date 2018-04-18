@@ -29,8 +29,10 @@ class LoginController extends AbstractController
 
         session_start ();
         // on enregistre les paramètres de notre client comme variables de session ($login et $pwd)
-        $_SESSION['user'] = $_POST['user'];
-        $_SESSION['password'] = $_POST['password'];
+        if (isset($_POST['user'])&&isset($_POST['password'])) {
+            $_SESSION['user'] = $_POST['user'];
+            $_SESSION['password'] = $_POST['password'];
+        }
         $_SESSION['name'] = $admin['0']['name'];
         $_SESSION['pwd'] = $admin['0']['password'];
 
