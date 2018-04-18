@@ -27,6 +27,7 @@ h3 {
     text-align: center;
 }
 .btn{
+    margin-top: 23px;
     background-color: #dbb875;
     color:#ffffff;
 }
@@ -36,4 +37,14 @@ h3 {
 
 .carousel .item {
     height: 250px;
+}
+
+/* Icon handicap */
+.fa-wheelchair {
+    margin-left: 5px;
+}
+
+.checkbox {
+    text-align: center;
+    margin-top: 27px;
 }

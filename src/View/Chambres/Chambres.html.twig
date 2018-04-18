@@ -15,31 +15,48 @@
                 </div>
 
                 <!--Selection de critères-->
-                <div class="row">
-                    <div class="container-fluid center-block">
-                        <form class="center-block critere" action="Chambres" method="post">
-                            <select name="Style" class="">
-                                <option value="style">Style</option>
-                                <option value="classique">Classique</option>
-                                <option value="moderne">Moderne</option>
-                            </select>
-                            <select name="Literie">
-                                <option value="literie">Literie</option>
-                                <option value="simple">Lits simples</option>
-                                <option value="double">Lit double</option>
-                            </select>
-                            <select name="SdB">
-                                <option value="SbB">Salle de bain</option>
-                                <option value="baignoire">Baignoire</option>
-                                <option value="douche">Douche</option>
-                            </select>
-                            <input type="checkbox" name="PMR" value="pmr">Accessibilité PMR
-                            <input type="submit" value="Valider">
-
-                        </form>
+                <div class="form-group">
+                    <h2>Options :</h2>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-xs-12 col-md-2">
+                            <div class="controls">
+                                <label for="bathroom">Style</label>
+                                <select class="form-control">
+                                    <option value="bath" selected>Classique / Classic</option>
+                                    <option value="shower">Moderne / Modern</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                            <div class="controls">
+                                <label for="bathroom">Bain / Bathroom</label>
+                                <select class="form-control">
+                                    <option value="bath" selected>Baththub / Baignoire</option>
+                                    <option value="shower">Shower/Douche</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                            <div class="controls">
+                                <label for="fruit">Literie / Bedding</label>
+                                <select class="form-control">
+                                    <option value="single-bed">Lit simple / Single Bed</option>
+                                    <option value="double-bed" selected>Lit double / Double Bed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-1">
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="PMR" value="pmr"><i class="fas fa-wheelchair fa-2x"></i></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-1">
+                            <button type="submit" class="btn">Valider</button>
+                        </div>
+                        <div class="col-md-1"></div>
                     </div>
-
-                </div>
+                </div> <!-- /.form-group -->
 
 
                 <!--Chambre gauche-->
@@ -149,15 +166,13 @@
                                         </ol>
                                         <!-- Wrapper for carousel items -->
                                         <div class="carousel-inner">
-                                            <div class="item active">
-                                                <img src="http://via.placeholder.com/250x250" alt="First Slide">
-                                            </div>
-                                            <div class="item">
-                                                <img src="http://via.placeholder.com/250x250" alt="Second Slide">
-                                            </div>
-                                            <div class="item">
-                                                <img src="http://via.placeholder.com/250x250" alt="Third Slide">
-                                            </div>
+
+                                            {% for img in chambre.urlImage %}
+                                                <div class="item {% if loop.index == 1 %} active {% endif %} ">
+                                                    <img src="{{ img }}" alt="Other Slide">
+                                                </div>
+                                            {% endfor %}
+
                                         </div>
                                         <!-- Carousel controls -->
                                         <a class="carousel-control left" href="#myCarousel" data-slide="prev">
