@@ -26,7 +26,7 @@ class ChambreController extends AbstractController
         $chambres = $chambreManager->findAll();
         var_dump($chambres);
 
-        
+
 
 
 

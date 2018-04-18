@@ -54,17 +54,28 @@ abstract class EntityManager
         // prepared request
         $statement = $this->conn->prepare("DELETE FROM $this->table WHERE id=:id");
         $statement->bindValue('id', $id, \PDO::PARAM_INT);
-        $res = $statement->execute();
+        return $statement->execute();
 
-        return $res;
     }
 
     /**
-     *
+     *recevoir de la data sous forme de tableau avec les colonnes bien nommées...
      */
     public function insert($data)
-    {
-        //TODO : Implements SQL INSERT request
+    {   $statement = $this->conn->prepare("INSERT INTO $this->table (:columns) VALUES (:vals)");
+        $columns = "";
+        $values = "";
+        foreach ($data as $column => $value){
+            $columns .= $column.",";
+            $values .= "'".$value."',";
+        }
+        $columns=substr($columns, 0, strlen($columns)-1);
+        $values=substr($values, 0, strlen($values)-1);
+        $statement->bindValue('columns', $columns, \PDO::PARAM_INT);
+        $statement->bindValue('vals', $values, \PDO::PARAM_INT);
+        return $statement->execute();
+
+
     }
 
 
