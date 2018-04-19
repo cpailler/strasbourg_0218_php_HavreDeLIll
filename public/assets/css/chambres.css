@@ -7,6 +7,12 @@ h3 {
 	display: inline;
 }
 
+.panel-default > .panel-heading {
+    text-align: center;
+    color: #ffffff;
+    background-image: linear-gradient(to bottom, #dbb875 50%, #fbedd5 100%);
+}
+
 /* Carrousels Chambres*/
 .carchambres {
     background: #ffffff;
@@ -27,9 +33,24 @@ h3 {
     text-align: center;
 }
 .btn{
+    margin-top: 23px;
     background-color: #dbb875;
     color:#ffffff;
 }
 .btn:hover{
     color:#0d153c;
+}
+
+.carousel .item {
+    height: 250px;
+}
+
+/* Icon handicap */
+.fa-wheelchair {
+    margin-left: 5px;
+}
+
+.checkbox {
+    text-align: center;
+    margin-top: 27px;
 }

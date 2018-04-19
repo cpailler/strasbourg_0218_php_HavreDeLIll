@@ -1,179 +1,206 @@
 {% extends 'layout.html.twig' %}
 
     {% block stylesheet %}
-    <link rel="stylesheet" href="/assets/css/chambres.css">
+        <link rel="stylesheet" href="/assets/css/chambres.css">
     {% endblock %}
 
     {% block content %}
 
-    <section>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h1>LES CHAMBRES DU HAVRE DE L'ILL</h1>
-                </div>
-            </div>
-
-            <!--Selection de critères-->
-            <div class="row">
-                <div class="container-fluid center-block">
-                    <form class="center-block critere" action="Chambres" method="post">
-                        <select name="Style" class="">
-                            <option value="style">Style</option>
-                            <option value="classique">Classique</option>
-                            <option value="moderne">Moderne</option>
-                        </select>
-                        <select name="Literie">
-                            <option value="literie">Literie</option>
-                            <option value="simple">Lits simples</option>
-                            <option value="double">Lit double</option>
-                        </select>
-                        <select name="SdB">
-                            <option value="SbB">Salle de bain</option>
-                            <option value="baignoire">Baignoire</option>
-                            <option value="douche">Douche</option>
-                        </select>
-                        <input type="checkbox" name="PMR" value="pmr">Accessibilité PMR
-                        <input type="submit" value="Valider">
-
-                    </form>
-                </div>
-
-            </div>
-            <!--Chambre gauche-->
-
-            <div class="row element">
-                <div class="col-xs-1"></div>
-                <div class="col-xs-3">
-                    <div class="slider">
-                        <div id="myCarousel" class="carousel slide carchambres" data-ride="carousel">
-                            <!-- Carousel indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel" data-slide-to="1"></li>
-                                <li data-target="#myCarousel" data-slide-to="2"></li>
-                            </ol>
-                            <!-- Wrapper for carousel items -->
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img src="http://via.placeholder.com/250x250" alt="First Slide">
-                                </div>
-                                <div class="item">
-                                    <img src="http://via.placeholder.com/250x250" alt="Second Slide">
-                                </div>
-                                <div class="item">
-                                    <img src="http://via.placeholder.com/250x250" alt="Third Slide">
-                                </div>
-                            </div>
-                            <!-- Carousel controls -->
-                            <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-                               <span class="glyphicon glyphicon-chevron-left"></span>
-                           </a>
-                            <a class="carousel-control right" href="#myCarousel" data-slide="next">
-                               <span class="glyphicon glyphicon-chevron-right"></span>
-                           </a>
-                        </div>
+        <section>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1>LES CHAMBRES DU HAVRE DE L'ILL</h1>
                     </div>
                 </div>
-                <div class="container-fluid col-xs-7">
-                    <div class="row container-fluid col-xs-12">
-                        <div class="col-xs-12 critere">
-                            <h2 class="chambres">CHAMBRE 1 : </h2><h3 class="chambres">100€TTC/nuit</h3>
-                            <hr>
-                        </div>
 
-                    </div>
-                    <div class="container-fluid col-xs-12">
-                        <div class="col-xs-8 center-block">
-                            <p><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            <form class="" action="" method="post">
-                                <button type="submit" class="btn">Réserver</button>
-                            </form>
-                        </div>
-                        <div class="col-xs-4 panel panel-default">
-                            <div class="panel-heading">Options de la chambre</div>
-                            <div class="panel-body">
-                                <ul>
-                                    <li>style</li>
-                                    <li>literie</li>
-                                    <li>salle de bain</li>
-                                </ul>
+                <!--Selection de critères-->
+                <div class="form-group">
+                    <h2>Options :</h2>
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-xs-12 col-md-2">
+                            <div class="controls">
+                                <label for="bathroom">Style</label>
+                                <select class="form-control">
+                                    <option value="bath" selected>Classique / Classic</option>
+                                    <option value="shower">Moderne / Modern</option>
+                                </select>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xs-1"></div>
-            </div>
-
-            <hr>
-
-            <!--chambre droite-->
-
-            <div class="row element">
-                <div class="col-xs-1"></div>
-                <div class="container-fluid col-xs-7">
-                    <div class="row container-fluid col-xs-12">
-                        <div class="col-xs-12 critere">
-                            <h2 class="chambres">CHAMBRE 2 : </h2><h3 class="chambres">100€TTC/nuit</h3>
-                            <hr>
-                        </div>
-
-                    </div>
-                    <div class="container-fluid col-xs-12">
-                        <div class="col-xs-4 panel panel-default">
-                            <div class="panel-heading">Options de la chambre</div>
-                            <div class="panel-body">
-                                <ul>
-                                    <li>style</li>
-                                    <li>literie</li>
-                                    <li>salle de bain</li>
-                                </ul>
+                        <div class="col-xs-12 col-md-2">
+                            <div class="controls">
+                                <label for="bathroom">Bain / Bathroom</label>
+                                <select class="form-control">
+                                    <option value="bath">Baththub / Baignoire</option>
+                                    <option value="shower">Shower/Douche</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-xs-8 center-block">
-                            <p><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            <form class="" action="" method="post">
-                                <button type="submit" class="btn pull-right">Réserver</button>
-                            </form>
+                        <div class="col-xs-12 col-md-2">
+                            <div class="controls">
+                                <label for="fruit">Literie / Bedding</label>
+                                <select class="form-control">
+                                    <option value="single-bed">Lit simple / Single Bed</option>
+                                    <option value="double-bed" selected>Lit double / Double Bed</option>
+                                </select>
+                            </div>
                         </div>
+                        <div class="col-xs-6 col-md-1">
+                            <div class="checkbox">
+                                <label><input type="checkbox" name="PMR" value="pmr"><i class="fas fa-wheelchair fa-2x"></i></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-1">
+                            <button type="submit" class="btn">Valider</button>
+                        </div>
+                        <div class="col-md-1"></div>
                     </div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="slider">
-                        <div id="myCarousel" class="carousel slide carchambres" data-ride="carousel">
-                            <!-- Carousel indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel" data-slide-to="1"></li>
-                                <li data-target="#myCarousel" data-slide-to="2"></li>
-                            </ol>
-                            <!-- Wrapper for carousel items -->
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img src="http://via.placeholder.com/250x250" alt="First Slide">
-                                </div>
-                                <div class="item">
-                                    <img src="http://via.placeholder.com/250x250" alt="Second Slide">
-                                </div>
-                                <div class="item">
-                                    <img src="http://via.placeholder.com/250x250" alt="Third Slide">
+                </div> <!-- /.form-group -->
+
+
+
+
+
+
+                <!--Chambre gauche-->
+                {% for i,chambre in datas %}
+                    {% if i!=1 %}<hr>{% endif %}
+                    {% if i%2==1 %}
+
+                        <div class="row element">
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-3">
+                                <div class="slider">
+                                    <div id="{{ i }}" class="carousel slide carchambres" data-ride="carousel">
+                                        <!-- Carousel indicators -->
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#{{ i }}" data-slide-to="0" class="active"></li>
+                                            <li data-target="#{{ i }}" data-slide-to="1"></li>
+                                        </ol>
+                                        <!-- Wrapper for carousel items -->
+                                        <div class="carousel-inner">
+                                            {% for img in chambre.urlImage %}
+                                                <div class="item {% if loop.index == 1 %} active {% endif %}">
+                                                    <img class="item" src="{{ img }}" alt="Other slide">
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <!-- Carousel controls -->
+                                        <a class="carousel-control left" href="#{{ i }}" data-slide="prev">
+                                            <span class="glyphicon glyphicon-chevron-left"></span>
+                                        </a>
+                                        <a class="carousel-control right" href="#{{ i }}" data-slide="next">
+                                            <span class="glyphicon glyphicon-chevron-right"></span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Carousel controls -->
-                            <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-                               <span class="glyphicon glyphicon-chevron-left"></span>
-                           </a>
-                            <a class="carousel-control right" href="#myCarousel" data-slide="next">
-                               <span class="glyphicon glyphicon-chevron-right"></span>
-                           </a>
+                            <div class="container-fluid col-xs-7">
+                                <div class="row container-fluid col-xs-12">
+                                    <div class="col-xs-12 critere">
+                                        <h2 class="chambres">{{ chambre.titre | upper }} </h2>
+                                        <h3 class="chambres">{{ chambre.prix }}€ TTC/nuit</h3>
+                                        <hr>
+                                    </div>
+
+                                </div>
+                                <div class="container-fluid col-xs-12">
+                                    <div class="col-xs-8 center-block">
+                                        <p><br>{{ chambre.texte }}</p>
+                                        <form class="" action="" method="post">
+                                            <button type="submit" class="btn">Réserver</button>
+                                        </form>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">OPTIONS :</div>
+                                            <div class="panel-body">
+                                                <ul>
+                                                    <li>{{ chambre.style }}</li>
+                                                    <li>{{ chambre.literie }}</li>
+                                                    <li>{{ chambre.salleDeBain }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-1"></div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xs-1"></div>
-            </div>
-    </section>
+
+                    {% else %}
+
+                        <!--chambre droite-->
+                        <div class="row element">
+                            <div class="col-xs-1"></div>
+                            <div class="container-fluid col-xs-7">
+                                <div class="row container-fluid col-xs-12">
+                                    <div class="col-xs-12 critere">
+                                        <h2 class="chambres">{{ chambre.titre | upper }} </h2>
+                                        <h3 class="chambres">{{ chambre.prix }}€ TTC/nuit</h3>
+                                        <hr>
+                                    </div>
+
+                                </div>
+                                <div class="container-fluid col-xs-12">
+                                        <div class="col-xs-4">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">OPTIONS :</div>
+                                                <div class="panel-body">
+                                                    <ul>
+                                                        <li>{{ chambre.style }}</li>
+                                                        <li>{{ chambre.literie }}</li>
+                                                        <li>{{ chambre.salleDeBain }}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="col-xs-8 center-block">
+                                        <p><br>{{ chambre.texte }}</p>
+                                        <form class="" action="" method="post">
+                                            <button type="submit" class="btn pull-right">Réserver</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="slider">
+                                    <div id="{{ i }}" class="carousel slide carchambres" data-ride="carousel">
+                                        <!-- Carousel indicators -->
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#{{ i }}" data-slide-to="0" class="active"></li>
+                                            <li data-target="#{{ i }}" data-slide-to="1"></li>
+                                        </ol>
+                                        <!-- Wrapper for carousel items -->
+                                        <div class="carousel-inner">
+
+                                            {% for img in chambre.urlImage %}
+                                                <div class="item {% if loop.index == 1 %} active {% endif %} ">
+                                                    <img src="{{ img }}" alt="Other Slide">
+                                                </div>
+                                            {% endfor %}
+
+                                        </div>
+                                        <!-- Carousel controls -->
+                                        <a class="carousel-control left" href="#{{ i }}" data-slide="prev">
+                                            <span class="glyphicon glyphicon-chevron-left"></span>
+                                        </a>
+                                        <a class="carousel-control right" href="#{{ i }}" data-slide="next">
+                                            <span class="glyphicon glyphicon-chevron-right"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-1"></div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+
+
+
+        </section>
 
 
     {% endblock %}
