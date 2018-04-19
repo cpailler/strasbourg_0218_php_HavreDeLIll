@@ -25,12 +25,11 @@ class ChambreController extends AbstractController
         $chambreManager = new ChambreManager();
         $chambres = $chambreManager->findAll();
         $datas = [];
-
+        $i=0;
         foreach ($chambres as $diapo => $data) {
-
             if (!isset($datas[$data['chambres_id']])) {
-
-                $datas += [$data['chambres_id'] => array(
+                $i++;
+                $datas += [$i => array(
                     'id' => $data['chambres_id'],
                     'titre' => $data['titre'],
                     'texte' => $data['texte'],

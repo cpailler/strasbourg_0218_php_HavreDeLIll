@@ -32,7 +32,7 @@
                             <div class="controls">
                                 <label for="bathroom">Bain / Bathroom</label>
                                 <select class="form-control">
-                                    <option value="bath" selected>Baththub / Baignoire</option>
+                                    <option value="bath">Baththub / Baignoire</option>
                                     <option value="shower">Shower/Douche</option>
                                 </select>
                             </div>
@@ -59,18 +59,24 @@
                 </div> <!-- /.form-group -->
 
 
+
+
+
+
                 <!--Chambre gauche-->
-                {% for chambre in datas %}
-                    {% if chambre.id%4==1 %}
+                {% for i,chambre in datas %}
+                    {% if i!=1 %}<hr>{% endif %}
+                    {% if i%2==1 %}
+
                         <div class="row element">
                             <div class="col-xs-1"></div>
                             <div class="col-xs-3">
                                 <div class="slider">
-                                    <div id="myCarousel" class="carousel slide carchambres" data-ride="carousel">
+                                    <div id="{{ i }}" class="carousel slide carchambres" data-ride="carousel">
                                         <!-- Carousel indicators -->
                                         <ol class="carousel-indicators">
-                                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                                            <li data-target="#{{ i }}" data-slide-to="0" class="active"></li>
+                                            <li data-target="#{{ i }}" data-slide-to="1"></li>
                                         </ol>
                                         <!-- Wrapper for carousel items -->
                                         <div class="carousel-inner">
@@ -81,10 +87,10 @@
                                             {% endfor %}
                                         </div>
                                         <!-- Carousel controls -->
-                                        <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                                        <a class="carousel-control left" href="#{{ i }}" data-slide="prev">
                                             <span class="glyphicon glyphicon-chevron-left"></span>
                                         </a>
-                                        <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                                        <a class="carousel-control right" href="#{{ i }}" data-slide="next">
                                             <span class="glyphicon glyphicon-chevron-right"></span>
                                         </a>
                                     </div>
@@ -122,10 +128,8 @@
                         </div>
 
                     {% else %}
-                        <hr>
 
                         <!--chambre droite-->
-
                         <div class="row element">
                             <div class="col-xs-1"></div>
                             <div class="container-fluid col-xs-7">
@@ -158,11 +162,11 @@
                             </div>
                             <div class="col-xs-3">
                                 <div class="slider">
-                                    <div id="myCarousel" class="carousel slide carchambres" data-ride="carousel">
+                                    <div id="{{ i }}" class="carousel slide carchambres" data-ride="carousel">
                                         <!-- Carousel indicators -->
                                         <ol class="carousel-indicators">
-                                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                                            <li data-target="#{{ i }}" data-slide-to="0" class="active"></li>
+                                            <li data-target="#{{ i }}" data-slide-to="1"></li>
                                         </ol>
                                         <!-- Wrapper for carousel items -->
                                         <div class="carousel-inner">
@@ -175,10 +179,10 @@
 
                                         </div>
                                         <!-- Carousel controls -->
-                                        <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                                        <a class="carousel-control left" href="#{{ i }}" data-slide="prev">
                                             <span class="glyphicon glyphicon-chevron-left"></span>
                                         </a>
-                                        <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                                        <a class="carousel-control right" href="#{{ i }}" data-slide="next">
                                             <span class="glyphicon glyphicon-chevron-right"></span>
                                         </a>
                                     </div>
@@ -188,6 +192,10 @@
                         </div>
                     {% endif %}
                 {% endfor %}
+
+
+
+
         </section>
 
 
