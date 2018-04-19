@@ -7,6 +7,12 @@ h3 {
 	display: inline;
 }
 
+.panel-default > .panel-heading {
+    text-align: center;
+    color: #ffffff;
+    background-image: linear-gradient(to bottom, #dbb875 50%, #fbedd5 100%);
+}
+
 /* Carrousels Chambres*/
 .carchambres {
     background: #ffffff;
