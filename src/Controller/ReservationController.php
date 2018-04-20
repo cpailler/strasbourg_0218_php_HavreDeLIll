@@ -75,4 +75,8 @@ class ReservationController extends AbstractController
     }
 
 
+    public function envoiMail()
+    {
+echo "envoiMail";
+    }
 }
