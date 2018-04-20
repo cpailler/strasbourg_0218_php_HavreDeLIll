@@ -65,32 +65,32 @@
                 </div>
                 <div class="modal-body">
                   <h6 class="modal-title" id="myModalLabel">Pour toute information, ou toutes questions, n'hesitez pas à nous contacter via notre formulaire ci dessous</h6></br>
-                  <form >
+                  <form>
                     <div class="form-group">
                       <label class="sr-only" for="exampleInputAmount"></label>
                       <div class="input-group">
                         <div class="input-group-addon">N</div>
-                        <input type="text" class="form-control" id="exampleInputAmount" placeholder="Nom">
+                        <input type="text" class="form-control" name="nomMail"  id="nomMail" placeholder="Nom">
                       </div></br>
                       <div class="form-group">
                         <label class="sr-only" for="exampleInputAmount"></label>
                         <div class="input-group">
                           <div class="input-group-addon">P</div>
-                          <input type="text" class="form-control" id="exampleInputAmount" placeholder="Prenom">
+                          <input type="text" class="form-control"  name="prenomMail"  id="prenomMail" placeholder="Prenom">
                         </div></br>
                         <div class="form-group">
                           <label class="sr-only" for="exampleInputAmount"></label>
                           <div class="input-group">
                             <div class="input-group-addon">@</div>
-                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="E-mail">
+                            <input type="text" class="form-control"  name="adresseMail"  id="adresseMail" placeholder="E-mail">
                           </div></br>
                           <div class="form-group">
                             <label class="sr-only" for="exampleInputAmount"></label>
                             <div class="input-group">
                               <div class="input-group-addon">@</div>
-                              <textarea class="form-control" rows="3" placeholder="Tapez votre message ici"></textarea>
+                              <textarea class="form-control" rows="3"  name="contenuMail"  id="contenuMail" placeholder="Tapez votre message ici"></textarea>
                             </div></br>
-                            <button type="submit"class="btn btn-localisation">Envoyer</button>
+                            <button id="envoyer"type="submit"class="btn btn-localisation">Envoyer</button>
                             </div>
                           </div>
                         </div>
@@ -122,8 +122,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-
 <script>
 $(document).ready(function(){
 
@@ -141,6 +139,25 @@ $(document).ready(function(){
     $('html, body').animate({scrollTop : 0},800);
     return false;
   });
+
+// envoi mail avec js+ajax
+    $('#envoyer').click (function() {
+
+        var dataString = 'nomMail=' + $('#nomMail').val() + '&prenomMail=' + $('#prenomMail').val();
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8000/Reservation/mail",
+            data: dataString,
+            cache: false,
+            success: function () {
+                console.log("ça marche");
+            },
+            error: function () {
+                console.log("ça marche pas");
+            }
+        });
+    });
 
 });</script>
 
