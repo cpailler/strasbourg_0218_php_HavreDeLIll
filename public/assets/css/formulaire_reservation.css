@@ -9,3 +9,9 @@
 }
 
 .input-group { width: 100%; }
+button{
+    background: #dcba79;
+    color: #fff;
+    font-size: 1.2em;
+    padding: 10px;
+}

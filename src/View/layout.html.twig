@@ -50,6 +50,9 @@
             </nav>
           </header>
           <!-- END HEADER-->
+          <div id="messageSend">
+
+          </div>
           {% block content %}{% endblock %}
 
           <button onclick="topFunction()" id="myBtn" title="haut de page"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>
@@ -62,33 +65,34 @@
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                   <h1 class="modal-title" id="myModalLabel">Notre formulaire</h1>
+
                 </div>
                 <div class="modal-body">
                   <h6 class="modal-title" id="myModalLabel">Pour toute information, ou toutes questions, n'hesitez pas à nous contacter via notre formulaire ci dessous</h6></br>
-                  <form>
+                  <form id="mainForm" name='formulaire'>
                     <div class="form-group">
                       <label class="sr-only" for="exampleInputAmount"></label>
                       <div class="input-group">
                         <div class="input-group-addon">N</div>
-                        <input type="text" class="form-control" name="nomMail"  id="nomMail" placeholder="Nom">
+                        <input type="text" class="form-control" name="nomMail"  id="nomMail" placeholder="Nom" required>
                       </div></br>
                       <div class="form-group">
                         <label class="sr-only" for="exampleInputAmount"></label>
                         <div class="input-group">
                           <div class="input-group-addon">P</div>
-                          <input type="text" class="form-control"  name="prenomMail"  id="prenomMail" placeholder="Prenom">
+                          <input type="text" class="form-control"  name="prenomMail"  id="prenomMail" placeholder="Prenom" required>
                         </div></br>
                         <div class="form-group">
                           <label class="sr-only" for="exampleInputAmount"></label>
                           <div class="input-group">
                             <div class="input-group-addon">@</div>
-                            <input type="text" class="form-control"  name="adresseMail"  id="adresseMail" placeholder="E-mail">
+                            <input type="mail" class="form-control"  name="adresseMail"  id="adresseMail" placeholder="E-mail" required>
                           </div></br>
                           <div class="form-group">
                             <label class="sr-only" for="exampleInputAmount"></label>
                             <div class="input-group">
-                              <div class="input-group-addon">@</div>
-                              <textarea class="form-control" rows="3"  name="contenuMail"  id="contenuMail" placeholder="Tapez votre message ici"></textarea>
+                              <div class="input-group-addon">Msg</div>
+                              <textarea class="form-control" rows="3"  name="contenuMail"  id="contenuMail" placeholder="Tapez votre message ici" required></textarea>
                             </div></br>
                             <button id="envoyer"type="submit"class="btn btn-localisation">Envoyer</button>
                             </div>
@@ -122,7 +126,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript" src="http://jzaefferer.github.io/jquery-validation/localization/messages_fr.js" />
 <script>
+
 $(document).ready(function(){
 
   //Check to see if the window is top if not then display button
@@ -141,20 +147,74 @@ $(document).ready(function(){
   });
 
 // envoi mail avec js+ajax
-    $('#envoyer').click (function() {
 
-        var dataString = 'nomMail=' + $('#nomMail').val() + '&prenomMail=' + $('#prenomMail').val();
+    $(function() {
+        $('#envoyer').click(function() {
+            var data = {
+                nom: $("#nomMail").val(),
+                prenom: $("#prenomMail").val(),
+                mail: $("#adresseMail").val(),
+                message: $("#contenuMail").val()
+            };
 
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8000/Reservation/mail",
-            data: dataString,
-            cache: false,
-            success: function () {
-                console.log("ça marche");
+
+
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8000/Reservation/mail",
+                data: data,
+                success: function(response){
+
+                    $('#messageSend').append('<div class="alert alert-success" role="alert">'+'Message envoyer' + '</div>');
+                }
+
+            });
+
+            return false;
+        });
+
+
+
+
+    });
+
+    // Wait for the DOM to be ready
+    $(function() {
+        // Initialize form validation on the registration form.
+        // It has the name attribute "registration"
+        $("form[name='formulaire']").validate({
+            // Specify validation rules
+            rules: {
+                // The key name on the left side is the name attribute
+                // of an input field. Validation rules are defined
+                // on the right side
+                nomMail: "required",
+                prenomMail: "required",
+                adresseMail: {
+                    required: true,
+                    // Specify that email should be validated
+                    // by the built-in "email" rule
+                    email: true
+                },
+                contenuMail: {
+                    required: true,
+                    minlength: 5
+                }
             },
-            error: function () {
-                console.log("ça marche pas");
+            // Specify validation error messages
+            messages: {
+                nomMail: "Veuillez entrer votre nom",
+                prenomMail: "Please enter your lastname",
+                contenuMail: {
+                    required: "Please provide a password",
+
+                },
+                contenuMail: "Please enter a valid email address"
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function(form) {
+                form.submit();
             }
         });
     });

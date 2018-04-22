@@ -8,7 +8,7 @@
 
  */
 
-namespace Controller\Date;
+namespace Controller\Calendar;
 
 
 class Month {

@@ -22,25 +22,6 @@
           <div class="row">
               <div class="col-xs-6">
                   <form action="">
-                      <!--  General -->
-                      <div class="form-group">
-                          <h2>Réservation & contact / Booking & contact</h2>
-                          <div class="input-group">
-                              <span class="input-group-addon" id="">Nom / Name</span>
-                              <input type="text" class="form-control">
-                          </div>
-                          <br>
-                          <div class="input-group">
-                              <span class="input-group-addon" id="">@</span>
-                              <input type="text" class="form-control">
-                          </div>
-                          <br>
-                          <div class="input-group">
-                              <span class="input-group-addon" id="">Téléphone / Phone</span>
-                              <input type="text" class="form-control">
-                          </div>
-                      </div>
-
 
                       <!--  Details -->
                       <div class="form-group">
@@ -65,25 +46,46 @@
                           <div class="row">
                               <div class="col-xs-6">
                                   <div class="controls">
-                                      <label for="bathroom">Salle d'eau / Bathroom</label>
+                                      <label for="bedrooms">Chambres / bedrooms</label>
                                       <select class="form-control">
-                                          <option value="bath" selected>Baththub / Baignoire</option>
-                                          <option value="shower">Shower/Douche</option>
+                                          <option value="gretel" selected>CHAMBRE GRETEL</option>
+                                          <option value="veil">CHAMBRE SIMONE VEIL</option>
+                                          <option value="hansel" selected>CHAMBRE HÄNSEL</option>
+                                          <option value="schuman">CHAMBRE ROBERT SCHUMAN</option>
                                       </select>
                                   </div>
                               </div>
                               <div class="col-xs-6">
                                   <div class="controls">
-                                      <label for="fruit">Literie / Bedding</label>
-                                      <select class="form-control">
-                                          <option value="single-bed">Lit simple / Single Bed</option>
-                                          <option value="double-bed" selected>Lit double / Double Bed</option>
-                                      </select>
+                                      <label for="depart" class="label-date">&nbsp;&nbsp;Nuitées / Nuity</label>
+                                      <input type="text" id="depart" class="form-control" name="depart"
+                                             value=""/>
                                   </div>
                               </div>
 
                           </div>
                       </div> <!-- /.form-group -->
+
+                      <!--  General -->
+                      <div class="form-group">
+                          <h2>Réservation & contact / Booking & contact</h2>
+                          <div class="input-group">
+                              <span class="input-group-addon" id="">Nom / Name</span>
+                              <input type="text" class="form-control">
+                          </div>
+                          <br>
+                          <div class="input-group">
+                              <span class="input-group-addon" id="">@</span>
+                              <input type="text" class="form-control">
+                          </div>
+                          <br>
+                          <div class="input-group">
+                              <span class="input-group-addon" id="">Téléphone / Phone</span>
+                              <input type="text" class="form-control">
+                          </div>
+                          </br>
+                          <button type="submit" class="">Réserver</button>
+                      </div>
                   </form>
               </div>
               <div class="col-xs-6">
@@ -99,12 +101,18 @@
                           </div>
 
                       </div>
+
+
+
+
                       <table class="calendar__table calendar__table--{{ month.getweeks() }}weeks">
                           {% set date = cloneStart.modify("-1 day") %}
                           {% for i in 0..weeks %}
                               <tr>
                                   {% for k, day in days %}
+
                                       {% if i == 0 %}
+
                                       <td class="{% if (month.withinMonth(date)) %}{% else %}calendar__otherMonth{% endif %}">
                                           <div class="calendar__weekday">{{ day }}</div>
                                       {% else %}
@@ -113,6 +121,12 @@
                                           <td class="{% if (month.withinMonth(date)) %}  {% else %}calendar__otherMonth{% endif %}">
                                           <div class="calendar__day">{{ date.format('d') }}</div>
                                       {% endif %}
+                                              {% for reservation in ReservationForDay %}
+
+                                      <div class="calendar__event">
+                                         <a href="#">{{ Reservation.nomClient }}</a>
+                                      </div>
+                                              {% endfor %}
 
                                       </td>
                                   {% endfor %}

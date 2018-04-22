@@ -20,6 +20,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/Reservation/{initMonth:\d+}/{initYear:\d+}', 'Reservation/init');
     $r->addRoute('GET', '/Reservation', 'Reservation/init');
     $r->addRoute('POST', '/Reservation/mail', 'Reservation/envoiMail');
+   // $r->addRoute('GET', '/Reservation/mail', 'Reservation/envoiMail');
     $r->addRoute('GET', '/Administration', 'Administration/index');
     // {id} must be a number (\d+)
     /*
