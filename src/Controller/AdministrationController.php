@@ -43,8 +43,6 @@ class AdministrationController extends AbstractController
 
 
         $diapoManager = New DiapoAccueilManager();
-        var_dump($_POST);
-        var_dump($_FILES);
 
         if (isset($_POST['send'])) {
             $n = count($_FILES['file']['name']);
