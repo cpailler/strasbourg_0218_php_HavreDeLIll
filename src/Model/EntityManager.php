@@ -62,19 +62,18 @@ abstract class EntityManager
      *
      */
     public function insert($data)
-    {   $statement = $this->conn->prepare("INSERT INTO ".$this->table." (:columns) VALUES (:vals)");
+    {
         $columns = "";
         $values = "";
         foreach ($data as $column => $value){
-            $columns .= $column.",";
+            $columns .= $column.", ";
             $values .= "'".$value."', ";
         }
-        $columns=substr($columns, 0, strlen($columns)-1);
+        $columns=substr($columns, 0, strlen($columns)-2);
         $values=substr($values, 0, strlen($values)-2);
-        $statement->bindValue('columns', $columns, \PDO::PARAM_INT);
-        $statement->bindValue('vals', $values, \PDO::PARAM_INT);
-        return $statement->execute();
+        $statement = $this->conn->prepare("INSERT INTO ".$this->table." (".$columns.") VALUES (".$values.")");
 
+        return $statement->execute();
 
     }
 
@@ -84,14 +83,13 @@ abstract class EntityManager
      */
     public function update($id, $data)
     {
-        $statement = $this->conn->prepare("UPDATE ".$this->table." SET :modifs WHERE id=:id");
         $modifs = "";
         foreach ($data as $column => $value){
             $modifs.=$column."='".$value."', ";
         }
         $modifs=substr($modifs, 0, strlen($modifs)-2);
-        $statement->bindValue('modifs', $modifs, \PDO::PARAM_INT);
-        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement = $this->conn->prepare("UPDATE ".$this->table." SET ".$modifs." WHERE id=".$id);
+
         return $statement->execute();
 
     }
