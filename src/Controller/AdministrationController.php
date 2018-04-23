@@ -9,6 +9,8 @@
 namespace Controller;
 
 use Controller\Date\Month;
+use Model\ChambreManager;
+use Model\DiapoChambreManager;
 use Model\ReservationManager;
 
 use Model\DiapoAccueilManager;
@@ -40,13 +42,10 @@ class AdministrationController extends AbstractController
     public function DiapoAccueil()
     {
 
-
-
         $diapoManager = New DiapoAccueilManager();
 
         if (isset($_POST['send'])) {
             $n = count($_FILES['file']['name']);
-
             $message = "";
 
             for ($i = 0; $i < $n; $i++) {
@@ -98,14 +97,7 @@ class AdministrationController extends AbstractController
             $message = "";
         }
 
-
-
-
         $diapos = $diapoManager->findAll();
-
-
-
-
 
         foreach ($diapos as $diapo){
             if (isset($_POST[$diapo['id']])) {
@@ -118,12 +110,32 @@ class AdministrationController extends AbstractController
 
         $diapos = $diapoManager->findAll();
 
-
-
-
-
-
-
             return $this->twig->render('Administration/DiapoAccueilAdmin.html.twig', ['diapos' => $diapos, 'message' => $message]);
-        }
     }
+
+    public function AdminChambres(){
+        $chambreManager = new ChambreManager();
+        $DiapoChambreManager = new DiapoChambreManager();
+        $chambres = $chambreManager->findAll();
+        $select="";
+        $chambreAModifier=[];
+        $diapos=[];
+
+        //Selection de la chambre
+        if (isset($_POST['chambre'])){
+            $select = $_POST['chambre'];
+            $chambreAModifier = $chambreManager->findOneById($_POST['chambre']);
+            $diapos = $DiapoChambreManager->findByChambreId($_POST['chambre']);
+        }
+        var_dump($_POST);
+        if (isset($_POST['modifier'])){}
+
+
+        return $this->twig->render('Administration/ChambresAdmin.html.twig',[
+            'select'=>$select,
+            'chambres'=>$chambres,
+            'chambreAModifier'=>$chambreAModifier,
+            'diapos'=>$diapos]);
+    }
+
+}
