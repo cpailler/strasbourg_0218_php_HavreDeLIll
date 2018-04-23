@@ -23,32 +23,10 @@ class ChambreController extends AbstractController
     public function index()
     {
         $chambreManager = new ChambreManager();
-        $chambres = $chambreManager->findAll();
-        $datasorigin = [];
+        $datasorigin = $chambreManager->findAll();
         $error=false;
         $select=["","","",false];
-        $i=0;
-        foreach ($chambres as $diapo => $data) {
-            if (!isset($datasorigin[$data['chambres_id']])) {
-                $i++;
-                $datasorigin += [$i => array(
-                    'id' => $data['chambres_id'],
-                    'titre' => $data['titre'],
-                    'texte' => $data['texte'],
-                    'prix' => $data['prix'],
-                    'style' => $data['style'],
-                    'literie' => $data['literie'],
-                    'accessibilite' => $data['accessibilite'],
-                    'salleDeBain' => $data['salleDeBain'],
-                    'urlImage' => array($data['id'] => $data['urlImage']))];
 
-                } else {
-
-                $datasorigin[$data['chambres_id']]['urlImage']+= [$data['id'] => $data['urlImage']];
-
-            }
-
-        }
         $datas=$datasorigin;
         $i=0;
         if (isset($_POST['submit'])){
@@ -79,7 +57,7 @@ class ChambreController extends AbstractController
 
             //var_dump($datas[$data['chambres_id']]['urlImage']);
 
-        return $this->twig->render('Chambres/Chambres.html.twig', ['chambres' => $chambres, 'datas' => $datas, 'error'=> $error, 'select'=> $select]);
+        return $this->twig->render('Chambres/Chambres.html.twig', ['datas' => $datas, 'error'=> $error, 'select'=> $select]);
 
     }
 
