@@ -128,7 +128,23 @@ class AdministrationController extends AbstractController
             $diapos = $DiapoChambreManager->findByChambreId($_POST['chambre']);
         }
         var_dump($_POST);
-        if (isset($_POST['modifier'])){}
+        if (isset($_POST['modifier'])){
+            $data = [];
+            $data['id']=$_POST['id'];
+            $data['titre']=$_POST['titre'];
+            $data['prix']=$_POST['prix'];
+            $data['texte']=$_POST['texte'];
+            $data['style']=$_POST['style'];
+            $data['salleDeBain']=$_POST['salleDeBain'];
+            $data['literie']=$_POST['literie'];
+            if (isset($_POST['PMR'])){
+                $data['accessibilite']='Oui';
+            }
+            else{
+                $data['accessibilite']='Non';
+            }
+            var_dump($data);
+        }
 
 
         return $this->twig->render('Administration/ChambresAdmin.html.twig',[
