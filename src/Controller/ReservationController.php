@@ -53,15 +53,21 @@ class ReservationController extends AbstractController
         $weeks = $month->getWeeks();
         $end = (clone $start)->modify('+'.(6+7*($weeks -1)).'days');
         $Reservation = $ReservationManager->getReservationBetweenByDay($start, $end);
+        $ReservationForDay=[];
 
-        $newRes = (new \DateTime($Reservation['start']))->format('d.m.Y');
+
+       // $newRes = (new \DateTime($Reservation['start']))->format('d.m.Y');
+
 
         $fullCalendar = [];
         for ($i =0; $i <$month->getWeeks();$i++):
             foreach ($month->days as $k=>$day) :
                 $calendar = [];
                 $date =(clone $start)->modify("+".($k + $i *7)."day");
-                $ReservationForDay = $Reservation[$date->format('Y-m-d')] ?? [];
+                $ReservationForDay[] = $Reservation[$date->format('Y-m-d')] ?? [];
+
+
+
 
                 $calendar['withMonth']=$month->withinMonth($date);
 
@@ -73,6 +79,7 @@ class ReservationController extends AbstractController
                 $fullCalendar[] = $calendar;
           endforeach;
         endfor;
+
 
         try {
             return $this->twig->render('Reservation/calendrier.html.twig',
@@ -86,9 +93,9 @@ class ReservationController extends AbstractController
                     'weeks' => $month->getWeeks(),
                     'fullCalendar' => $fullCalendar,
                     'cloneStart' => clone $start,
-                    'ReservationForDay'=>$ReservationForDay,
-                    'newRes'=>$newRes,
-                    'days' => $days,
+                    'ReservationForDay'=> $ReservationForDay,
+                    'days' => $days
+
                 ]);
         } catch (\Twig_Error_Loader $e) {
         } catch (\Twig_Error_Runtime $e) {

@@ -11,7 +11,7 @@ namespace Model;
 
 class ReservationManager extends EntityManager
 {
-    const TABLE = 'Reservation';
+    const TABLE = 'Reservations';
 
 
     public function __construct()
@@ -25,11 +25,8 @@ class ReservationManager extends EntityManager
      * @param \DateTime $end
      * @return array
      */
-    public function getReservationBetween (\DateTime $start, \DateTime $end): array {
-        $sql = "SELECT * FROM $this->table WHERE start BETWEEN '{$start->format('Y-m-d 00:00:00')}' AND '{$end->format('Y-m-d 23:59:59')}' ORDER BY start ASC";
-        $statement = $this->conn->query($sql);
-        $results = $statement->fetchAll();
-        return $results;
+    public function getReservationBetween ($start, $end): array {
+        return $this->conn->query('SELECT * FROM ' . $this->table, \PDO::FETCH_ASSOC)->fetchAll();
     }
 
     /**
@@ -38,15 +35,18 @@ class ReservationManager extends EntityManager
      * @param \DateTime $end
      * @return array
      */
-    public function getReservationBetweenByDay (\DateTime $start, \DateTime $end): array {
-        $Reservation = $this->getReservationBetween($start, $end);
+    public function getReservationBetweenByDay ( $start,  $end): array {
+        $Reservations = $this->getReservationBetween($start, $end);
         $days = [];
-        foreach($Reservation as $event) {
-            $date = explode(' ', $event['start'])[0];
+
+        foreach($Reservations as $Reservation) {
+            $date = $Reservation['start'];
+
+
             if (!isset($days[$date])) {
-                $days[$date] = [$event];
+                $days[$date] = [$Reservation];
             } else {
-                $days[$date][] = $event;
+                $days[$date][] = $Reservation;
             }
         }
         return $days;

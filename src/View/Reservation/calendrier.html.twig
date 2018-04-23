@@ -31,14 +31,14 @@
                                   <div class="controls">
                                       <label for="arrive" class="label-date">&nbsp;&nbsp;Arrive</label>
                                       <input type="date" id="arrive" class="form-control" name="arrive"
-                                             value="<?php echo date('d-m-Y'); ?>">
+                                              value="">
                                   </div>
                               </div>
                               <div class="col-xs-6">
                                   <div class="controls">
                                       <label for="depart" class="label-date">&nbsp;&nbsp;Depart</label>
                                       <input type="date" id="depart" class="form-control" name="depart"
-                                             value="<?php echo date('d-m-Y'); ?>"/>
+                                             value=""/>
                                   </div>
                               </div>
                           </div>
@@ -57,8 +57,8 @@
                               </div>
                               <div class="col-xs-6">
                                   <div class="controls">
-                                      <label for="depart" class="label-date">&nbsp;&nbsp;Nuitées / Nuity</label>
-                                      <input type="text" id="depart" class="form-control" name="depart"
+                                      <label for="nuite" class="label-date">&nbsp;&nbsp;Nuitées / Nuity</label>
+                                      <input type="text" id="nuite" class="form-control" name="nuite"
                                              value=""/>
                                   </div>
                               </div>
@@ -103,8 +103,6 @@
                       </div>
 
 
-
-
                       <table class="calendar__table calendar__table--{{ month.getweeks() }}weeks">
                           {% set date = cloneStart.modify("-1 day") %}
                           {% for i in 0..weeks %}
@@ -120,13 +118,18 @@
 
                                           <td class="{% if (month.withinMonth(date)) %}  {% else %}calendar__otherMonth{% endif %}">
                                           <div class="calendar__day">{{ date.format('d') }}</div>
-                                      {% endif %}
-                                              {% for reservation in ReservationForDay %}
+                                          {% for reservation in ReservationForDay %}
 
-                                      <div class="calendar__event">
-                                         <a href="#">{{ Reservation.nomClient }}</a>
-                                      </div>
-                                              {% endfor %}
+                                              <div class="calendar__event">
+
+                                                  {{ reservation.0.start }}
+
+
+                                              </div>
+                                          {% endfor %}
+                                      {% endif %}
+
+
 
                                       </td>
                                   {% endfor %}
@@ -143,3 +146,49 @@
 
 
   {% endblock %}
+{% block javascript %}
+<script>
+
+        var dateDepart = $('#depart').val();
+        var dateArrive = $('#arrive').val();
+
+        $(function() {
+            $('#depart').dblclick(function() {
+        alert(dateDepart)});
+        });
+
+       var date1 = '';
+       var date2 = '';
+       if (date1 =='undefined' && date2 =='undefined'){
+           $('#nuite').val(0);
+       }
+       else
+       {
+
+
+           // First we split the values to arrays date1[0] is the year, [1] the month and [2] the day
+           date1 = date1.split('-');
+           date2 = date2.split('-');
+
+           // Now we convert the array to a Date object, which has several helpful methods
+           date1 = new Date(date1[0], date1[1], date1[2]);
+           date2 = new Date(date2[0], date2[1], date2[2]);
+
+           // We use the getTime() method and get the unixtime (in milliseconds, but we want seconds, therefore we divide it through 1000)
+           date1_unixtime = parseInt(date1.getTime() / 1000);
+           date2_unixtime = parseInt(date2.getTime() / 1000);
+
+           // This is the calculated difference in seconds
+           var timeDifference = date2_unixtime - date1_unixtime;
+
+           // in Hours
+           var timeDifferenceInHours = timeDifference / 60 / 60;
+
+           // and finaly, in days :)
+           var timeDifferenceInDays = timeDifferenceInHours / 24;
+
+           //alert(timeDifferenceInDays);
+       }
+
+</script>
+{% endblock %}

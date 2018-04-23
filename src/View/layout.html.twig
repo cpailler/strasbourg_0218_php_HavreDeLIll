@@ -122,11 +122,13 @@
           </div>
         </footer>
 
-        {% block javascript %}{% endblock %}
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script type="text/javascript" src="http://jzaefferer.github.io/jquery-validation/localization/messages_fr.js" />
+
+          {% block javascript %}{% endblock %}
 <script>
 
 $(document).ready(function(){
@@ -179,45 +181,7 @@ $(document).ready(function(){
     });
 
     // Wait for the DOM to be ready
-    $(function() {
-        // Initialize form validation on the registration form.
-        // It has the name attribute "registration"
-        $("form[name='formulaire']").validate({
-            // Specify validation rules
-            rules: {
-                // The key name on the left side is the name attribute
-                // of an input field. Validation rules are defined
-                // on the right side
-                nomMail: "required",
-                prenomMail: "required",
-                adresseMail: {
-                    required: true,
-                    // Specify that email should be validated
-                    // by the built-in "email" rule
-                    email: true
-                },
-                contenuMail: {
-                    required: true,
-                    minlength: 5
-                }
-            },
-            // Specify validation error messages
-            messages: {
-                nomMail: "Veuillez entrer votre nom",
-                prenomMail: "Please enter your lastname",
-                contenuMail: {
-                    required: "Please provide a password",
 
-                },
-                contenuMail: "Please enter a valid email address"
-            },
-            // Make sure the form is submitted to the destination defined
-            // in the "action" attribute of the form when valid
-            submitHandler: function(form) {
-                form.submit();
-            }
-        });
-    });
 
 });</script>
 
