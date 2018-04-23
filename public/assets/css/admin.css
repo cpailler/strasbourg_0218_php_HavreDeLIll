@@ -1,0 +1,13 @@
+.diapo {
+    height: 150px;
+    width: 220px;
+    overflow: hidden;
+}
+
+h3 {
+    text-align: center;
+}
+
+.form-control-file {
+    text-align: center;
+}
