@@ -122,7 +122,7 @@ class ReservationController extends AbstractController
             //Recipients
             $mail->setFrom('f.olivier.wilder@gmail.com', 'Mailer');
             $mail->addAddress('f.olivier.wilder@gmail.com', 'Havre de l Ill');     // Add a recipient
-            $mail->addReplyTo($_POST['mail'], 'Information');
+            //$mail->addReplyTo($_POST['mail'], 'Information');
 
             //Content
             $mail->isHTML(true);                                  // Set email format to HTML

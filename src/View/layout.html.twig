@@ -44,15 +44,17 @@
                     <li><a href="/Parlementaires"><img class="drapeauEurope" src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1521753995/Drapeau-Europe_k876hd.png" alt="drapeauEurope"> PARLEMENTAIRE</a></li>
                   </ul>
                 </div>
+                <div id="messageSend">
+
+                </div>
                 <!-- /.navbar-collapse -->
               </div>
               <!-- /.container-fluid -->
             </nav>
+
           </header>
           <!-- END HEADER-->
-          <div id="messageSend">
 
-          </div>
           {% block content %}{% endblock %}
 
           <button onclick="topFunction()" id="myBtn" title="haut de page"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>
@@ -69,7 +71,7 @@
                 </div>
                 <div class="modal-body">
                   <h6 class="modal-title" id="myModalLabel">Pour toute information, ou toutes questions, n'hesitez pas à nous contacter via notre formulaire ci dessous</h6></br>
-                  <form id="mainForm" name='formulaire'>
+                  <form id="mainForm" name='formulaire' >
                     <div class="form-group">
                       <label class="sr-only" for="exampleInputAmount"></label>
                       <div class="input-group">
@@ -127,7 +129,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js"></script>
           {% block javascript %}{% endblock %}
 <script>
 
@@ -152,6 +154,7 @@ $(document).ready(function(){
 
     $(function() {
         $('#envoyer').click(function() {
+
             var data = {
                 nom: $("#nomMail").val(),
                 prenom: $("#prenomMail").val(),
@@ -165,7 +168,7 @@ $(document).ready(function(){
                 type: "POST",
                 url: "http://localhost:8000/Reservation/mail",
                 data: data,
-                success: function(response){
+                success: function(){
 
                     $('#messageSend').append('<div class="alert alert-success" role="alert">'+'Message envoyer' + '</div>');
                 }
@@ -173,6 +176,7 @@ $(document).ready(function(){
             });
 
             return false;
+
         });
 
 
