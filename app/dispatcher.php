@@ -26,6 +26,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/Administration/DiapoAccueil', 'Administration/DiapoAccueil');
     $r->addRoute('GET', '/Administration/Chambres', 'Administration/AdminChambres');
     $r->addRoute('POST', '/Administration/Chambres', 'Administration/AdminChambres');
+    $r->addRoute('GET', '/Administration/NouvelleChambre', 'Administration/NouvelleChambre');
+    $r->addRoute('POST', '/Administration/NouvelleChambre', 'Administration/NouvelleChambre');
     // {id} must be a number (\d+)
     /*
     $r->addRoute('GET', '/item/{id:\d+}', 'Item/show');

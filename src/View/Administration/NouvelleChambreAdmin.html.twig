@@ -1,0 +1,67 @@
+{% extends 'Administration/Administration.html.twig' %}
+
+    {% block stylesheet %}
+        <link rel="stylesheet" href="/assets/css/admin.css">
+    {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+
+        <h3>Ajout d'une nouvelle chambre :</h3>
+
+        {% if errors|length>0 %}
+            <div class="alert alert-danger">
+                {% for error in errors %}
+                <strong>{{ error }}</strong><br>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if valids|length>0 %}
+            <div class="alert alert-success"><br>
+                {% for valid in valids %}
+                    <strong>{{ valid }}</strong>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <br>
+        <div class="jumbotron container-fluid">
+            <div class="row">
+                <form action="" method="post" class="form-group" enctype="multipart/form-data">
+                    <div class="">
+                        <input type="text" name="titre" value="{{ data.titre }}"/>
+                        <input type="text" name="prix" value="{{ data.prix }}"/>
+                        <textarea name="texte" style="height: auto;width: 100%">{{ data.texte }}</textarea>
+                        <input type="file" name="nouvellesDiapos[]" multiple="multiple" />
+                    </div>
+                    <div class="">
+                        <select name="style" class="form-control">
+                            <option value="" {% if data.style=="" %}selected{% endif %}></option>
+                            <option value="Classique" {% if data.style=="Classique" %}selected{% endif %}>Classique</option>
+                            <option value="Moderne" {% if data.style=="Moderne" %}selected{% endif %}>Moderne</option>
+                        </select>
+                        <select name="literie" class="form-control">
+                            <option value="" {% if data.literie=="" %}selected{% endif %}></option>
+                            <option value="Simple" {% if data.literie=="Simple" %}selected{% endif %}>Lits Simples</option>
+                            <option value="Double" {% if data.literie=="Double" %}selected{% endif %}>Lit Double</option>
+                        </select>
+                        <select name="salleDeBain" class="form-control">
+                            <option value="" {% if data.salleDeBain=="" %}selected{% endif %}></option>
+                            <option value="Baignoire" {% if data.salleDeBain=="Baignoire" %}selected{% endif %}>Baignoire</option>
+                            <option value="Douche" {% if data.salleDeBain=="Douche" %}selected{% endif %}>Douche</option>
+                        </select>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="PMR" value="pmr"{% if data.accessibilite == "Oui" %}checked{% endif %}><i class="fas fa-wheelchair fa-2x"></i></label>
+
+                        </div>
+                    </div>
+                    <div>
+                        <input type="submit" name="New" value="Ajouter" class="btn btn-success"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
