@@ -21,28 +21,23 @@ class ChambreManager extends EntityManager
 
     public function findAll()
     {
-        $DiaposChambres=$this->conn->query('SELECT DISTINCT * FROM ' . $this->table . ' INNER JOIN DiapoChambres ON Chambres.id  =  DiapoChambres .chambres_id', \PDO::FETCH_ASSOC)->fetchAll();
+        $chambresSeules=$this->conn->query('SELECT DISTINCT * FROM ' . $this->table)->fetchAll();
         $chambres=[];
+        $DiapoChambresManager= new DiapoChambreManager();
         $i=0;
-        foreach ($DiaposChambres as $diapo => $data) {
-            if (!isset($chambres[$data['chambres_id']])) {
-                $i++;
-                $chambres += [$i => array(
-                    'id' => $data['chambres_id'],
-                    'titre' => $data['titre'],
-                    'texte' => $data['texte'],
-                    'prix' => $data['prix'],
-                    'style' => $data['style'],
-                    'literie' => $data['literie'],
-                    'accessibilite' => $data['accessibilite'],
-                    'salleDeBain' => $data['salleDeBain'],
-                    'urlImage' => array($data['id'] => $data['urlImage']))];
-
-            } else {
-
-                $chambres[$data['chambres_id']]['urlImage']+= [$data['id'] => $data['urlImage']];
-
-            }
+        foreach ($chambresSeules as $data) {
+            $i++;
+            $diaposChambre=$DiapoChambresManager->findByChambreId($data['id']);
+            $chambres += [$i => array(
+                'id' => $data['id'],
+                'titre' => $data['titre'],
+                'texte' => $data['texte'],
+                'prix' => $data['prix'],
+                'style' => $data['style'],
+                'literie' => $data['literie'],
+                'accessibilite' => $data['accessibilite'],
+                'salleDeBain' => $data['salleDeBain'],
+                'urlImage' => $diaposChambre)];
 
         }
         return $chambres;

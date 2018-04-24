@@ -89,7 +89,7 @@
                                         <div class="carousel-inner">
                                             {% for img in chambre.urlImage %}
                                                 <div class="item {% if loop.index == 1 %} active {% endif %}">
-                                                    <img class="item" src="{{ img }}" alt="Other slide">
+                                                    <img class="item" src="{{ img.urlImage }}" alt="Other slide">
                                                 </div>
                                             {% endfor %}
                                         </div>
@@ -184,7 +184,7 @@
 
                                             {% for img in chambre.urlImage %}
                                                 <div class="item {% if loop.index == 1 %} active {% endif %} ">
-                                                    <img src="{{ img }}" alt="Other Slide">
+                                                    <img src="{{ img.urlImage }}" alt="Other Slide">
                                                 </div>
                                             {% endfor %}
 
@@ -203,10 +203,6 @@
                         </div>
                     {% endif %}
                 {% endfor %}
-
-
-
-
         </section>
 
 

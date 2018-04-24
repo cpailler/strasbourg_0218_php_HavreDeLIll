@@ -28,13 +28,9 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/Administration/Chambres', 'Administration/AdminChambres');
     $r->addRoute('GET', '/Administration/Localisation', 'Administration/LocalisationAdmin');
     $r->addRoute('POST', '/Administration/Localisation', 'Administration/LocalisationAdmin');
-    // {id} must be a number (\d+)
-    /*
-    $r->addRoute('GET', '/item/{id:\d+}', 'Item/show');
-    $r->addRoute('GET', '/item/add', 'Item/add');
-    $r->addRoute('GET', '/item/edit/{id:\d+}', 'Item/edit');
-    $r->addRoute('GET', '/admin', 'Admin/index');
-    */
+    $r->addRoute('GET', '/Administration/NouvelleChambre', 'Administration/NouvelleChambre');
+    $r->addRoute('POST', '/Administration/NouvelleChambre', 'Administration/NouvelleChambre');
+
 });
 
 // Fetch method and URI from somewhere
