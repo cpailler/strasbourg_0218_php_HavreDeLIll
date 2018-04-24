@@ -1,0 +1,91 @@
+{% extends 'Administration/Administration.html.twig' %}
+
+    {% block stylesheet %}
+        <link rel="stylesheet" href="/assets/css/admin.css">
+    {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+
+        <h3>Modification des chambres :</h3>
+        <form action="" method="post" class="form-group">
+            <select name="chambre" class="form-control" onchange="this.form.submit()">
+                <option value="" {% if select=="" %}selected{% endif %}></option>
+                {% for chambre in chambres %}
+                <option value="{{ chambre.id }}" {% if select==chambre.id %}selected{% endif %}>{{ chambre.titre }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        {% if errors|length>0 %}
+            <div class="alert alert-danger">
+                {% for error in errors %}
+                <strong>{{ error }}</strong><br>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if valids|length>0 %}
+            <div class="alert alert-success"><br>
+                {% for valid in valids %}
+                    <strong>{{ valid }}</strong>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <br>
+        {% if select!="" %}
+        <div class="jumbotron container-fluid">
+            <div class="row">
+                <form action="" method="post" class="form-group" enctype="multipart/form-data">
+                    <div class="">
+                        <input type="hidden" name="id" value="{{ chambreAModifier.id }}">
+                        <input type="text" name="titre" value="{{ chambreAModifier.titre }}"/>
+                        <input type="text" name="prix" value="{{ chambreAModifier.prix }}"/>
+                        <textarea name="texte" style="height: auto;width: 100%">{{ chambreAModifier.texte }}</textarea>
+                        <input type="file" name="nouvellesDiapos[]" multiple="multiple" />
+                    </div>
+                    <div class="">
+                        <select name="style" class="form-control">
+                            <option value="Classique" {% if chambreAModifier.style=="Classique" %}selected{% endif %}>Classique</option>
+                            <option value="Moderne" {% if chambreAModifier.style=="Moderne" %}selected{% endif %}>Moderne</option>
+                        </select>
+                        <select name="literie" class="form-control">
+                            <option value="Simple" {% if chambreAModifier.literie=="Simple" %}selected{% endif %}>Lits Simples</option>
+                            <option value="Double" {% if chambreAModifier.literie=="Double" %}selected{% endif %}>Lit Double</option>
+                        </select>
+                        <select name="salleDeBain" class="form-control">
+                            <option value="Baignoire" {% if chambreAModifier.salleDeBain=="Baignoire" %}selected{% endif %}>Baignoire</option>
+                            <option value="Douche" {% if chambreAModifier.salleDeBain=="Douche" %}selected{% endif %}>Douche</option>
+                        </select>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="PMR" value="pmr"{% if chambreAModifier.accessibilite == "Oui" %}checked{% endif %}><i class="fas fa-wheelchair fa-2x"></i></label>
+
+                        </div>
+                    </div>
+                    <div>
+                        <input type="submit" name="modifier" value="Modifier" class="btn btn-warning"/>
+                        <input type="submit" name="delete" value="Supprimer" class="btn btn-danger" />
+                    </div>
+                </form>
+
+            </div>
+            <div class="row">
+                {% for diapo in diapos %}
+
+                    <div class="col-md-3 text-center">
+                        <br>
+                        <img class="diapo" src="{{ diapo.urlImage }}" alt="Other Slide">
+                        <br>
+                        <form class="form-group"  action="" method="POST">
+                            <input type="submit" class="btn btn-danger center-block" value="supprimer" name="{{ diapo.id }}"/>
+                        </form>
+                        <br>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+

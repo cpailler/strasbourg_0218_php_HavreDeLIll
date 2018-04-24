@@ -21,20 +21,32 @@ class ChambreManager extends EntityManager
 
     public function findAll()
     {
-        return $this->conn->query('SELECT DISTINCT * FROM ' . $this->table . ' INNER JOIN DiapoChambres ON Chambres.id  =  DiapoChambres .chambres_id', \PDO::FETCH_ASSOC)->fetchAll();
+        $DiaposChambres=$this->conn->query('SELECT DISTINCT * FROM ' . $this->table . ' INNER JOIN DiapoChambres ON Chambres.id  =  DiapoChambres .chambres_id', \PDO::FETCH_ASSOC)->fetchAll();
+        $chambres=[];
+        $i=0;
+        foreach ($DiaposChambres as $diapo => $data) {
+            if (!isset($chambres[$data['chambres_id']])) {
+                $i++;
+                $chambres += [$i => array(
+                    'id' => $data['chambres_id'],
+                    'titre' => $data['titre'],
+                    'texte' => $data['texte'],
+                    'prix' => $data['prix'],
+                    'style' => $data['style'],
+                    'literie' => $data['literie'],
+                    'accessibilite' => $data['accessibilite'],
+                    'salleDeBain' => $data['salleDeBain'],
+                    'urlImage' => array($data['id'] => $data['urlImage']))];
 
-    }
+            } else {
 
-    public function delete($id)
-    {
-    }
+                $chambres[$data['chambres_id']]['urlImage']+= [$data['id'] => $data['urlImage']];
 
-    public function update($id, $data)
-    {
-    }
+            }
 
-    public function insert($data)
-    {
+        }
+        return $chambres;
+
     }
 
 }
