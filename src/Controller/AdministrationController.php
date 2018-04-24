@@ -27,7 +27,7 @@ class AdministrationController extends AbstractController
     public function index()
     {
         session_start();
-        if ($_SESSION['user'] != $_SESSION['name'] && $_SESSION['password'] != $_SESSION['pwd']) {
+        if (!isset($_SESSION['user']) && !isset($_SESSION['password']) ) {
             header('Location: /Login');
         }
 

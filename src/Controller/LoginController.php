@@ -29,9 +29,11 @@ class LoginController extends AbstractController
 
         session_start ();
         // on enregistre les paramètres de notre client comme variables de session ($login et $pwd)
-        if (isset($_POST['user'])&&isset($_POST['password'])) {
+        var_dump($_SESSION['password']);
+        if (isset($_POST['user'])&& isset($_POST['password'])) {
             $_SESSION['user'] = $_POST['user'];
             $_SESSION['password'] = $_POST['password'];
+
         }
         $_SESSION['name'] = $admin['0']['name'];
         $_SESSION['pwd'] = $admin['0']['password'];
@@ -51,7 +53,7 @@ class LoginController extends AbstractController
             elseif ($_POST['user'] != $admin['0']['name'] && $_POST['password'] != $admin['0']['password']) {
                 $errors['login'] = "Votre mot de passe ou votre nom d'utilisateur est incorrect";
             }
-            elseif ($_POST['user'] === $admin['0']['name'] && $_POST['password'] === $admin['0']['password']) {
+            elseif ($_POST['user'] === $admin['0']['name'] && $_POST['password'] === $admin['0']['password'] ) {
                 header('Location: /Administration');
             }
         }
