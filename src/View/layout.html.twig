@@ -44,9 +44,7 @@
                     <li><a href="/Parlementaires"><img class="drapeauEurope" src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1521753995/Drapeau-Europe_k876hd.png" alt="drapeauEurope"> PARLEMENTAIRE</a></li>
                   </ul>
                 </div>
-                <div id="messageSend">
 
-                </div>
                 <!-- /.navbar-collapse -->
               </div>
               <!-- /.container-fluid -->
@@ -84,19 +82,22 @@
                           <div class="input-group-addon">P</div>
                           <input type="text" class="form-control"  name="prenomMail"  id="prenomMail" placeholder="Prenom" required>
                         </div></br>
-                        <div class="form-group">
+                        <br class="form-group">
                           <label class="sr-only" for="exampleInputAmount"></label>
                           <div class="input-group">
                             <div class="input-group-addon">@</div>
                             <input type="mail" class="form-control"  name="adresseMail"  id="adresseMail" placeholder="E-mail" required>
                           </div></br>
-                          <div class="form-group">
+                          <br class="form-group">
                             <label class="sr-only" for="exampleInputAmount"></label>
                             <div class="input-group">
                               <div class="input-group-addon">Msg</div>
                               <textarea class="form-control" rows="3"  name="contenuMail"  id="contenuMail" placeholder="Tapez votre message ici" required></textarea>
                             </div></br>
-                            <button id="envoyer"type="submit"class="btn btn-localisation">Envoyer</button>
+                          <button id="envoyer"type="submit"class="btn btn-localisation">Envoyer</button></br></br>
+                          <div id="messageSend">
+
+                          </div>
                             </div>
                           </div>
                         </div>
@@ -129,7 +130,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.12.0/validate.min.js"></script>
+
           {% block javascript %}{% endblock %}
 <script>
 
@@ -155,6 +156,8 @@ $(document).ready(function(){
     $(function() {
         $('#envoyer').click(function() {
 
+
+
             var data = {
                 nom: $("#nomMail").val(),
                 prenom: $("#prenomMail").val(),
@@ -163,17 +166,24 @@ $(document).ready(function(){
             };
 
 
+            if (!($("#nomMail").val() === "") && !($("#PrenomMail").val() === "") && !($("#adresseMail").val() === "") && !($("#contenuMail").val() === "")) {
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8000/Reservation/mail",
+                    data: data,
+                    success: function () {
 
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:8000/Reservation/mail",
-                data: data,
-                success: function(){
+                        $('input').css('border-color', '#999');
+                        $('textarea').css('border-color', '#999');
+                        $('#messageSend').replaceWith('<div class="alert alert-success" role="alert">' + 'Message envoyé' + '</div>');
+                    }
 
-                    $('#messageSend').append('<div class="alert alert-success" role="alert">'+'Message envoyer' + '</div>');
-                }
-
-            });
+                });
+            }else{
+                $('input').css('border-color', 'red');
+                $('textarea').css('border-color', 'red');
+                $('#messageSend').append('<div class="alert alert-warning" role="alert">' + 'veuillez remplir tous les champs' + '</div>');
+            }
 
             return false;
 
