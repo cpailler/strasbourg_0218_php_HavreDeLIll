@@ -49,16 +49,4 @@ class ChambreManager extends EntityManager
 
     }
 
-    public function delete($id)
-    {
-    }
-
-    public function update($id, $data)
-    {
-    }
-
-    public function insert($data)
-    {
-    }
-
 }

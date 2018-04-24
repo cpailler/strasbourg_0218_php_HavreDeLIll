@@ -16,6 +16,20 @@
                 {% endfor %}
             </select>
         </form>
+        {% if errors|length>0 %}
+            <div class="alert alert-danger">
+                {% for error in errors %}
+                <strong>{{ error }}</strong><br>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if valids|length>0 %}
+            <div class="alert alert-success"><br>
+                {% for valid in valids %}
+                    <strong>{{ valid }}</strong>
+                {% endfor %}
+            </div>
+        {% endif %}
         <br>
         {% if select!="" %}
         <div class="jumbotron container-fluid">
@@ -48,7 +62,7 @@
                     </div>
                     <div>
                         <input type="submit" name="modifier" value="Modifier" class="btn btn-warning"/>
-                        <input type="submit" name="supprimer" value="Supprimer" class="btn btn-danger" />
+                        <input type="submit" name="delete" value="Supprimer" class="btn btn-danger" />
                     </div>
                 </form>
 

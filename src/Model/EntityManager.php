@@ -66,12 +66,12 @@ abstract class EntityManager
         $columns = "";
         $values = "";
         foreach ($data as $column => $value){
-            $columns .= $column.", ";
-            $values .= "'".$value."', ";
+            $columns .= $column.', ';
+            $values .= '"'.$value.'", ';
         }
         $columns=substr($columns, 0, strlen($columns)-2);
         $values=substr($values, 0, strlen($values)-2);
-        $statement = $this->conn->prepare("INSERT INTO ".$this->table." (".$columns.") VALUES (".$values.")");
+        $statement = $this->conn->prepare('INSERT INTO '.$this->table.' ('.$columns.') VALUES ('.$values.')');
 
         return $statement->execute();
 
@@ -85,10 +85,10 @@ abstract class EntityManager
     {
         $modifs = "";
         foreach ($data as $column => $value){
-            $modifs.=$column."='".$value."', ";
+            $modifs.=$column.'="'.$value.'", ';
         }
         $modifs=substr($modifs, 0, strlen($modifs)-2);
-        $statement = $this->conn->prepare("UPDATE ".$this->table." SET ".$modifs." WHERE id=".$id);
+        $statement = $this->conn->prepare('UPDATE '.$this->table.' SET '.$modifs.' WHERE id='.$id);
 
         return $statement->execute();
 
