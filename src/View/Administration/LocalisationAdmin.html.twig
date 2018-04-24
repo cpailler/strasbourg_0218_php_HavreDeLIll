@@ -1,0 +1,44 @@
+{% extends 'Administration/Administration.html.twig' %}
+
+    {% block stylesheet %}
+        <link rel="stylesheet" href="/assets/css/admin.css">
+    {% endblock %}
+{% block content %}
+    <h1>Page de Localisation</h1>
+    <form action="" method="post">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" value=" {{ adminLoc.0.numPortable }}" name="numPortable" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2 data-feather="map-pin">Téléphone portable</span>
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" value="{{ adminLoc.0.numFixe }}" name="numFixe" aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">Téléphone Fixe</span>
+
+        </div>
+    </div>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Contenu</span>
+        </div>
+        <textarea class="form-control" name="texte" aria-label="With textarea">{{ adminLoc.0.texte }}</textarea>
+    </div></br>
+    <div class="input-group">
+    <input type="submit" class="btn btn-warning" name="modifierLoc" value="Modifier">
+    </div>
+    </form>
+    {% if error.0 is defined %}
+        <div class="alert alert-danger" role="alert">
+            {{ error.0 }}
+        </div>
+
+    {% elseif valid.0 is defined %}
+        <div class="alert alert-success" role="alert">
+            {{ valid.0 }}
+        </div>
+    {% endif %}
+
+
+{% endblock %}

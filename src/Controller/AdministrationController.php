@@ -8,10 +8,11 @@
 
 namespace Controller;
 
-use Controller\Date\Month;
+use Controller\Calendar\Month;
 use Model\ChambreManager;
 use Model\DiapoChambreManager;
 use Model\ReservationManager;
+use Model\LocalisationManager;
 
 use Model\DiapoAccueilManager;
 
@@ -230,6 +231,34 @@ class AdministrationController extends AbstractController
             'diapos'=>$diapos,
             'errors'=>$error,
             'valids'=>$valid]);
+    }
+    public function LocalisationAdmin(){
+        $LocalisationManager = new LocalisationManager();
+        $error=[];
+        $valid=[];
+        if (isset($_POST['modifierLoc'])) {
+            $data = [];
+            $id = 1;
+            $data['numPortable'] = $_POST['numPortable'];
+            $data['numFixe'] = $_POST['numFixe'];
+            $data['texte'] = $_POST['texte'];
+            $adminModifier = $LocalisationManager->update($id, $data);
+            if (!$adminModifier) {
+                $error[] = "La base de donnée a refusé votre requête, veuillez contacter votre support technique.";
+            } else {
+                $valid[] = "modifications ont été effectuées";
+
+            }
+        }
+
+        $adminLoc=$LocalisationManager->findAll();
+
+
+        return $this->twig->render('Administration/LocalisationAdmin.html.twig',[
+            'adminLoc'=> $adminLoc,
+            'error'=>$error,
+            'valid'=>$valid
+        ]);
     }
 
 }
