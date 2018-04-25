@@ -28,7 +28,7 @@ class ChambreController extends AbstractController
         $select=["","","",false];
 
         $datas=$datasorigin;
-        $i=0;
+
         if (isset($_POST['submit'])){
 
             $select[0]=$_POST['style'];
@@ -44,8 +44,8 @@ class ChambreController extends AbstractController
                     (($_POST['salleDeBain']=='')||($_POST['salleDeBain']==$data['salleDeBain']))&&
                     (($_POST['literie']=='')||($_POST['literie']==$data['literie']))&&
                     ((isset($_POST['PMR'])&&($data['accessibilite']=='Oui'))||(!isset($_POST['PMR'])))){
-                    $i++;
-                    $datas+=[$i=>$data];
+
+                    $datas[]=$data;
                 }
             }
             if (empty($datas)){
