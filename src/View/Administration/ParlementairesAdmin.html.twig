@@ -1,0 +1,41 @@
+{% extends 'Administration/Administration.html.twig' %}
+
+    {% block stylesheet %}
+        <link rel="stylesheet" href="/assets/css/admin.css">
+    {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+
+        <h3>Modification des articles de la page parlementaires :</h3>
+
+        <br>
+
+
+        <div class="jumbotron container-fluid">
+            <div class="row">
+                {% for article in articles %}
+                    <div class="col-xs-12 col-md-12 col-lg-12">
+                        <form action="" method="post" class="form-group" enctype="multipart/form-data">
+                            <div class="">
+                                <input type="hidden" name="id" value="{{ article.id }}">
+                                <br>
+                                <img class="diapo" name="urlImage" src="{{ article.urlImage }}" alt="image">
+                                <br>
+                                <input type="file" name="urlImage"/>
+                                <br>
+                                <input type="text" name="titre" value="{{ article.titre }}"/>
+                                <br>
+                                <textarea name="texte" style="height: auto;width: 100%">{{ article.texte }}</textarea>
+                            </div>
+                            <div>
+                                <input type="submit" name="modifier" value="Modifier" class="btn btn-warning"/>
+                            </div>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

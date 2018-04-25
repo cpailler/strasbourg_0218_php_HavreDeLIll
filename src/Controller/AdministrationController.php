@@ -16,7 +16,7 @@ use Model\ChambreManager;
 use Model\DiapoChambreManager;
 use Model\ReservationManager;
 use Model\LocalisationManager;
-
+use Model\ParlementairesManager;
 use Model\DiapoAccueilManager;
 
 /**
@@ -454,6 +454,72 @@ private function ConnectionCheck(){
             'errors'=>$error,
             'valids'=>$valid,
             'data'=>$data]);
+    }
+
+    public function ParlementairesAdmin()
+    {
+        $this->ConnectionCheck();
+
+        $ParlementairesManager = new ParlementairesManager();
+
+        $error = [];
+        $valid = [];
+        if (isset($_POST['modifier'])) {
+            $data = [];
+            $id = $_POST['id'];
+            $data['titre'] = $_POST['titre'];
+            $data['texte'] = $_POST['texte'];
+
+            // Vérifie qu'un fichier a bien été envoyé
+            if (!empty($_FILES['urlImage']['name'])) {
+                var_dump($_FILES['urlImage']);
+                // Vérification du type de fichier
+                $typeMime = mime_content_type($_FILES['urlImage']['tmp_name']);
+                if (in_array($typeMime, ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'])) {
+
+                    // Vérification taille du fichier
+                    $size = filesize($_FILES['urlImage']['tmp_name']);
+
+                    if ($size > 5000000) {
+                        $error[] = "Le fichier ne doit pas dépasser 5Mo";
+                    } else {
+                        // Récupération de l'extension du fichier (fin de la chaîne) :
+                        $extensionDuFichier = strrchr($_FILES['urlImage']['name'], ".");
+
+                        // Définition d'un nom unique :
+                        $uniqueId = uniqid('/assets/images/image') . $extensionDuFichier;
+
+                        // Emplacement temporaire du fichier uploadé :
+                        $cheminEtNomTemporaire = $_FILES['urlImage']['tmp_name'];
+
+                        // Nouvel emplacement du fichier :
+                        $deplacementOK = move_uploaded_file($cheminEtNomTemporaire, substr($uniqueId, 1, strlen($uniqueId)));
+
+                        if ($deplacementOK){
+                            $data['urlImage'] = $uniqueId;
+                        }
+                        else{
+                            $error[]="Erreur inconnue : Votre fichier n'as pas pu être enregistré";
+                        }
+
+                    }
+                } else {
+                    $error[] = "Format d'image non supporté (formats supportés : jpeg, jpg, png, gif)";
+                }
+
+            }
+
+            $ok = $accueilManager->update($id, $data);
+            if (!$ok) {
+                $error[] = "La base de donnée a refusé votre requête, veuillez contacter votre support technique.";
+            } else {
+                $valid[] = "Article modifiée avec succès";
+            }
+        }
+
+        $articles =  $ParlementairesManager->findAll();
+
+        return $this->twig->render('Administration/ParlementairesAdmin.html.twig', ['articles' => $articles]);
     }
 
 }
