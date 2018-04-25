@@ -41,7 +41,6 @@ class AdministrationController extends AbstractController
         return $this->twig->render('Administration/Administration.html.twig');
     }
 
-
     public function DiapoAccueil()
     {
 
