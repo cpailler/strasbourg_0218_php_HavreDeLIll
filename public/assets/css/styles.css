@@ -154,3 +154,7 @@ text-align: center;
 .calendar_booked{
     background-color: rgba(13, 21, 84, 0.07);
 }
+.badge{
+    font-size: 18px;
+    background-color: #dbb875;
+}

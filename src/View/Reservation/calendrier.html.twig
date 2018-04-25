@@ -59,27 +59,22 @@
                               <div class="col-xs-6">
                                   <div class="controls">
                                       <label for="arrive" class="label-date">&nbsp;&nbsp;Arrive</label>
-                                      <input type="date" id="arrive" class="form-control" name="dateDebut"
+                                      <input type="date" id="arrive" class="form-control dateclic" name="dateDebut"
                                               value="{% if errors|length>0 and data.dateDebut is defined  %}{{ data.dateDebut }}{% endif %}">
                                   </div>
                               </div>
                               <div class="col-xs-6">
                                   <div class="controls">
                                       <label for="depart" class="label-date">&nbsp;&nbsp;Depart</label>
-                                      <input type="date" id="depart" class="form-control" name="dateFin"
+                                      <input type="date" id="depart" class="form-control dateclic" name="dateFin"
                                              value="{% if errors|length>0 and data.dateFin is defined  %}{{ data.dateFin }}{% endif %}"/>
                                   </div>
                               </div>
                           </div>
                           <br>
                           <div class="row">
-
                               <div class="col-xs-6">
-                                  <div class="controls">
-                                      <label for="nuite" class="label-date">&nbsp;&nbsp;Nuitées / Nuity</label>
-                                      <input type="text" id="nuite" class="form-control" name="nuite"
-                                             value=""/>
-                                  </div>
+                                <h2 id="nbNuite">Nombre de Nuités : <span></span></h2>
                               </div>
 
                           </div>
@@ -152,47 +147,45 @@
   {% endblock %}
 {% block javascript %}
 <script>
+    $( '.dateclic' ).on('change',function() {
 
-        var dateDepart = $('#depart').val();
-        var dateArrive = $('#arrive').val();
-
-        $(function() {
-            $('#depart').dblclick(function() {
-        alert(dateDepart)});
-        });
-
-       var date1 = '';
-       var date2 = '';
-       if (date1 =='undefined' && date2 =='undefined'){
-           $('#nuite').val(0);
-       }
-       else
-       {
+        var date1 = $('#arrive').val();
+        var date2 = $('#depart').val();
+        if (date1 == 'undefined' && date2 == 'undefined') {
+            $('#nuite').val(0);
+        }
+        else {
 
 
-           // First we split the values to arrays date1[0] is the year, [1] the month and [2] the day
-           date1 = date1.split('-');
-           date2 = date2.split('-');
+            // First we split the values to arrays date1[0] is the year, [1] the month and [2] the day
+            date1 = date1.split('-');
+            date2 = date2.split('-');
 
-           // Now we convert the array to a Date object, which has several helpful methods
-           date1 = new Date(date1[0], date1[1], date1[2]);
-           date2 = new Date(date2[0], date2[1], date2[2]);
+            // Now we convert the array to a Date object, which has several helpful methods
+            date1 = new Date(date1[0], date1[1], date1[2]);
+            date2 = new Date(date2[0], date2[1], date2[2]);
 
-           // We use the getTime() method and get the unixtime (in milliseconds, but we want seconds, therefore we divide it through 1000)
-           date1_unixtime = parseInt(date1.getTime() / 1000);
-           date2_unixtime = parseInt(date2.getTime() / 1000);
+            // We use the getTime() method and get the unixtime (in milliseconds, but we want seconds, therefore we divide it through 1000)
+            date1_unixtime = parseInt(date1.getTime() / 1000);
+            date2_unixtime = parseInt(date2.getTime() / 1000);
 
-           // This is the calculated difference in seconds
-           var timeDifference = date2_unixtime - date1_unixtime;
+            // This is the calculated difference in seconds
+            var timeDifference = (date2_unixtime - date1_unixtime);
 
-           // in Hours
-           var timeDifferenceInHours = timeDifference / 60 / 60;
+            // in Hours
+            var timeDifferenceInHours = timeDifference / 60 / 60;
 
-           // and finaly, in days :)
-           var timeDifferenceInDays = timeDifferenceInHours / 24;
+            // and finaly, in days :)
+            var timeDifferenceInDays = timeDifferenceInHours / 24;
+            if (timeDifferenceInDays <= 0) {
+                $('#nbNuite').replaceWith(`<h2 id="nbNuite">Nombre de Nuités :<span class="badge badge-light">0</span></h2>`);
+            } else {
+                $('#nbNuite').replaceWith(`<h2 id="nbNuite">Nombre de Nuités :<span  class="badge badge-light">${timeDifferenceInDays}</span></h2>`);
 
-           //alert(timeDifferenceInDays);
-       }
+            }
 
+
+        }
+    });
 </script>
 {% endblock %}
