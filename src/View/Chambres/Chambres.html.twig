@@ -24,8 +24,12 @@
                                 <label for="style">Style</label>
                                 <select name="style" class="form-control">
                                     <option value="" {% if select.0=="" %}selected{% endif %}></option>
-                                    <option value="Classique" {% if select.0=="Classique" %}selected{% endif %}>Classique / Classic</option>
-                                    <option value="Moderne" {% if select.0=="Moderne" %}selected{% endif %}>Moderne / Modern</option>
+                                    <option value="Classique" {% if select.0=="Classique" %}selected{% endif %}>
+                                        Classique / Classic
+                                    </option>
+                                    <option value="Moderne" {% if select.0=="Moderne" %}selected{% endif %}>Moderne /
+                                        Modern
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -34,24 +38,34 @@
                                 <label for="salleDeBain">Bain / Bathroom</label>
                                 <select name="salleDeBain" class="form-control">
                                     <option value="" {% if select.1=="" %}selected{% endif %}></option>
-                                    <option value="Baignoire" {% if select.1=="Baignoire" %}selected{% endif %}>Baththub / Baignoire</option>
-                                    <option value="Douche" {% if select.1=="Douche" %}selected{% endif %}>Shower/Douche</option>
+                                    <option value="Baignoire" {% if select.1=="Baignoire" %}selected{% endif %}>Baththub
+                                        / Baignoire
+                                    </option>
+                                    <option value="Douche" {% if select.1=="Douche" %}selected{% endif %}>
+                                        Shower/Douche
+                                    </option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-xs-12 col-md-2">
                             <div class="controls">
                                 <label for="literie">Literie / Bedding</label>
-                                <select  name="literie" class="form-control">
+                                <select name="literie" class="form-control">
                                     <option value="" {% if select.2=="" %}selected{% endif %}></option>
-                                    <option value="Simple" {% if select.2=="Simple" %}selected{% endif %}>Lit simple / Single Bed</option>
-                                    <option value="Double" {% if select.2=="Double" %}selected{% endif %}>Lit double / Double Bed</option>
+                                    <option value="Simple" {% if select.2=="Simple" %}selected{% endif %}>Lit simple /
+                                        Single Bed
+                                    </option>
+                                    <option value="Double" {% if select.2=="Double" %}selected{% endif %}>Lit double /
+                                        Double Bed
+                                    </option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-xs-6 col-md-1">
                             <div class="checkbox">
-                                <label><input type="checkbox" name="PMR" value="pmr"{% if select.3 %}checked{% endif %}><i class="fas fa-wheelchair fa-2x"></i></label>
+                                <label><input type="checkbox" name="PMR" value="pmr"
+                                              {% if select.3 %}checked{% endif %}><i
+                                            class="fas fa-wheelchair fa-2x"></i></label>
                             </div>
                         </div>
                         <div class="col-xs-6 col-md-1">
@@ -61,25 +75,24 @@
                     </div>
                 </form> <!-- /.form-group -->
                 {% if error %}
-                <div class="alert alert-danger">
-                    <strong>Oops!</strong> Aucune chambre ne correspond à votre sélection.
-                </div>
+                    <div class="alert alert-danger">
+                        <strong>Oops!</strong> Aucune chambre ne correspond à votre sélection.
+                    </div>
                 {% endif %}
-
-
-
 
 
                 <!--Chambre gauche-->
                 {% for i,chambre in datas %}
-                    {% if i!=1 %}<hr>{% endif %}
+                    {% if i!=1 %}
+                        <hr>{% endif %}
                     {% if i%2==1 %}
 
                         <div class="row element">
                             <div class="col-xs-1"></div>
-                            <div class="col-xs-3">
+                            <div class="col-xs-12 col-md-3">
                                 <div class="slider">
-                                    <div id="{{ i }}" class="carousel slide carchambres" data-ride="carousel">
+                                    <div id="{{ i }}" class="carousel slide carchambres center-block"
+                                         data-ride="carousel">
                                         <!-- Carousel indicators -->
                                         <ol class="carousel-indicators">
                                             <li data-target="#{{ i }}" data-slide-to="0" class="active"></li>
@@ -103,31 +116,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="container-fluid col-xs-7">
-                                <div class="row container-fluid col-xs-12">
-                                    <div class="col-xs-12 critere">
+                            <div class="col-xs-12 col-md-7">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-12 critere">
                                         <h2 class="chambres">{{ chambre.titre | upper }} </h2>
                                         <h3 class="chambres">{{ chambre.prix }}€ TTC/nuit</h3>
                                         <hr>
                                     </div>
-
                                 </div>
-                                <div class="container-fluid col-xs-12">
-                                    <div class="col-xs-8 center-block">
-                                        <p><br>{{ chambre.texte }}</p>
-                                        <form class="" action="" method="post">
-                                            <button type="submit" class="btn">Réserver</button>
-                                        </form>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">OPTIONS :</div>
-                                            <div class="panel-body">
-                                                <ul>
-                                                    <li>{{ chambre.style }}</li>
-                                                    <li>{{ chambre.literie }}</li>
-                                                    <li>{{ chambre.salleDeBain }}</li>
-                                                </ul>
+                                <div class="row center-block">
+                                    <div class="col-xs-12 col-md-12">
+                                        <div class="row center-block">
+                                            <div class="col-xs-12 col-md-12">
+                                                <p><br>{{ chambre.texte }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -135,45 +136,56 @@
                             </div>
                             <div class="col-xs-1"></div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">OPTIONS :</div>
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li>{{ chambre.style }}</li>
+                                            <li>{{ chambre.literie }}</li>
+                                            <li>{{ chambre.salleDeBain }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <form class="" action="" method="post">
+                                    <button type="submit" class="btn center-block">Réserver</button>
+                                </form>
+                                <br>
+                            </div>
+                        </div>
+
+
 
                     {% else %}
 
                         <!--chambre droite-->
                         <div class="row element">
                             <div class="col-xs-1"></div>
-                            <div class="container-fluid col-xs-7">
-                                <div class="row container-fluid col-xs-12">
-                                    <div class="col-xs-12 critere">
+                            <div class="col-xs-12 col-md-7">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-12 critere">
                                         <h2 class="chambres">{{ chambre.titre | upper }} </h2>
                                         <h3 class="chambres">{{ chambre.prix }}€ TTC/nuit</h3>
                                         <hr>
                                     </div>
-
                                 </div>
-                                <div class="container-fluid col-xs-12">
-                                        <div class="col-xs-4">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">OPTIONS :</div>
-                                                <div class="panel-body">
-                                                    <ul>
-                                                        <li>{{ chambre.style }}</li>
-                                                        <li>{{ chambre.literie }}</li>
-                                                        <li>{{ chambre.salleDeBain }}</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <div class="col-xs-8 center-block">
+                                <div class="row center-block">
+                                    <div class="col-xs-12 col-md-12">
                                         <p><br>{{ chambre.texte }}</p>
-                                        <form class="" action="" method="post">
-                                            <button type="submit" class="btn pull-right">Réserver</button>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-xs-12 col-md-3">
                                 <div class="slider">
-                                    <div id="{{ i }}" class="carousel slide carchambres" data-ride="carousel">
+                                    <div id="{{ i }}" class="carousel slide carchambres center-block"
+                                         data-ride="carousel">
                                         <!-- Carousel indicators -->
                                         <ol class="carousel-indicators">
                                             <li data-target="#{{ i }}" data-slide-to="0" class="active"></li>
@@ -200,6 +212,30 @@
                                 </div>
                             </div>
                             <div class="col-xs-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">OPTIONS :</div>
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li>{{ chambre.style }}</li>
+                                            <li>{{ chambre.literie }}</li>
+                                            <li>{{ chambre.salleDeBain }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <form class="" action="" method="post">
+                                    <button type="submit" class="btn center-block">Réserver</button>
+                                </form>
+                                <br>
+                            </div>
                         </div>
                     {% endif %}
                 {% endfor %}
