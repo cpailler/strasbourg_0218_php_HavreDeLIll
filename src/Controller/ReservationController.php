@@ -68,8 +68,9 @@ class ReservationController extends AbstractController
         if (isset($_POST['chambreselect'])) {
             $_SESSION['chambre_id'] = $_POST['chambreselect'];
         }
+        $data=[];
         if (isset($_POST['Book'])){
-            $data=[];
+
             $data['chambre_id']=$_SESSION['chambre_id'];
             //verification du remplissage des champs
             if ($_POST['dateDebut']!=""){
@@ -172,7 +173,8 @@ class ReservationController extends AbstractController
                     'chambres'=> $chambres,
                     'select'=>$_SESSION['chambre_id'],
                     'errors'=>$errors,
-                    'valids'=>$valids
+                    'valids'=>$valids,
+                    'data'=>$data
 
                 ]);
         } catch (\Twig_Error_Loader $e) {

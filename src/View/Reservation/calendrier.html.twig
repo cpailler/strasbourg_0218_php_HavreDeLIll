@@ -60,14 +60,14 @@
                                   <div class="controls">
                                       <label for="arrive" class="label-date">&nbsp;&nbsp;Arrive</label>
                                       <input type="date" id="arrive" class="form-control" name="dateDebut"
-                                              value="">
+                                              value="{% if errors|length>0 and data.dateDebut is defined  %}{{ data.dateDebut }}{% endif %}">
                                   </div>
                               </div>
                               <div class="col-xs-6">
                                   <div class="controls">
                                       <label for="depart" class="label-date">&nbsp;&nbsp;Depart</label>
                                       <input type="date" id="depart" class="form-control" name="dateFin"
-                                             value=""/>
+                                             value="{% if errors|length>0 and data.dateFin is defined  %}{{ data.dateFin }}{% endif %}"/>
                                   </div>
                               </div>
                           </div>
@@ -90,17 +90,17 @@
                           <h2>Réservation & contact / Booking & contact</h2>
                           <div class="input-group">
                               <span class="input-group-addon" id="">Nom / Name</span>
-                              <input type="text" name="nomClient" class="form-control">
+                              <input type="text" name="nomClient" class="form-control" value="{% if errors|length>0 and data.nomClient is defined  %}{{ data.nomClient }}{% endif %}">
                           </div>
                           <br>
                           <div class="input-group">
                               <span class="input-group-addon" id="">@</span>
-                              <input type="email" name="mailClient" class="form-control" >
+                              <input type="email" name="mailClient" class="form-control" value="{% if errors|length>0 and data.mailClient is defined  %}{{ data.mailClient }}{% endif %}">
                           </div>
                           <br>
                           <div class="input-group">
                               <span class="input-group-addon" id="">Téléphone / Phone</span>
-                              <input type="text" name="telClient" class="form-control">
+                              <input type="text" name="telClient" class="form-control" value="{% if errors|length>0 and data.telClient is defined  %}{{ data.telClient }}{% endif %}">
                           </div>
                           <br>
                           <button type="submit" class="" name="Book">Réserver</button>
