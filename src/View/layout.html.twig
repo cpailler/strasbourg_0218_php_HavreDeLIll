@@ -169,7 +169,7 @@ $(document).ready(function(){
             if (!($("#nomMail").val() === "") && !($("#PrenomMail").val() === "") && !($("#adresseMail").val() === "") && !($("#contenuMail").val() === "")) {
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8000/Reservation/mail",
+                    url: "http://localhost:8000/Contact/mail",
                     data: data,
                     success: function () {
 
