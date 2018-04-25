@@ -26,7 +26,7 @@ class ReservationManager extends EntityManager
      * @return array
      */
     public function getReservationBetween ($start, $end): array {
-        return $this->conn->query('SELECT * FROM ' . $this->table, \PDO::FETCH_ASSOC)->fetchAll();
+        return $this->conn->query('SELECT * FROM ' . $this->table.'WHERE dateDebut<'.$end.' AND dateFin>'.$start, \PDO::FETCH_ASSOC)->fetchAll();
     }
 
     /**
