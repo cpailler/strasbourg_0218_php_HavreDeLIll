@@ -1,19 +1,21 @@
 
 /* Header */
 .logo {
-  height: 110px;
-  margin-top: -7px;
+  height: 8.1vw;
+  margin-top: -0.5vw;
 }
 
 .navbar {
-  font-size: 1,5uw;
+  font-size: 1.4vw;
   font-family: 'Croissant One', cursive;
   background-color: white;
+
 }
 .navbar-default .navbar-nav>li>a {
   color: #0d153c;
   height: 130px;
-  padding-top: 50px;
+  padding-top: 3.8vw;
+  padding-left: 5vw;
 }
 .collapse .navbar-nav>li>a:hover {
   background-color: ;
@@ -32,10 +34,10 @@
   }
   .navbar-text {
     padding-top: 0px;
-    font-size: 20px;
     font-weight: bold;
   }
   .navbar-default .navbar-nav>li>a {
+    font-size: 15px;
     height: 60px;
     padding-top: 20px;
   }

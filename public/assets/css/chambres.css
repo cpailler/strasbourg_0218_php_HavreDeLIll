@@ -54,3 +54,11 @@ h3 {
     text-align: center;
     margin-top: 27px;
 }
+
+.ligne_haut {
+    padding-top: 70px;
+}
+
+.ligne_bas {
+    padding-bottom: 50px;
+}

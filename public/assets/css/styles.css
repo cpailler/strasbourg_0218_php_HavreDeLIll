@@ -20,6 +20,7 @@ h3 {
 p {
     font-family: 'Open Sans', sans-serif;
     color:#0d153c;
+    font-size: 15px;
 }
 
 hr {
@@ -30,7 +31,7 @@ hr {
 }
 
 section {
-    padding-top: 130px;
+    padding-top: 131px;
     padding-bottom: 50px;
 }
 
@@ -154,7 +155,17 @@ text-align: center;
 .calendar_booked{
     background-color: rgba(13, 21, 84, 0.07);
 }
+
 .badge{
     font-size: 18px;
     background-color: #dbb875;
+
+
+
+/* Général version mobile */
+@media only screen and (max-width: 767px) {
+    section {
+        padding-top: 55px;
+        padding-bottom: 30px;
+    }
 }
