@@ -24,11 +24,9 @@ class ChambreManager extends EntityManager
         $chambresSeules=$this->conn->query('SELECT DISTINCT * FROM ' . $this->table)->fetchAll();
         $chambres=[];
         $DiapoChambresManager= new DiapoChambreManager();
-        $i=0;
         foreach ($chambresSeules as $data) {
-            $i++;
             $diaposChambre=$DiapoChambresManager->findByChambreId($data['id']);
-            $chambres += [$i => array(
+            $chambres[]= [
                 'id' => $data['id'],
                 'titre' => $data['titre'],
                 'texte' => $data['texte'],
@@ -37,7 +35,7 @@ class ChambreManager extends EntityManager
                 'literie' => $data['literie'],
                 'accessibilite' => $data['accessibilite'],
                 'salleDeBain' => $data['salleDeBain'],
-                'urlImage' => $diaposChambre)];
+                'urlImage' => $diaposChambre];
 
         }
         return $chambres;

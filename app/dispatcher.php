@@ -19,6 +19,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/Logout', 'Logout/index');
     $r->addRoute('GET', '/Reservation/{initMonth:\d+}/{initYear:\d+}', 'Reservation/index');
     $r->addRoute('GET', '/Reservation', 'Reservation/index');
+    $r->addRoute('POST', '/Reservation/{initMonth:\d+}/{initYear:\d+}', 'Reservation/index');
+    $r->addRoute('POST', '/Reservation', 'Reservation/index');
     $r->addRoute('POST', '/Contact/mail', 'GestionMail/envoiMail');
    // $r->addRoute('GET', '/Reservation/mail', 'Reservation/envoiMail');
     $r->addRoute('GET', '/Administration', 'Administration/index');

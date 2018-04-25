@@ -20,8 +20,37 @@
           <br>
           <br>
           <div class="row">
+              {% if errors|length>0 %}
+                  <div class="alert alert-danger">
+                      {% for error in errors %}
+                          <strong>{{ error }}</strong><br>
+                      {% endfor %}
+                  </div>
+              {% endif %}
+              {% if valids|length>0 %}
+                  <div class="alert alert-success"><br>
+                      {% for valid in valids %}
+                          <strong>{{ valid }}</strong>
+                      {% endfor %}
+                  </div>
+              {% endif %}
+          </div>
+          <div class="row">
               <div class="col-xs-6">
-                  <form action="">
+                  <div class="row">
+                      <div class="controls">
+                          <form action="" method="post">
+                              <label for="bedrooms">Chambre / bedroom</label>
+                              <select class="form-control" name="chambreselect" onchange="this.form.submit()">
+                                  {% for chambre in chambres %}
+                                      <option value="{{ chambre.id }}"{% if select==chambre.id %}selected{% endif %}>{{ chambre.titre }}</option>
+                                  {% endfor %}
+                              </select>
+                          </form>
+
+                      </div>
+                  </div>
+                  <form action="" method="POST">
 
                       <!--  Details -->
                       <div class="form-group">
@@ -30,31 +59,21 @@
                               <div class="col-xs-6">
                                   <div class="controls">
                                       <label for="arrive" class="label-date">&nbsp;&nbsp;Arrive</label>
-                                      <input type="date" id="arrive" class="form-control" name="arrive"
+                                      <input type="date" id="arrive" class="form-control" name="dateDebut"
                                               value="">
                                   </div>
                               </div>
                               <div class="col-xs-6">
                                   <div class="controls">
                                       <label for="depart" class="label-date">&nbsp;&nbsp;Depart</label>
-                                      <input type="date" id="depart" class="form-control" name="depart"
+                                      <input type="date" id="depart" class="form-control" name="dateFin"
                                              value=""/>
                                   </div>
                               </div>
                           </div>
                           <br>
                           <div class="row">
-                              <div class="col-xs-6">
-                                  <div class="controls">
-                                      <label for="bedrooms">Chambres / bedrooms</label>
-                                      <select class="form-control">
-                                          <option value="gretel" selected>CHAMBRE GRETEL</option>
-                                          <option value="veil">CHAMBRE SIMONE VEIL</option>
-                                          <option value="hansel" selected>CHAMBRE HÄNSEL</option>
-                                          <option value="schuman">CHAMBRE ROBERT SCHUMAN</option>
-                                      </select>
-                                  </div>
-                              </div>
+
                               <div class="col-xs-6">
                                   <div class="controls">
                                       <label for="nuite" class="label-date">&nbsp;&nbsp;Nuitées / Nuity</label>
@@ -71,20 +90,20 @@
                           <h2>Réservation & contact / Booking & contact</h2>
                           <div class="input-group">
                               <span class="input-group-addon" id="">Nom / Name</span>
-                              <input type="text" class="form-control">
+                              <input type="text" name="nomClient" class="form-control">
                           </div>
                           <br>
                           <div class="input-group">
                               <span class="input-group-addon" id="">@</span>
-                              <input type="text" class="form-control">
+                              <input type="email" name="mailClient" class="form-control" >
                           </div>
                           <br>
                           <div class="input-group">
                               <span class="input-group-addon" id="">Téléphone / Phone</span>
-                              <input type="text" class="form-control">
+                              <input type="text" name="telClient" class="form-control">
                           </div>
                           <br>
-                          <button type="submit" class="">Réserver</button>
+                          <button type="submit" class="" name="Book">Réserver</button>
                       </div>
                   </form>
               </div>
