@@ -25,17 +25,19 @@ use Model\DiapoAccueilManager;
  */
 class AdministrationController extends AbstractController
 {
-
+private function ConnectionCheck(){
+    session_start();
+    if (!isset($_SESSION['user']) && !isset($_SESSION['password'])) {
+        header('Location: /Login');
+    }
+}
 
     /**
      * @return string
      */
     public function index()
     {
-        session_start();
-        if (!isset($_SESSION['user']) && !isset($_SESSION['password'])) {
-            header('Location: /Login');
-        }
+        $this->ConnectionCheck();
 
 
         return $this->twig->render('Administration/Administration.html.twig');
@@ -43,6 +45,7 @@ class AdministrationController extends AbstractController
 
     public function DiapoAccueil()
     {
+        $this->ConnectionCheck();
 
         $diapoManager = New DiapoAccueilManager();
 
@@ -117,6 +120,7 @@ class AdministrationController extends AbstractController
 
     public function AdminChambres()
     {
+        $this->ConnectionCheck();
 
         $chambreManager = new ChambreManager();
         $diapoChambreManager = new DiapoChambreManager();
@@ -234,9 +238,9 @@ class AdministrationController extends AbstractController
 
     public function ArticlesAccueil()
     {
+        $this->ConnectionCheck();
 
         $accueilManager = new AccueilManager();
-        $accueil = $accueilManager->findAll();
 
         $error = [];
         $valid = [];
@@ -271,15 +275,18 @@ class AdministrationController extends AbstractController
                         // Nouvel emplacement du fichier :
                         $deplacementOK = move_uploaded_file($cheminEtNomTemporaire, substr($uniqueId, 1, strlen($uniqueId)));
 
-                        $data['urlImage'] = $uniqueId;
+                        if ($deplacementOK){
+                            $data['urlImage'] = $uniqueId;
+                        }
+                        else{
+                            $error[]="Erreur inconnue : Votre fichier n'as pas pu être enregistré";
+                        }
 
                     }
                 } else {
                     $error[] = "Format d'image non supporté (formats supportés : jpeg, jpg, png, gif)";
                 }
 
-            } else {
-                $data['urlImage'] = $_FILES['urlImage'];
             }
 
             $ok = $accueilManager->update($id, $data);
@@ -296,6 +303,9 @@ class AdministrationController extends AbstractController
     }
 
     public function LocalisationAdmin(){
+
+        $this->ConnectionCheck();
+
         $LocalisationManager = new LocalisationManager();
         $error=[];
         $valid=[];
@@ -325,6 +335,9 @@ class AdministrationController extends AbstractController
     }
 
     public function NouvelleChambre(){
+
+        $this->ConnectionCheck();
+
         $data=[];
         $error=[];
         $valid=[];
