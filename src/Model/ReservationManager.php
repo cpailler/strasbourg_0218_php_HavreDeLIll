@@ -11,7 +11,7 @@ namespace Model;
 
 class ReservationManager extends EntityManager
 {
-    const TABLE = 'Reservations';
+    const TABLE = 'Reservation';
 
 
     public function __construct()
@@ -26,8 +26,9 @@ class ReservationManager extends EntityManager
      * @return array
      */
     public function getReservationBetween ($start, $end): array {
-        return $this->conn->query('SELECT * FROM ' . $this->table.'WHERE dateDebut<'.$end.' AND dateFin>'.$start, \PDO::FETCH_ASSOC)->fetchAll();
+        return $this->conn->query("SELECT * FROM ".$this->table." WHERE dateDebut<='".$end->format('Y-m-d')."' AND dateFin>'".$start->format('Y-m-d')."';", \PDO::FETCH_ASSOC)->fetchAll();
     }
+    //SELECT * FROM " . $this->table."WHERE dateDebut <= '".$end->format('Y-m-d')."' AND dateFin > '".$start->format('Y-m-d')."'"
 
     /**
      * Récupère les évènements commençant entre 2 dates indexé par jour

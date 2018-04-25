@@ -151,3 +151,6 @@ text-align: center;
 
     color: #dcba79;
 }
+.calendar_booked{
+    background-color: rgba(13, 21, 84, 0.07);
+}
