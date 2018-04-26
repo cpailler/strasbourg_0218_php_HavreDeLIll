@@ -17,6 +17,22 @@
 	margin: 0px;
 }
 
+
+
+.column#zoomIn img {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+.column#zoomIn:hover img {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+
+
+
  /* Page accueil version mobile */
 @media only screen and (max-width: 767px) {
 
