@@ -9,6 +9,7 @@
 namespace Controller;
 
 use Model\ParlementairesManager;
+use Model\ChambreManager;
 
 /**
  * Class AccueilController
@@ -25,8 +26,11 @@ class ParlementairesController extends AbstractController
         $ParlementairesManager = new ParlementairesManager();
         $Articles =  $ParlementairesManager->findAll();
 
+        $ChambreManager = new ChambreManager();
+        $chambres = $ChambreManager->findAll();
 
-        return $this->twig->render('Parlementaires/Parlementaires.html.twig',['Articles' => $Articles]);
+
+        return $this->twig->render('Parlementaires/Parlementaires.html.twig',['Articles' => $Articles, 'chambres' => $chambres]);
     }
 
   }
