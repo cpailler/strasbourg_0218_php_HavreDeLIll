@@ -14,6 +14,7 @@ use Model\AccueilManager;
 use Model\Accueil;
 use Model\ChambreManager;
 use Model\DiapoChambreManager;
+use Model\ReservationAttenteManager;
 use Model\ReservationManager;
 use Model\LocalisationManager;
 use Model\ParlementairesManager;
@@ -25,16 +26,13 @@ use Model\DiapoAccueilManager;
  */
 class AdministrationController extends AbstractController
 {
-private function ConnectionCheck(){
+    private function ConnectionCheck(){
     session_start();
     if (!isset($_SESSION['user']) && !isset($_SESSION['password'])) {
         header('Location: /Login');
     }
 }
 
-    /**
-     * @return string
-     */
     public function index()
     {
         $this->ConnectionCheck();
@@ -520,6 +518,24 @@ private function ConnectionCheck(){
         $articles =  $ParlementairesManager->findAll();
 
         return $this->twig->render('Administration/ParlementairesAdmin.html.twig', ['articles' => $articles]);
+    }
+
+    public function ReservationEnAttente(){
+        $this->ConnectionCheck();
+        $reservationsEnAttentesManager = new ReservationAttenteManager();
+        $chambresManager = new ChambreManager();
+        $chambres = $chambresManager->findAll();
+        $resas = $reservationsEnAttentesManager->findAll();
+        foreach ($chambres as $chambre){
+            foreach($resas as &$resa){
+                if ($resa['chambre_id']=$chambre['id']){
+                    $resa['chambre_titre']=$chambre['titre'];
+                }
+            }
+        }
+
+
+        return $this->twig->render('Administration/ReservationsEnAttenteAdmin.twig', ['resas' => $resas]);
     }
 
 }
