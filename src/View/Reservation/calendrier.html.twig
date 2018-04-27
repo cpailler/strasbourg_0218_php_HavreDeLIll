@@ -1,191 +1,206 @@
 {% extends 'layout.html.twig' %}
 {% block title %}Page de localisation{% endblock %}
 {% block stylesheet %}
-    <link rel="stylesheet" href="/assets/css/formulaire_reservation.css">{% endblock %}
+    <link rel="stylesheet" href="/assets/css/formulaire_reservation.css">
+    <link rel="stylesheet" href="/assets/css/calendrier.css">
+{% endblock %}
+
+{% block content %}
 
 
 
-  {% block content %}
+
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>RÉSERVATION / BOOKING</h1>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                {% if errors|length>0 %}
+                    <div class="alert alert-danger">
+                        {% for error in errors %}
+                            <strong>{{ error }}</strong><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if valids|length>0 %}
+                    <div class="alert alert-success"><br>
+                        {% for valid in valids %}
+                            <strong>{{ valid }}</strong>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                        <div class="controls">
+                            <form action="" method="post">
+                                <label for="bedrooms">Chambre / bedroom</label>
+                                <select class="form-control" name="chambreselect" onchange="this.form.submit()">
+                                    {% for chambre in chambres %}
+                                        <option value="{{ chambre.id }}"
+                                                {% if select==chambre.id %}selected{% endif %}>{{ chambre.titre }}</option>
+                                    {% endfor %}
+                                </select>
+                            </form>
+                        </div>
+
+                    <form action="" method="POST">
+
+                        <!--  Champs détails -->
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="controls">
+                                        <label for="arrive" class="label-date">&nbsp;&nbsp;Arrive</label>
+                                        <input type="date" id="arrive" class="form-control dateclic"
+                                               name="dateDebut"
+                                               value="{% if errors|length>0 and data.dateDebut is defined %}{{ data.dateDebut }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="controls">
+                                        <label for="depart" class="label-date">&nbsp;&nbsp;Depart</label>
+                                        <input type="date" id="depart" class="form-control dateclic"
+                                               name="dateFin"
+                                               value="{% if errors|length>0 and data.dateFin is defined %}{{ data.dateFin }}{% endif %}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h2 id="nbNuite" style="text-align: center;">Nombre de Nuités : <span></span></h2>
+                                </div>
+
+                            </div>
+                        </div> <!-- /.form-group -->
+
+                        <!--  General -->
+                        <div class="form-group">
+                            <h2>Réservation & contact / Booking & contact</h2>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="">Nom / Name</span>
+                                <input type="text" name="nomClient" class="form-control"
+                                       value="{% if errors|length>0 and data.nomClient is defined %}{{ data.nomClient }}{% endif %}">
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="">Prénom / Firstname</span>
+                                <input type="text" name="prenomClient" class="form-control"
+                                       value="{% if errors|length>0 and data.prenomClient is defined %}{{ data.prenomClient }}{% endif %}">
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="">@</span>
+                                <input type="email" name="mailClient" class="form-control"
+                                       value="{% if errors|length>0 and data.mailClient is defined %}{{ data.mailClient }}{% endif %}">
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="">Téléphone / Phone</span>
+                                <input type="text" name="telClient" class="form-control"
+                                       value="{% if errors|length>0 and data.telClient is defined %}{{ data.telClient }}{% endif %}">
+                            </div>
+                            <br>
+                            <button type="submit" name="Book" class="btn center-block">Réserver</button>
+                        </div>
+                    </form>
+                </div>
 
 
+                <!--Calendrier-->
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="row center-block">
+                            <br>
+                            <div class="col-md-8 col-xs-7">
+                                <h1>{{ monthTS }}</h1>
+                            </div>
+                            <div class="col-md-4 col-xs-5">
+                                <p></p> <a href="/Reservation/{{ previousMonth }}/{{ previousYear }}"
+                                           class="btn-calender">&lt;</a>
+                                <a href="/Reservation/{{ nextMonth }}/{{ nextYear }}" class="btn-calender">&gt;</a></p>
+                            </div>
+                        </div>
+
+                        <div class="row center-block">
+                            <div class="col-md-12">
+                                <table class="calendar__table calendar__table--{{ month.getweeks() }}weeks">
+                                    <tr>
+                                        {% for day in days %}
+                                            <th class="calendar__otherMonth">{{ day }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                    {% set date = cloneStart.modify("-1 day") %}
+                                    {% for key,infosDay in infosDays %}
+                                        {% if key%7==0 %}
+                                            <tr>
+                                        {% endif %}
+                                        {% set date = date.modify("+1 day") %}
+                                        <td class="{% if (month.withinMonth(date)) %}{% if infosDay.reserve %}calendar_booked{% endif %}{% else %}calendar__otherMonth{% endif %} ">
+                                            <div class="calendar__day ">{{ infosDay.date }}</div>
+                                        </td>
+                                        {% if key%7==6 %}
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
 
 
-<section>
-      <div class="container-fluid">
-          <div class="row">
-              <div class="col-xs-12">
-                  <h1>RÉSERVATION / BOOKING</h1>
-              </div>
-          </div>
-          <br>
-          <br>
-          <div class="row">
-              {% if errors|length>0 %}
-                  <div class="alert alert-danger">
-                      {% for error in errors %}
-                          <strong>{{ error }}</strong><br>
-                      {% endfor %}
-                  </div>
-              {% endif %}
-              {% if valids|length>0 %}
-                  <div class="alert alert-success"><br>
-                      {% for valid in valids %}
-                          <strong>{{ valid }}</strong>
-                      {% endfor %}
-                  </div>
-              {% endif %}
-          </div>
-          <div class="row">
-              <div class="col-xs-6">
-                  <div class="row">
-                      <div class="controls">
-                          <form action="" method="post">
-                              <label for="bedrooms">Chambre / bedroom</label>
-                              <select class="form-control" name="chambreselect" onchange="this.form.submit()">
-                                  {% for chambre in chambres %}
-                                      <option value="{{ chambre.id }}"{% if select==chambre.id %}selected{% endif %}>{{ chambre.titre }}</option>
-                                  {% endfor %}
-                              </select>
-                          </form>
-
-                      </div>
-                  </div>
-                  <form action="" method="POST">
-
-                      <!--  Details -->
-                      <div class="form-group">
-                          <h2>Details</h2>
-                          <div class="row">
-                              <div class="col-xs-6">
-                                  <div class="controls">
-                                      <label for="arrive" class="label-date">&nbsp;&nbsp;Arrive</label>
-                                      <input type="date" id="arrive" class="form-control dateclic" name="dateDebut"
-                                              value="{% if errors|length>0 and data.dateDebut is defined  %}{{ data.dateDebut }}{% endif %}">
-                                  </div>
-                              </div>
-                              <div class="col-xs-6">
-                                  <div class="controls">
-                                      <label for="depart" class="label-date">&nbsp;&nbsp;Depart</label>
-                                      <input type="date" id="depart" class="form-control dateclic" name="dateFin"
-                                             value="{% if errors|length>0 and data.dateFin is defined  %}{{ data.dateFin }}{% endif %}"/>
-                                  </div>
-                              </div>
-                          </div>
-                          <br>
-                          <div class="row">
-                              <div class="col-xs-6">
-                                <h2 id="nbNuite">Nombre de Nuités : <span></span></h2>
-                              </div>
-
-                          </div>
-                      </div> <!-- /.form-group -->
-
-                      <!--  General -->
-                      <div class="form-group">
-                          <h2>Réservation & contact / Booking & contact</h2>
-                          <div class="input-group">
-                              <span class="input-group-addon" id="">Nom / Name</span>
-                              <input type="text" name="nomClient" class="form-control" value="{% if errors|length>0 and data.nomClient is defined  %}{{ data.nomClient }}{% endif %}">
-                          </div>
-                          <br>
-                          <div class="input-group">
-                              <span class="input-group-addon" id="">@</span>
-                              <input type="email" name="mailClient" class="form-control" value="{% if errors|length>0 and data.mailClient is defined  %}{{ data.mailClient }}{% endif %}">
-                          </div>
-                          <br>
-                          <div class="input-group">
-                              <span class="input-group-addon" id="">Téléphone / Phone</span>
-                              <input type="text" name="telClient" class="form-control" value="{% if errors|length>0 and data.telClient is defined  %}{{ data.telClient }}{% endif %}">
-                          </div>
-                          <br>
-                          <button type="submit" class="" name="Book">Réserver</button>
-                      </div>
-                  </form>
-              </div>
-              <div class="col-xs-6">
-                  <div class="col-md-9">
-                      <div class="row">
-                          <div class="col-md-10">
-                              <h1>{{ monthTS }}</h1>
-                          </div>
-                          <div class="col-md-2">
-                              <p></p> <a href="/Reservation/{{ previousMonth }}/{{ previousYear }}"
-                                         class="btn-calender">&lt;</a>
-                              <a href="/Reservation/{{ nextMonth }}/{{ nextYear }}" class="btn-calender">&gt;</a></p>
-                          </div>
-
-                      </div>
-
-
-                      <table class="calendar__table calendar__table--{{ month.getweeks() }}weeks">
-                          <tr>
-                              {% for day in days %}
-                                  <td class="calendar__otherMonth" >{{ day }}</td>
-                              {% endfor %}
-                          </tr>
-                          {% set date = cloneStart.modify("-1 day") %}
-                          {% for key,infosDay in infosDays %}
-                              {% if key%7==0 %}
-                                <tr>
-                              {% endif %}
-                              {% set date = date.modify("+1 day") %}
-                                  <td class="{% if (month.withinMonth(date)) %}{% if infosDay.reserve %}calendar_booked{% endif %}{% else %}calendar__otherMonth{% endif %} ">
-                                      <div class="calendar__day ">{{ infosDay.date }}</div>
-                                  </td>
-                              {% if key%7==6 %}
-                                  </tr>
-                              {% endif %}
-                          {% endfor %}
-                      </table>
-                  </div>
-              </div>
-          </div>
-      </div>
-</section>
-
-
-  {% endblock %}
+{% endblock %}
 {% block javascript %}
 <script>
-    $( '.dateclic' ).on('change',function() {
+$('.dateclic').on('change', function () {
 
-        var date1 = $('#arrive').val();
-        var date2 = $('#depart').val();
-        if (date1 == 'undefined' && date2 == 'undefined') {
-            $('#nuite').val(0);
-        }
-        else {
+    var date1 = $('#arrive').val();
+    var date2 = $('#depart').val();
+    if (date1 == 'undefined' && date2 == 'undefined') {
+        $('#nuite').val(0);
+    }
+    else {
 
 
-            // First we split the values to arrays date1[0] is the year, [1] the month and [2] the day
-            date1 = date1.split('-');
-            date2 = date2.split('-');
+        // First we split the values to arrays date1[0] is the year, [1] the month and [2] the day
+        date1 = date1.split('-');
+        date2 = date2.split('-');
 
-            // Now we convert the array to a Date object, which has several helpful methods
-            date1 = new Date(date1[0], date1[1], date1[2]);
-            date2 = new Date(date2[0], date2[1], date2[2]);
+        // Now we convert the array to a Date object, which has several helpful methods
+        date1 = new Date(date1[0], date1[1], date1[2]);
+        date2 = new Date(date2[0], date2[1], date2[2]);
 
-            // We use the getTime() method and get the unixtime (in milliseconds, but we want seconds, therefore we divide it through 1000)
-            date1_unixtime = parseInt(date1.getTime() / 1000);
-            date2_unixtime = parseInt(date2.getTime() / 1000);
+        // We use the getTime() method and get the unixtime (in milliseconds, but we want seconds, therefore we divide it through 1000)
+        date1_unixtime = parseInt(date1.getTime() / 1000);
+        date2_unixtime = parseInt(date2.getTime() / 1000);
 
-            // This is the calculated difference in seconds
-            var timeDifference = (date2_unixtime - date1_unixtime);
+        // This is the calculated difference in seconds
+        var timeDifference = (date2_unixtime - date1_unixtime);
 
-            // in Hours
-            var timeDifferenceInHours = timeDifference / 60 / 60;
+        // in Hours
+        var timeDifferenceInHours = timeDifference / 60 / 60;
 
-            // and finaly, in days :)
-            var timeDifferenceInDays = timeDifferenceInHours / 24;
-            if (timeDifferenceInDays <= 0) {
-                $('#nbNuite').replaceWith(`<h2 id="nbNuite">Nombre de Nuités :<span class="badge badge-light">0</span></h2>`);
-            } else {
-                $('#nbNuite').replaceWith(`<h2 id="nbNuite">Nombre de Nuités :<span  class="badge badge-light">${timeDifferenceInDays}</span></h2>`);
-
-            }
-
+        // and finaly, in days :)
+        var timeDifferenceInDays = timeDifferenceInHours / 24;
+        if (timeDifferenceInDays <= 0) {
+            $('#nbNuite').replaceWith(`<h2 id="nbNuite">Nombre de Nuités :<span class="badge badge-light">0</span></h2>`);
+        } else {
+            $('#nbNuite').replaceWith(`<h2 id="nbNuite">Nombre de Nuités :<span  class="badge badge-light">${timeDifferenceInDays}</span></h2>`);
 
         }
-    });
+
+
+    }
+});
 </script>
 {% endblock %}
