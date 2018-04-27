@@ -8,17 +8,18 @@
         <h1 style="text-align: center;">Page de Localisation</h1>
         <form action="" method="post">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" value=" {{ adminLoc.0.numPortable }}" name="numPortable" aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon2 data-feather="map-pin">Téléphone portable</span>
             </div>
+            <input type="text" class="form-control" value=" {{ adminLoc.0.numPortable }}" name="numPortable" aria-label="Recipient's username" aria-describedby="basic-addon2">
+
         </div>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" value="{{ adminLoc.0.numFixe }}" name="numFixe" aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append">
                 <span class="input-group-text" id="basic-addon2">Téléphone Fixe</span>
-
             </div>
+            <input type="text" class="form-control" value="{{ adminLoc.0.numFixe }}" name="numFixe" aria-label="Recipient's username" aria-describedby="basic-addon2">
+
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
