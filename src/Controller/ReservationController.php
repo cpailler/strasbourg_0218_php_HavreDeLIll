@@ -27,20 +27,6 @@ class ReservationController extends AbstractController
      * retourne le mois en toute lettre (ex:mars 2018)
      * @return string
      */
-    public function toString (): string
-    {
-
-        $myDate=array();
-        $myMonth = new Month($_GET['month'] ?? null, $_GET['year'] ?? null);
-        $myDate['days']=$myMonth->days;
-        $start = $myMonth->getStartingDay();
-        $start = $start->format('N')==='1' ? $start : $myMonth->getStartingDay()->modify('last monday');
-        $myDate['myMonth'] = $myMonth->months[$myMonth->month -1].' '.$myMonth->year;
-        $myDate['nbWeeks'] =$myMonth->getWeeks();
-
-        return $this->twig->render('Reservation/Reservation.html.twig', ['myDate' => $myDate]);
-    }
-
 
     public function index(int $initMonth=null, int $initYear=null)
     {
@@ -64,7 +50,7 @@ class ReservationController extends AbstractController
                 $_SESSION['chambre_id']=$chambre['id'];
             }
         }
-        //en arrivant en POST depuis la selection de chambre
+        //en arrivant en POST depuis la selection de chambre sur cette même page
         if (isset($_POST['chambreselect'])) {
             $_SESSION['chambre_id'] = $_POST['chambreselect'];
         }
@@ -77,48 +63,60 @@ class ReservationController extends AbstractController
                 $data['dateDebut']=$_POST['dateDebut'];
             }
             else {
-                $errors[]="Veuillez saisir une date d'arrivée";
+                $errors[]="Veuillez saisir une date d'arrivée.";
             }
             if ($_POST['dateFin']!=""){
                 $data['dateFin']=$_POST['dateFin'];
             }
             else {
-                $errors[]="Veuillez saisir une date de départ";
+                $errors[]="Veuillez saisir une date de départ.";
             }
             if ($_POST['nomClient']!=""){
                 $data['nomClient']=$_POST['nomClient'];
             }
             else {
-                $errors[]="Veuillez saisir votre nom";
+                $errors[]="Veuillez saisir votre nom.";
             }
             if ($_POST['mailClient']!=""){
                 $data['mailClient']=$_POST['mailClient'];
             }
             else {
-                $errors[]="Veuillez saisir votre adresse mail";
+                $errors[]="Veuillez saisir votre adresse mail.";
             }
             if ($_POST['telClient']!=""){
                 $data['telClient']=$_POST['telClient'];
             }
             else {
-                $errors[]="Veuillez saisir votre numero de téléphone";
+                $errors[]="Veuillez saisir votre numero de téléphone.";
             }
 
+            //Verification des dates
+
+            $start=new \DateTime($data['dateDebut']);
+            $end=new \DateTime($data['dateFin']);
+            $now = new \DateTime();
+            //verification que la date d'entrée est posterieure à la date du jour
+            if (strtotime($now->format('Y-m-d'))>strtotime($start->format('Y-m-d'))){
+                $errors[]="La date d'arrivée que vous avez saisi se trouve dans le passé.";
+            }
+            //vérification de la cohérance des dates
+            if (strtotime($end->format('Y-m-d'))<=strtotime($start->format('Y-m-d'))){
+                $errors[] ="Les dates saisies pour votre séjour ne sont pas réalisables, pensez à vérifier le nombre nuitées.";
+            }
             //verification de la disponibilité de la chambre
             if (empty($errors)) {
-                $start=new \DateTime($data['dateDebut']);
-                $end=new \DateTime($data['dateFin']);
+
                 if (!empty($ReservationManager->getReservationBetween($start, $end, $data['chambre_id']))) {
-                    $errors[] = "La chambre n'est pas libre aux dates que vous avez sélectionnées, veuillez voir les disponibilité des autres chambres(n'hésitez pas à utiliser le calendrier)";
+                    $errors[] = "La chambre n'est pas libre aux dates que vous avez sélectionné, veuillez voir les disponibilités des autres chambres(n'hésitez pas à utiliser le calendrier).";
                 }
             }
             if (empty($errors)){
                 $ok=$ReservationManager->insert($data);
                 if ($ok){
-                    $valids[]="Votre réservation a bien été prise en compte, vous serez informé par mail lorsqu'elle sera validé par le propriétaire ";
+                    $valids[]="Votre réservation a bien été prise en compte, vous serez informé par mail lorsqu'elle sera validé par le propriétaire.";
                 }
                 else {
-                    $errors[]="Votre reservation n'as pas pu être prise en compte, assurer-vous d'avoir rempli correctement chaque champ du formulaire";
+                    $errors[]="Votre reservation n'as pas pu être prise en compte, assurer-vous d'avoir rempli correctement chaque champ du formulaire.";
                 }
             }
 
@@ -138,10 +136,8 @@ class ReservationController extends AbstractController
         $infosDays=[];
 
        // $newRes = (new \DateTime($Reservation['start']))->format('d.m.Y');
-        $fullCalendar = [];
         for ($i =0; $i <$weeks;$i++) {
             foreach ($weekDays as $k => $day) {
-                $calendar = [];
                 $date = (clone $start)->modify("+" . ($k + $i * 7) . "day");
                 $key = $k + $i * 7;
                 $infosDays[$key] = ['jourZero' => false,'date'=>$date->format('d'),'withinMonth'=>$month->withinMonth($date),'reserve'=>false];
