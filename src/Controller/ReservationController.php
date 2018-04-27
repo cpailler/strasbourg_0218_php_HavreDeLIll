@@ -14,6 +14,7 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use Controller\Calendar\Reservation;
 use Model\ReservationManager;
+use Model\ReservationAttenteManager;
 
 /**
  * Class ReservationController
@@ -33,6 +34,7 @@ class ReservationController extends AbstractController
         session_start();
         $chambresManager = new ChambreManager();
         $ReservationManager = new ReservationManager();
+        $ReservationAttenteManager = new ReservationAttenteManager();
         $chambres=$chambresManager->findAll();
         $errors=[];
         $valids=[];
@@ -106,12 +108,12 @@ class ReservationController extends AbstractController
             //verification de la disponibilité de la chambre
             if (empty($errors)) {
 
-                if (!empty($ReservationManager->getReservationBetween($start, $end, $data['chambre_id']))) {
+                if (!empty($ReservationManager->getReservationBetween($start, $end, $data['chambre_id']))&&!empty($ReservationAttenteManager->getReservationBetween($start, $end, $data['chambre_id']))) {
                     $errors[] = "La chambre n'est pas libre aux dates que vous avez sélectionné, veuillez voir les disponibilités des autres chambres(n'hésitez pas à utiliser le calendrier).";
                 }
             }
             if (empty($errors)){
-                $ok=$ReservationManager->insert($data);
+                $ok=$ReservationAttenteManager->insert($data);
                 if ($ok){
                     $valids[]="Votre réservation a bien été prise en compte, vous serez informé par mail lorsqu'elle sera validé par le propriétaire.";
                 }
@@ -133,6 +135,7 @@ class ReservationController extends AbstractController
         $weeks = $month->getWeeks();
         $end = (clone $start)->modify('+'.(6+7*($weeks -1)).'days');
         $reservations = $ReservationManager->getReservationBetween($start, $end,$_SESSION['chambre_id']);
+        $reservationsAttente = $ReservationAttenteManager->getReservationBetween($start, $end,$_SESSION['chambre_id']);
         $infosDays=[];
 
        // $newRes = (new \DateTime($Reservation['start']))->format('d.m.Y');
@@ -142,6 +145,11 @@ class ReservationController extends AbstractController
                 $key = $k + $i * 7;
                 $infosDays[$key] = ['jourZero' => false,'date'=>$date->format('d'),'withinMonth'=>$month->withinMonth($date),'reserve'=>false];
                 foreach ($reservations as $reservation) {
+                    if ((strtotime($date->format('Y-m-d')) >= strtotime($reservation['dateDebut'])) && (strtotime($date->format('Y-m-d')) < strtotime($reservation['dateFin']))) {
+                        $infosDays[$key]['reserve'] = true;
+                    }
+                }
+                foreach ($reservationsAttente as $reservation) {
                     if ((strtotime($date->format('Y-m-d')) >= strtotime($reservation['dateDebut'])) && (strtotime($date->format('Y-m-d')) < strtotime($reservation['dateFin']))) {
                         $infosDays[$key]['reserve'] = true;
                     }
