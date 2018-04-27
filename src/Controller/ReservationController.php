@@ -91,6 +91,12 @@ class ReservationController extends AbstractController
             else {
                 $errors[]="Veuillez saisir votre nom";
             }
+            if ($_POST['prenomClient']!=""){
+                $data['prenomClient']=$_POST['nomClient'];
+            }
+            else {
+                $errors[]="Veuillez saisir votre prénom";
+            }
             if ($_POST['mailClient']!=""){
                 $data['mailClient']=$_POST['mailClient'];
             }
