@@ -1,6 +1,6 @@
-.diapo {
-    height: 150px;
-    width: 220px;
+.img-thumbnail {
+    height: 250px;
+    width: 250px;
     overflow: hidden;
 }
 
@@ -10,4 +10,17 @@ h3 {
 
 .form-control-file {
     text-align: center;
+
+}
+.sidebar .nav-link .feather {
+     margin-right: 4px;
+     color: #474646;
+ }
+svg:not(:root) {
+    overflow: hidden;
+}
+.feather {
+    width: 20px;
+    height: 20px;
+    vertical-align: text-bottom;
 }

@@ -9,12 +9,18 @@
 
         <h3>Modification des chambres :</h3>
         <form action="" method="post" class="form-group">
-            <select name="chambre" class="form-control" onchange="this.form.submit()">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Choisir votre chambre</label>
+                </div>
+
+            <select name="chambre" class="custom-select"  onchange="this.form.submit()">
                 <option value="" {% if select=="" %}selected{% endif %}></option>
                 {% for chambre in chambres %}
                 <option value="{{ chambre.id }}" {% if select==chambre.id %}selected{% endif %}>{{ chambre.titre }}</option>
                 {% endfor %}
             </select>
+            </div>
         </form>
         {% if errors|length>0 %}
             <div class="alert alert-danger">
@@ -34,27 +40,61 @@
         {% if select!="" %}
         <div class="jumbotron container-fluid">
             <div class="row">
-                <form action="" method="post" class="form-group" enctype="multipart/form-data">
+                <form action="" method="post" class="form-group col-lg-8" enctype="multipart/form-data">
                     <div class="">
                         <input type="hidden" name="id" value="{{ chambreAModifier.id }}">
-                        <input type="text" name="titre" value="{{ chambreAModifier.titre }}"/>
-                        <input type="text" name="prix" value="{{ chambreAModifier.prix }}"/>
-                        <textarea name="texte" style="height: auto;width: 100%">{{ chambreAModifier.texte }}</textarea>
-                        <input type="file" name="nouvellesDiapos[]" multiple="multiple" />
-                    </div>
+                        <div class="input-group ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Titre</span>
+                            </div>
+                            <input type="text" class="form-control" name="titre" value="{{ chambreAModifier.titre }}" aria-label="Username" aria-describedby="basic-addon1">
+                        </div></br>
+
+                        <div class="input-group ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Prix €</span>
+                            </div>
+                            <input type="text" class="form-control" name="prix" value="{{ chambreAModifier.prix }}" aria-label="Username" aria-describedby="basic-addon1">
+                        </div></br>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Texte</span>
+                            </div>
+                            <textarea class="form-control" name="texte" aria-label="With textarea">{{ chambreAModifier.texte }}</textarea>
+                        </div></br>
+
+
+
+                        <input type="file" name="nouvellesDiapos[]" multiple="multiple" class="btn btn-outline-dark"/>
+                    </div></br>
                     <div class="">
-                        <select name="style" class="form-control">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Style</label>
+                            </div>
+                        <select name="style"  class="custom-select" >
                             <option value="Classique" {% if chambreAModifier.style=="Classique" %}selected{% endif %}>Classique</option>
                             <option value="Moderne" {% if chambreAModifier.style=="Moderne" %}selected{% endif %}>Moderne</option>
                         </select>
-                        <select name="literie" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Literie</label>
+                            </div>
+                        <select name="literie" class="custom-select" >
                             <option value="Simple" {% if chambreAModifier.literie=="Simple" %}selected{% endif %}>Lits Simples</option>
                             <option value="Double" {% if chambreAModifier.literie=="Double" %}selected{% endif %}>Lit Double</option>
                         </select>
-                        <select name="salleDeBain" class="form-control">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Salle de bain</label>
+                            </div>
+                        <select name="salleDeBain" class="custom-select" >
                             <option value="Baignoire" {% if chambreAModifier.salleDeBain=="Baignoire" %}selected{% endif %}>Baignoire</option>
                             <option value="Douche" {% if chambreAModifier.salleDeBain=="Douche" %}selected{% endif %}>Douche</option>
                         </select>
+                        </div>
                         <div class="checkbox">
                             <label><input type="checkbox" name="PMR" value="pmr"{% if chambreAModifier.accessibilite == "Oui" %}checked{% endif %}><i class="fas fa-wheelchair fa-2x"></i></label>
 
@@ -72,7 +112,7 @@
 
                     <div class="col-md-3 text-center">
                         <br>
-                        <img class="diapo" src="{{ diapo.urlImage }}" alt="Other Slide">
+                        <img  src="{{ diapo.urlImage }}" alt="Other Slide" class="img-thumbnail">
                         <br>
                         <form class="form-group"  action="" method="POST">
                             <input type="submit" class="btn btn-danger center-block" value="supprimer" name="{{ diapo.id }}"/>

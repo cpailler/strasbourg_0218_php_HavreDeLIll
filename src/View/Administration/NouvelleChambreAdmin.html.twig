@@ -26,29 +26,60 @@
         <br>
         <div class="jumbotron container-fluid">
             <div class="row">
-                <form action="" method="post" class="form-group" enctype="multipart/form-data">
-                    <div class="">
-                        <input type="text" name="titre" value="{{ data.titre }}"/>
-                        <input type="text" name="prix" value="{{ data.prix }}"/>
-                        <textarea name="texte" style="height: auto;width: 100%">{{ data.texte }}</textarea>
-                        <input type="file" name="nouvellesDiapos[]" multiple="multiple" />
+                <form action="" method="post" class="form-group col-lg-8" enctype="multipart/form-data">
+                    <br class="">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Titre</span>
+                            </div>
+                            <input type="text" class="form-control" name="titre" value="{{ article.titre }}" aria-label="Username" aria-describedby="basic-addon1">
+                        </div></br>
+
+                        <div class="input-group ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Prix €</span>
+                            </div>
+                            <input type="text" class="form-control" name="prix" value="{{ chambreAModifier.prix }}" aria-label="Username" aria-describedby="basic-addon1">
+                        </div></br>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Texte</span>
+                            </div>
+                            <textarea class="form-control" name="texte" aria-label="With textarea">{{ chambreAModifier.texte }}</textarea>
+                        </div></br>
+                        <input type="file" name="nouvellesDiapos[]" multiple="multiple" class="btn btn-outline-dark"/>
                     </div>
                     <div class="">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Style</label>
+                            </div>
                         <select name="style" class="form-control">
                             <option value="" {% if data.style=="" %}selected{% endif %}></option>
                             <option value="Classique" {% if data.style=="Classique" %}selected{% endif %}>Classique</option>
                             <option value="Moderne" {% if data.style=="Moderne" %}selected{% endif %}>Moderne</option>
                         </select>
+                        </div></br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Literie</label>
+                            </div>
                         <select name="literie" class="form-control">
                             <option value="" {% if data.literie=="" %}selected{% endif %}></option>
                             <option value="Simple" {% if data.literie=="Simple" %}selected{% endif %}>Lits Simples</option>
                             <option value="Double" {% if data.literie=="Double" %}selected{% endif %}>Lit Double</option>
                         </select>
+                        </div></br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Salle de bain</label>
+                            </div>
                         <select name="salleDeBain" class="form-control">
                             <option value="" {% if data.salleDeBain=="" %}selected{% endif %}></option>
                             <option value="Baignoire" {% if data.salleDeBain=="Baignoire" %}selected{% endif %}>Baignoire</option>
                             <option value="Douche" {% if data.salleDeBain=="Douche" %}selected{% endif %}>Douche</option>
                         </select>
+                        </div></div>
                         <div class="checkbox">
                             <label><input type="checkbox" name="PMR" value="pmr"{% if data.accessibilite == "Oui" %}checked{% endif %}><i class="fas fa-wheelchair fa-2x"></i></label>
 

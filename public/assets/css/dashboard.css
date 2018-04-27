@@ -98,3 +98,6 @@ p.titre-admin{
 .navbar-dark .navbar-nav .nav-link {
   color: rgb(243, 64, 64);
 }
+textarea{
+  height: 150px !important;
+}
