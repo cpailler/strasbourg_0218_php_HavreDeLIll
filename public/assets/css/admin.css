@@ -1,6 +1,6 @@
-.diapo {
-    height: 150px;
-    width: 220px;
+.img-thumbnail {
+    height: 250px;
+    width: 250px;
     overflow: hidden;
 }
 

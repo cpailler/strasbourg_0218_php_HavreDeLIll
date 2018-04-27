@@ -17,16 +17,29 @@
                 {% for article in accueil %}
                     <div class="col-xs-12 col-md-12 col-lg-12">
                         <form action="" method="post" class="form-group" enctype="multipart/form-data">
-                            <div class="">
+
                                 <input type="hidden" name="id" value="{{ article.id }}">
                                 <br>
-                                <img class="diapo" name="urlImage" src="{{ article.urlImage }}" alt="image">
+                                <img  name="urlImage" src="{{ article.urlImage }}" alt="image" class="img-thumbnail">
                                 <br>
-                                <input type="file" name="urlImage"/>
+                            <input type="file" class="btn btn-outline-dark" name="urlImage"/></br>
                                 <br>
-                                <input type="text" name="titre" value="{{ article.titre }}"/>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Titre</span>
+                                    </div>
+                                    <input type="text" class="form-control" name="titre" value="{{ article.titre }}" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+
                                 <br>
-                                <textarea name="texte" style="height: auto;width: 100%">{{ article.texte }}</textarea>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Texte</span>
+                                    </div>
+                                    <textarea class="form-control" name="texte" aria-label="With textarea">{{ article.texte }}</textarea>
+                                </div></br>
+
                             </div>
                             <div>
                                 <input type="submit" name="modifier" value="Modifier" class="btn btn-warning"/>

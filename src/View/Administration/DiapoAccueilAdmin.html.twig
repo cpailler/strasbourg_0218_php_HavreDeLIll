@@ -17,9 +17,9 @@
 
                     <div class="col-md-3 text-center">
                         <br>
-                        <img class="diapo" src="{{ diapo.urlImage }}" alt="Other Slide">
+                        <img  src="{{ diapo.urlImage }}" alt="Other Slide" class="img-thumbnail">
                         <br>
-                        <form class="form-group"  action="" method="POST">
+                        <br class="form-group"  action="" method="POST"></br>
                         <input type="submit" class="btn btn-danger center-block" value="supprimer" name="{{ diapo.id }}"/>
                         </form>
                         <br>
@@ -35,7 +35,7 @@
             <div class="col-md-12 text-center">
                 <h3>Photos à ajouter :</h3>
                 <form class="form-group" action="" method="POST" enctype="multipart/form-data">
-                    <input type="file" class="form-control-file center-block" name="file[]" multiple="multiple"/>
+                    <input type="file" class="btn btn-outline-dark" name="file[]" multiple="multiple"/>
                     <input type="submit" class="btn btn-success center-block" value="Envoyer" name="send"/>
                 </form>
                 <p>{{ message }}</p>
