@@ -29,16 +29,18 @@ class LoginController extends AbstractController
 
         session_start ();
         // on enregistre les paramètres de notre client comme variables de session ($login et $pwd)
+       $mdp = md5($_POST['password']);
 
         if (isset($_POST['user'])&& isset($_POST['password'])) {
             $_SESSION['user'] = $_POST['user'];
-            $_SESSION['password'] = $_POST['password'];
+            $_SESSION['password'] = $mdp;
+
 
         }
         $_SESSION['name'] = $admin['0']['name'];
         $_SESSION['pwd'] = $admin['0']['password'];
 
-
+// mot de passe = olivier67
         $errors = [];
         if ($_SERVER["REQUEST_METHOD"] === 'POST') {
 
@@ -46,14 +48,14 @@ class LoginController extends AbstractController
                 $errors['user'] = "Veuillez saisir votre nom d'utilisateur";
             }
 
-            if (!isset($_POST['password']) || empty($_POST['password'])) {
+            if (!isset($_POST['password']) || empty($mdp)) {
                 $errors['password'] = "Veuillez saisir votre mot de passe";
             }
 
-            elseif ($_POST['user'] != $admin['0']['name'] && $_POST['password'] != $admin['0']['password']) {
+            elseif ($_POST['user'] != $admin['0']['name'] && $mdp != $admin['0']['password']) {
                 $errors['login'] = "Votre mot de passe ou votre nom d'utilisateur est incorrect";
             }
-            elseif ($_POST['user'] === $admin['0']['name'] && $_POST['password'] === $admin['0']['password'] ) {
+            elseif ($_POST['user'] === $admin['0']['name'] && $mdp === $admin['0']['password'] ) {
                 header('Location: /Administration');
             }
         }
