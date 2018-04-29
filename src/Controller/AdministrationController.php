@@ -25,11 +25,18 @@ use Model\DiapoAccueilManager;
  */
 class AdministrationController extends AbstractController
 {
-private function ConnectionCheck(){
+    /**
+     *creation cookies
+     */
+    private function ConnectionCheck(){
     session_start();
-    if (!isset($_SESSION['user']) && !isset($_SESSION['password'])) {
+    var_dump($_COOKIE['mdp']);
+
+    if (!isset($_SESSION['user']) && !isset($_COOKIE['user'])){
         header('Location: /Login');
     }
+
+
 }
 
     /**

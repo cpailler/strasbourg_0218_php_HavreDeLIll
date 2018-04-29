@@ -29,16 +29,23 @@ class LoginController extends AbstractController
 
         session_start ();
         // on enregistre les paramètres de notre client comme variables de session ($login et $pwd)
-       $mdp = md5($_POST['password']);
 
-        if (isset($_POST['user'])&& isset($_POST['password'])) {
+
+
+        if (isset($_POST['user']) && isset($_POST['password'])) {
             $_SESSION['user'] = $_POST['user'];
-            $_SESSION['password'] = $mdp;
-
-
+            $_SESSION['password'] = $_POST['password'];
+            $mdp = md5($_POST['password']);
         }
+
         $_SESSION['name'] = $admin['0']['name'];
         $_SESSION['pwd'] = $admin['0']['password'];
+
+        if (isset($_POST['remember'])){
+            setcookie('user',$_POST['user'],time()+3600, '/','localhost',false,true);
+            setcookie('mdp',$mdp,time()+3600,'/','localhost',false,true);
+        }
+
 
 // mot de passe = olivier67
         $errors = [];
