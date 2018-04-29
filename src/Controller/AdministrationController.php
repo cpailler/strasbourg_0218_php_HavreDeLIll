@@ -30,7 +30,7 @@ class AdministrationController extends AbstractController
      */
     private function ConnectionCheck(){
     session_start();
-    var_dump($_COOKIE['mdp']);
+
 
     if (!isset($_SESSION['user']) && !isset($_COOKIE['user'])){
         header('Location: /Login');
