@@ -22,3 +22,9 @@
 .carchambres .item img{
     margin: 0 auto; /* Align slide image horizontally center */
 }
+
+.illustration {
+    float: none;
+    text-align: center;
+    width: 230px;
+}
