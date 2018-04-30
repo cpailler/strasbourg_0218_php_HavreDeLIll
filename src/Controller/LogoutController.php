@@ -23,6 +23,8 @@ class LogoutController extends AbstractController
   public function index()
     {
         session_start();
+        setcookie('user',$_POST['user'],time()-3600);
+        setcookie('mdp',$mdp,time()-3600);
         session_destroy();
         header('Location: /Login');
 
