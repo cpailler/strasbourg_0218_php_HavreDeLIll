@@ -31,7 +31,6 @@ class AdministrationController extends AbstractController
      */
     private function ConnectionCheck(){
     session_start();
-    var_dump($_COOKIE['mdp']);
 
     if (!isset($_SESSION['user']) && !isset($_COOKIE['user'])){
         header('Location: /Login');
@@ -576,10 +575,10 @@ class AdministrationController extends AbstractController
         }
 
 
-        return $this->twig->render('Administration/ReservationsEnAttenteAdmin.twig', ['resas' => $resas, 'errors' => $errors, 'valids' => $valids]);
+        return $this->twig->render('Administration/ReservationsEnAttenteAdmin.html.twig', ['resas' => $resas, 'errors' => $errors, 'valids' => $valids]);
     }
 
-    public function Calendrier(){
+    /*public function Calendrier(){
         $this->ConnectionCheck();
         $reservationsManager = new ReservationManager();
         $chambresManager = new ChambreManager();
@@ -589,7 +588,83 @@ class AdministrationController extends AbstractController
 
 
         return $this->twig->render('Administration/ReservationsEnAttenteAdmin.twig', ['errors' => $errors, 'valids' => $valids]);
+    }*/
+
+    public function BloquerChambre(){
+        $this->ConnectionCheck();
+        $chambresManager = new ChambreManager();
+        $chambres = $chambresManager->findAll();
+        $valids=[];
+        $errors=[];
+        $warnings=[];
+        $select="";
+        $data=[];
+
+
+
+        //Action du formulaire de bloquage de chambre
+        if (isset($_POST['Bloquer'])){
+
+            $ReservationManager =new ReservationManager();
+            $ReservationAttenteManager =new ReservationAttenteManager();
+
+            if ($_POST['chambre']!=""){
+                $select=$_POST['chambre'];
+                $data['chambre_id']=$_POST['chambre'];
+            }
+            else {
+                $errors[] = 'Veuillez sélectionner la chambre à bloquer';
+            }
+            if (isset($_POST['dateDebut'])&&isset($_POST['dateFin'])){
+                $data['dateDebut']=$_POST['dateDebut'];
+                $data['dateFin']=$_POST['dateFin'];
+
+            }
+            else {
+                $errors[] = 'Veuillez saisir les dates du bloquage';
+            }
+
+
+            //Verification des dates
+            if (isset($data['dateDebut'])&&isset($data['dateFin'])){
+                $start=new \DateTime($data['dateDebut']);
+                $end=new \DateTime($data['dateFin']);
+
+                //vérification de la cohérance des dates
+                if (strtotime($end->format('Y-m-d'))<=strtotime($start->format('Y-m-d'))){
+                    $errors[] ="Les dates saisies pour votre le bloquage ne sont pas réalisables, vérifiez que la date de fin soit postérieure à la date de début.";
+                }
+                //verification de la disponibilité de la chambre
+
+                if (empty($errors)) {
+                    if (!empty($ReservationManager->getReservationBetween($start, $end, $data['chambre_id']))&&!empty($ReservationAttenteManager->getReservationBetween($start, $end, $data['chambre_id']))) {
+                        $warnings[] = "Attention, il existe des réservations pour la chambre bloquée pendant la période bloquée";
+                    }
+                }
+            }
+
+            if (empty($errors)){
+                $data['nomClient'] = 'Admin';
+                $data['prenomClient'] = 'Admin';
+                $data['mailClient'] = 'f.olivier.wilder@gmail.com';
+                $data['telClient'] = '0000000000';
+                $ok=$ReservationManager->insert($data);
+                if ($ok){
+                    $valids[]="Le bloquage de la chambre a bien été pris en compte.";
+                }
+                else {
+                    $errors[]="Une erreur s'est produite lors de l'enregistrement de votre demande, si le problème persisite veuillez contacter le support technique";
+                }
+            }
+
+
+        }
+
+
+
+        return $this->twig->render('Administration/BloquerChambreAdmin.html.twig', ['chambres' => $chambres,'select' => $select,'data' => $data, 'errors' => $errors, 'valids' => $valids, 'warnings' => $warnings]);
     }
+
 
 
 }
