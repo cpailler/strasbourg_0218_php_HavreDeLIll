@@ -1,0 +1,55 @@
+{% extends 'Administration/Administration.html.twig' %}
+
+    {% block stylesheet %}
+        <link rel="stylesheet" href="/assets/css/admin.css">
+    {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+
+        <h3>Réservations en attente de validation :</h3>
+
+        <br>
+        {% if errors|length>0 %}
+            <div class="alert alert-danger">
+                {% for error in errors %}
+                    <strong>{{ error }}</strong><br>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if valids|length>0 %}
+            <div class="alert alert-success"><br>
+                {% for valid in valids %}
+                    <strong>{{ valid }}</strong>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <br>
+        {% for resa in resas %}
+        <div class="jumbotron">
+            <div class="row">
+
+                    <div class="col-md-9 text-center">
+                        <p>Nom du Client : {{ resa.prenomClient }} {{ resa.nomClient }}<br>
+                            Mail Client : {{ resa.mailClient }}<br>
+                            Telephone Client : {{ resa.telClient }}<br>
+                        Chambre réservée : {{ resa.chambre_titre }}<br>
+                        Dates réservées : Du {{ resa.dateDebut }} au {{ resa.dateFin }}</p>
+
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <form class="form-group"  action="" method="POST">
+                            <input type="submit" class="btn btn-success center-block" value="Valider" name="{{ resa.id }}"/><br><br>
+                            <input type="submit" class="btn btn-danger center-block" value="Refuser" name="{{ resa.id }}"/>
+                        </form>
+                        <br>
+                    </div>
+            </div>
+        </div>
+        {% endfor %}
+        <br>
+    </div>
+{% endblock %}
+
+
+

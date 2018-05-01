@@ -36,6 +36,14 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/Administration/Localisation', 'Administration/LocalisationAdmin');
     $r->addRoute('GET', '/Administration/NouvelleChambre', 'Administration/NouvelleChambre');
     $r->addRoute('POST', '/Administration/NouvelleChambre', 'Administration/NouvelleChambre');
+    $r->addRoute('GET', '/Administration/ReservationsEnAttente', 'Administration/ReservationEnAttente');
+    $r->addRoute('POST', '/Administration/ReservationsEnAttente', 'Administration/ReservationEnAttente');
+    $r->addRoute('GET', '/Administration/BloquerChambre', 'Administration/BloquerChambre');
+    $r->addRoute('POST', '/Administration/BloquerChambre', 'Administration/BloquerChambre');
+    $r->addRoute('GET', '/Administration/CalendrierAdmin/{initMonth:\d+}/{initYear:\d+}', 'Administration/CalendrierAdmin');
+    $r->addRoute('GET', '/Administration/CalendrierAdmin', 'Administration/CalendrierAdmin');
+    $r->addRoute('POST', '/Administration/CalendrierAdmin/{initMonth:\d+}/{initYear:\d+}', 'Administration/CalendrierAdmin');
+    $r->addRoute('POST', '/Administration/CalendrierAdmin', 'Administration/CalendrierAdmin');
 
 });
 
