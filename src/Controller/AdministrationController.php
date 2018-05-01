@@ -578,17 +578,106 @@ class AdministrationController extends AbstractController
         return $this->twig->render('Administration/ReservationsEnAttenteAdmin.html.twig', ['resas' => $resas, 'errors' => $errors, 'valids' => $valids]);
     }
 
-    /*public function Calendrier(){
+    public function CalendrierAdmin(int $initMonth=null, int $initYear=null){
         $this->ConnectionCheck();
         $reservationsManager = new ReservationManager();
         $chambresManager = new ChambreManager();
+        $chambres = $chambresManager->findAll();
         $valids=[];
         $errors=[];
 
+        //en arrivant en GET pour la première fois
+        if (!isset($_SESSION['chambre_id'])){
+            $_SESSION['chambre_id']="";
+        }
+        //en arrivant en POST depuis la selection de chambre sur cette même page
+        if (isset($_POST['chambreselect'])) {
+            $_SESSION['chambre_id'] = $_POST['chambreselect'];
+        }
 
+        //suppression de la réservation si necessaire
+        if (isset($_POST['Annuler'])){
+            $ok = $reservationsManager->delete($_POST['idAnnulation']);
+            if($ok){
+                $valids[]= 'réservation annulée avec succès';
+            }
+            else {
+                $errors[]= 'Une erreur s\'est produite lors de l\'annulation de la réservation, si le problème persiste veuillez contacter le service technique';
+            }
+        }
 
-        return $this->twig->render('Administration/ReservationsEnAttenteAdmin.html.twig', ['errors' => $errors, 'valids' => $valids]);
-    }*/
+        //Gestion du calendrier
+        $month = new Month($initMonth, $initYear);
+        $start = $month->getStartingDay();
+        $start = $start->format('N')==='1' ? $start : $month->getStartingDay()->modify('last monday');
+        $weekDays = $month->days;
+        $weeks = $month->getWeeks();
+        $end = (clone $start)->modify('+'.(6+7*($weeks -1)).'days');
+        if ($_SESSION['chambre_id']==""){
+            $reservations = $reservationsManager->getAllReservationBetween($start, $end);
+        }
+        else{
+            $reservations = $reservationsManager->getReservationBetween($start, $end,$_SESSION['chambre_id']);
+        }
+        $infosDays=[];
+
+       // $newRes = (new \DateTime($Reservation['start']))->format('d.m.Y');
+        for ($i =0; $i <$weeks;$i++) {
+            foreach ($weekDays as $k => $day) {
+                $date = (clone $start)->modify("+" . ($k + $i * 7) . "day");
+                if (isset($_POST[$date->format('Y-m-d')])){
+                    $detailsResas[$date->format('Y-m-d')]=[];
+                }
+                $key = $k + $i * 7;
+                $infosDays[$key] = ['jourZero' => false,'fullDate'=>$date->format('Y-m-d'),'date'=>$date->format('d'),'withinMonth'=>$month->withinMonth($date),'reserve'=>false];
+                foreach ($reservations as $reservation) {
+                    if ((strtotime($date->format('Y-m-d')) >= strtotime($reservation['dateDebut'])) && (strtotime($date->format('Y-m-d')) < strtotime($reservation['dateFin']))) {
+                        $infosDays[$key]['reserve'] = true;
+                        if (isset($detailsResas[$date->format('Y-m-d')])){
+                            $detailsResas[$date->format('Y-m-d')][]=$reservation;
+                        }
+                    }
+
+                }
+                if ($i === 0) {
+                    $infosDays[$key]['jourZero'] = true;
+                }
+            }
+        }
+        if (!isset($detailsResas)){
+            $detailsResas=[];
+        }
+        else {
+            foreach ($detailsResas as &$resas){
+                foreach($resas as &$resa){
+                    foreach ($chambres as $chambre){
+                        if ($resa['chambre_id']==$chambre['id']){
+                            $resa['chambre_titre']=$chambre['titre'];
+                        }
+                    }
+                }
+            }
+
+        }
+
+        return $this->twig->render('Administration/CalendrierAdmin.html.twig',
+            ['errors' => $errors,
+                'month' => $month,
+                'valids' => $valids,
+                'monthTS' => $month->toString(),
+                'previousMonth' => $month->previousMonth()->month,
+                'previousYear' => $month->previousMonth()->year,
+                'nextMonth' => $month->nextMonth()->month,
+                'nextYear' => $month->nextMonth()->year,
+                'weeks' => $month->getWeeks(),
+                'infosDays' => $infosDays,
+                'cloneStart' => clone $start,
+                'days' => $weekDays,
+                'chambres'=> $chambres,
+                'select'=>$_SESSION['chambre_id'],
+                'detailsResas' => $detailsResas
+            ]);
+    }
 
     public function BloquerChambre(){
         $this->ConnectionCheck();
