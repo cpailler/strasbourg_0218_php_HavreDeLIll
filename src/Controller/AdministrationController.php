@@ -14,6 +14,7 @@ use Model\AccueilManager;
 use Model\Accueil;
 use Model\ChambreManager;
 use Model\DiapoChambreManager;
+use Model\ReservationAttenteManager;
 use Model\ReservationManager;
 use Model\LocalisationManager;
 use Model\ParlementairesManager;
@@ -39,9 +40,6 @@ class AdministrationController extends AbstractController
 
 }
 
-    /**
-     * @return string
-     */
     public function index()
     {
         $this->ConnectionCheck();
@@ -516,7 +514,7 @@ class AdministrationController extends AbstractController
 
             }
 
-            $ok = $accueilManager->update($id, $data);
+            $ok = $ParlementairesManager->update($id, $data);
             if (!$ok) {
                 $error[] = "La base de donnée a refusé votre requête, veuillez contacter votre support technique.";
             } else {
@@ -528,5 +526,70 @@ class AdministrationController extends AbstractController
 
         return $this->twig->render('Administration/ParlementairesAdmin.html.twig', ['articles' => $articles]);
     }
+
+    public function ReservationEnAttente(){
+        $this->ConnectionCheck();
+        $reservationsEnAttentesManager = new ReservationAttenteManager();
+        $reservationsManager = new ReservationManager();
+        $chambresManager = new ChambreManager();
+        $valids=[];
+        $errors=[];
+        if(!empty($_POST)){
+            foreach ($_POST as $key=>$value){
+                if ($value=='Valider'){
+                    $resa = $reservationsEnAttentesManager->findOneById($key);
+                    var_dump($resa);
+                    array_shift($resa);
+                    var_dump($resa);
+                    $ok = $reservationsManager->insert($resa);
+                    if ($ok){
+                        $valids[]='chambre validée';
+                        $mail = new GestionMailController();
+                        $reservationsEnAttentesManager->delete($key);
+                        $mail->envoiMailValidation($resa);
+                    }
+                    else {
+                        $errors[]='Une erreur s\'est produite lors de la validation';
+                    }
+                }
+                elseif ($value=='Refuser'){
+                    $resa = $reservationsEnAttentesManager->findOneById($key);
+                    $reservationsEnAttentesManager->delete($key);
+                    $mail = new GestionMailController();
+                    $mail->envoiMailRefus($resa);
+                }
+
+            }
+        }
+
+
+
+
+        $chambres = $chambresManager->findAll();
+        $resas = $reservationsEnAttentesManager->findAll();
+        foreach ($chambres as $chambre){
+            foreach($resas as &$resa){
+                if ($resa['chambre_id']==$chambre['id']){
+                    $resa['chambre_titre']=$chambre['titre'];
+                }
+            }
+        }
+
+
+        return $this->twig->render('Administration/ReservationsEnAttenteAdmin.twig', ['resas' => $resas, 'errors' => $errors, 'valids' => $valids]);
+    }
+
+    public function Calendrier(){
+        $this->ConnectionCheck();
+        $reservationsManager = new ReservationManager();
+        $chambresManager = new ChambreManager();
+        $valids=[];
+        $errors=[];
+
+
+
+        return $this->twig->render('Administration/ReservationsEnAttenteAdmin.twig', ['errors' => $errors, 'valids' => $valids]);
+    }
+
 
 }

@@ -19,20 +19,8 @@ class ReservationAttenteManager extends EntityManager
         parent::__construct(self::TABLE);
     }
 
-    public function findAll()
-    {
-    }
-
-    public function delete($id)
-    {
-    }
-
-    public function update($id, $data)
-    {
-    }
-
-    public function insert($data)
-    {
+    public function getReservationBetween ($start, $end, $id): array {
+        return $this->conn->query("SELECT * FROM ".$this->table." WHERE dateDebut<='".$end->format('Y-m-d')."' AND dateFin>'".$start->format('Y-m-d')."' AND chambre_id='".$id."';", \PDO::FETCH_ASSOC)->fetchAll();
     }
 
 }

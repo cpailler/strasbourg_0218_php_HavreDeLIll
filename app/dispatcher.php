@@ -36,6 +36,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/Administration/Localisation', 'Administration/LocalisationAdmin');
     $r->addRoute('GET', '/Administration/NouvelleChambre', 'Administration/NouvelleChambre');
     $r->addRoute('POST', '/Administration/NouvelleChambre', 'Administration/NouvelleChambre');
+    $r->addRoute('GET', '/Administration/ReservationsEnAttente', 'Administration/ReservationEnAttente');
+    $r->addRoute('POST', '/Administration/ReservationsEnAttente', 'Administration/ReservationEnAttente');
 
 });
 
