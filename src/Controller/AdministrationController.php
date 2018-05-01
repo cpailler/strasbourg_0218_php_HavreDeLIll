@@ -14,6 +14,7 @@ use Model\AccueilManager;
 use Model\Accueil;
 use Model\ChambreManager;
 use Model\DiapoChambreManager;
+use Model\ReservationAttenteManager;
 use Model\ReservationManager;
 use Model\LocalisationManager;
 use Model\ParlementairesManager;
@@ -30,8 +31,6 @@ class AdministrationController extends AbstractController
      */
     private function ConnectionCheck(){
     session_start();
-    var_dump($_COOKIE['mdp']);
-
     if (!isset($_SESSION['user']) && !isset($_COOKIE['user'])){
         header('Location: /Login');
     }
@@ -39,9 +38,6 @@ class AdministrationController extends AbstractController
 
 }
 
-    /**
-     * @return string
-     */
     public function index()
     {
         $this->ConnectionCheck();
@@ -516,7 +512,7 @@ class AdministrationController extends AbstractController
 
             }
 
-            $ok = $accueilManager->update($id, $data);
+            $ok = $ParlementairesManager->update($id, $data);
             if (!$ok) {
                 $error[] = "La base de donnée a refusé votre requête, veuillez contacter votre support technique.";
             } else {
@@ -528,5 +524,235 @@ class AdministrationController extends AbstractController
 
         return $this->twig->render('Administration/ParlementairesAdmin.html.twig', ['articles' => $articles]);
     }
+
+    public function ReservationEnAttente(){
+        $this->ConnectionCheck();
+        $reservationsEnAttentesManager = new ReservationAttenteManager();
+        $reservationsManager = new ReservationManager();
+        $chambresManager = new ChambreManager();
+        $valids=[];
+        $errors=[];
+        if(!empty($_POST)){
+            foreach ($_POST as $key=>$value){
+                if ($value=='Valider'){
+                    $resa = $reservationsEnAttentesManager->findOneById($key);
+                    var_dump($resa);
+                    array_shift($resa);
+                    var_dump($resa);
+                    $ok = $reservationsManager->insert($resa);
+                    if ($ok){
+                        $valids[]='chambre validée';
+                        $mail = new GestionMailController();
+                        $reservationsEnAttentesManager->delete($key);
+                        $mail->envoiMailValidation($resa);
+                    }
+                    else {
+                        $errors[]='Une erreur s\'est produite lors de la validation';
+                    }
+                }
+                elseif ($value=='Refuser'){
+                    $resa = $reservationsEnAttentesManager->findOneById($key);
+                    $reservationsEnAttentesManager->delete($key);
+                    $mail = new GestionMailController();
+                    $mail->envoiMailRefus($resa);
+                }
+
+            }
+        }
+
+
+
+
+        $chambres = $chambresManager->findAll();
+        $resas = $reservationsEnAttentesManager->findAll();
+        foreach ($chambres as $chambre){
+            foreach($resas as &$resa){
+                if ($resa['chambre_id']==$chambre['id']){
+                    $resa['chambre_titre']=$chambre['titre'];
+                }
+            }
+        }
+
+
+        return $this->twig->render('Administration/ReservationsEnAttenteAdmin.html.twig', ['resas' => $resas, 'errors' => $errors, 'valids' => $valids]);
+    }
+
+    public function CalendrierAdmin(int $initMonth=null, int $initYear=null){
+        $this->ConnectionCheck();
+        $reservationsManager = new ReservationManager();
+        $chambresManager = new ChambreManager();
+        $chambres = $chambresManager->findAll();
+        $valids=[];
+        $errors=[];
+
+        //en arrivant en GET pour la première fois
+        if (!isset($_SESSION['chambre_id'])){
+            $_SESSION['chambre_id']="";
+        }
+        //en arrivant en POST depuis la selection de chambre sur cette même page
+        if (isset($_POST['chambreselect'])) {
+            $_SESSION['chambre_id'] = $_POST['chambreselect'];
+        }
+
+        //suppression de la réservation si necessaire
+        if (isset($_POST['Annuler'])){
+            $ok = $reservationsManager->delete($_POST['idAnnulation']);
+            if($ok){
+                $valids[]= 'réservation annulée avec succès';
+            }
+            else {
+                $errors[]= 'Une erreur s\'est produite lors de l\'annulation de la réservation, si le problème persiste veuillez contacter le service technique';
+            }
+        }
+
+        //Gestion du calendrier
+        $month = new Month($initMonth, $initYear);
+        $start = $month->getStartingDay();
+        $start = $start->format('N')==='1' ? $start : $month->getStartingDay()->modify('last monday');
+        $weekDays = $month->days;
+        $weeks = $month->getWeeks();
+        $end = (clone $start)->modify('+'.(6+7*($weeks -1)).'days');
+        if ($_SESSION['chambre_id']==""){
+            $reservations = $reservationsManager->getAllReservationBetween($start, $end);
+        }
+        else{
+            $reservations = $reservationsManager->getReservationBetween($start, $end,$_SESSION['chambre_id']);
+        }
+        $infosDays=[];
+
+       // $newRes = (new \DateTime($Reservation['start']))->format('d.m.Y');
+        for ($i =0; $i <$weeks;$i++) {
+            foreach ($weekDays as $k => $day) {
+                $date = (clone $start)->modify("+" . ($k + $i * 7) . "day");
+                if (isset($_POST[$date->format('Y-m-d')])){
+                    $detailsResas[$date->format('Y-m-d')]=[];
+                }
+                $key = $k + $i * 7;
+                $infosDays[$key] = ['jourZero' => false,'fullDate'=>$date->format('Y-m-d'),'date'=>$date->format('d'),'withinMonth'=>$month->withinMonth($date),'reserve'=>false];
+                foreach ($reservations as $reservation) {
+                    if ((strtotime($date->format('Y-m-d')) >= strtotime($reservation['dateDebut'])) && (strtotime($date->format('Y-m-d')) < strtotime($reservation['dateFin']))) {
+                        $infosDays[$key]['reserve'] = true;
+                        if (isset($detailsResas[$date->format('Y-m-d')])){
+                            $detailsResas[$date->format('Y-m-d')][]=$reservation;
+                        }
+                    }
+
+                }
+                if ($i === 0) {
+                    $infosDays[$key]['jourZero'] = true;
+                }
+            }
+        }
+        if (!isset($detailsResas)){
+            $detailsResas=[];
+        }
+        else {
+            foreach ($detailsResas as &$resas){
+                foreach($resas as &$resa){
+                    foreach ($chambres as $chambre){
+                        if ($resa['chambre_id']==$chambre['id']){
+                            $resa['chambre_titre']=$chambre['titre'];
+                        }
+                    }
+                }
+            }
+
+        }
+
+        return $this->twig->render('Administration/CalendrierAdmin.html.twig',
+            ['errors' => $errors,
+                'month' => $month,
+                'valids' => $valids,
+                'monthTS' => $month->toString(),
+                'previousMonth' => $month->previousMonth()->month,
+                'previousYear' => $month->previousMonth()->year,
+                'nextMonth' => $month->nextMonth()->month,
+                'nextYear' => $month->nextMonth()->year,
+                'weeks' => $month->getWeeks(),
+                'infosDays' => $infosDays,
+                'cloneStart' => clone $start,
+                'days' => $weekDays,
+                'chambres'=> $chambres,
+                'select'=>$_SESSION['chambre_id'],
+                'detailsResas' => $detailsResas
+            ]);
+    }
+
+    public function BloquerChambre(){
+        $this->ConnectionCheck();
+        $chambresManager = new ChambreManager();
+        $chambres = $chambresManager->findAll();
+        $valids=[];
+        $errors=[];
+        $warnings=[];
+        $select="";
+        $data=[];
+
+
+
+        //Action du formulaire de bloquage de chambre
+        if (isset($_POST['Bloquer'])){
+
+            $ReservationManager =new ReservationManager();
+            $ReservationAttenteManager =new ReservationAttenteManager();
+
+            if ($_POST['chambre']!=""){
+                $select=$_POST['chambre'];
+                $data['chambre_id']=$_POST['chambre'];
+            }
+            else {
+                $errors[] = 'Veuillez sélectionner la chambre à bloquer';
+            }
+            if (isset($_POST['dateDebut'])&&isset($_POST['dateFin'])){
+                $data['dateDebut']=$_POST['dateDebut'];
+                $data['dateFin']=$_POST['dateFin'];
+
+            }
+            else {
+                $errors[] = 'Veuillez saisir les dates du bloquage';
+            }
+
+
+            //Verification des dates
+            if (isset($data['dateDebut'])&&isset($data['dateFin'])){
+                $start=new \DateTime($data['dateDebut']);
+                $end=new \DateTime($data['dateFin']);
+
+                //vérification de la cohérance des dates
+                if (strtotime($end->format('Y-m-d'))<=strtotime($start->format('Y-m-d'))){
+                    $errors[] ="Les dates saisies pour votre le bloquage ne sont pas réalisables, vérifiez que la date de fin soit postérieure à la date de début.";
+                }
+                //verification de la disponibilité de la chambre
+
+                if (empty($errors)) {
+                    if (!empty($ReservationManager->getReservationBetween($start, $end, $data['chambre_id']))&&!empty($ReservationAttenteManager->getReservationBetween($start, $end, $data['chambre_id']))) {
+                        $warnings[] = "Attention, il existe des réservations pour la chambre bloquée pendant la période bloquée";
+                    }
+                }
+            }
+
+            if (empty($errors)){
+                $data['nomClient'] = 'Admin';
+                $data['prenomClient'] = 'Admin';
+                $data['mailClient'] = 'f.olivier.wilder@gmail.com';
+                $data['telClient'] = '0000000000';
+                $ok=$ReservationManager->insert($data);
+                if ($ok){
+                    $valids[]="Le bloquage de la chambre a bien été pris en compte.";
+                }
+                else {
+                    $errors[]="Une erreur s'est produite lors de l'enregistrement de votre demande, si le problème persisite veuillez contacter le support technique";
+                }
+            }
+
+
+        }
+
+
+
+        return $this->twig->render('Administration/BloquerChambreAdmin.html.twig', ['chambres' => $chambres,'select' => $select,'data' => $data, 'errors' => $errors, 'valids' => $valids, 'warnings' => $warnings]);
+    }
+
+
 
 }

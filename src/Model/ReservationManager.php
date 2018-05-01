@@ -25,6 +25,11 @@ class ReservationManager extends EntityManager
      * @param \DateTime $end
      * @return array
      */
+    public function getAllReservationBetween ($start, $end): array {
+        return $this->conn->query("SELECT * FROM ".$this->table." WHERE dateDebut<='".$end->format('Y-m-d')."' AND dateFin>'".$start->format('Y-m-d')."';", \PDO::FETCH_ASSOC)->fetchAll();
+    }
+
+
     public function getReservationBetween ($start, $end, $id): array {
         return $this->conn->query("SELECT * FROM ".$this->table." WHERE dateDebut<='".$end->format('Y-m-d')."' AND dateFin>'".$start->format('Y-m-d')."' AND chambre_id='".$id."';", \PDO::FETCH_ASSOC)->fetchAll();
     }

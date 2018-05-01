@@ -1,0 +1,73 @@
+{% extends 'Administration/Administration.html.twig' %}
+
+    {% block stylesheet %}
+        <link rel="stylesheet" href="/assets/css/admin.css">
+    {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+
+        <h3>Bloquer une Chambre :</h3>
+
+        <br>
+        {% if errors|length>0 %}
+            <div class="alert alert-danger">
+                {% for error in errors %}
+                    <strong>{{ error }}</strong><br>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if valids|length>0 %}
+            <div class="alert alert-success"><br>
+                {% for valid in valids %}
+                    <strong>{{ valid }}</strong>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if warnings|length>0 %}
+            <div class="alert alert-warning"><br>
+                {% for warning in warnings %}
+                    <strong>{{ warning }}</strong>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <br>
+        <br>
+        <div class="jumbotron">
+            <div class="row">
+                    <div class="col-md-12 text-center">
+                        <form class="form-group"  action="" method="POST">
+                            <select name="chambre" class="custom-select">
+                                <option value="" {% if select=="" %}selected{% endif %}></option>
+                                {% for chambre in chambres %}
+                                    <option value="{{ chambre.id }}" {% if select==chambre.id %}selected{% endif %}>{{ chambre.titre }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="col-xs-6 col-sm-6">
+                                <div class="controls">
+                                    <label for="arrive" class="label-date">&nbsp;Date de début du bloquage</label>
+                                    <input type="date" id="arrive" class="form-control"
+                                           name="dateDebut"
+                                           value="{% if errors|length>0 and data.dateDebut is defined %}{{ data.dateDebut }}{% endif %}">
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6">
+                                <div class="controls">
+                                    <label for="depart" class="label-date">&nbsp;&nbsp;Date de fin du bloquage (premier jour libre)</label>
+                                    <input type="date" id="depart" class="form-control"
+                                           name="dateFin"
+                                           value="{% if errors|length>0 and data.dateFin is defined %}{{ data.dateFin }}{% endif %}"/>
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-primary center-block" value="Bloquer" name="Bloquer"/>
+                        </form>
+                        <br>
+                    </div>
+            </div>
+        </div>
+        <br>
+    </div>
+{% endblock %}
+
+
+

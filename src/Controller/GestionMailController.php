@@ -27,6 +27,7 @@ class GestionMailController extends AbstractController
         $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
         try {
             //Server settings
+            $mail->CharSet = 'UTF-8';
             $mail->SMTPDebug = 2;                                 // Enable verbose debug output
             $mail->isSMTP();                                      // Set mailer to use SMTP
             $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
@@ -53,4 +54,65 @@ class GestionMailController extends AbstractController
             echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
         }
     }
+
+    public function envoiMailValidation($resa)
+    {
+        $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+
+        //Server settings
+        $mail->CharSet = 'UTF-8';
+        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'f.olivier.wilder@gmail.com';                 // SMTP username
+        $mail->Password = 'olivierwild67 ';                           // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 587;                                    // TCP port to connect to
+
+        //Recipients
+        $mail->setFrom('f.olivier.wilder@gmail.com', 'Mailer');
+        $mail->addAddress($resa['mailClient'], $resa['nomClient']);     // Add a recipient
+        //$mail->addReplyTo($_POST['mail'], 'Information');
+
+        //Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'Confirmation de votre réservation au Havre de l\'Ill';
+        $mail->Body    = 'Votre réservation au Havre de l\'Ill du '.$resa['dateDebut'].' au '.$resa['dateFin'].' a été confirmée par le propriétaire';
+        $mail->AltBody = 'Votre réservation au Havre de l\'Ill du '.$resa['dateDebut'].' au '.$resa['dateFin'].' a été confirmée par le propriétaire';
+
+        return $mail->send(header('Location:/Administration/ReservationsEnAttente'));
+
+    }
+
+    public function envoiMailRefus($resa)
+    {
+        $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+
+        //Server settings
+        $mail->CharSet = 'UTF-8';
+        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'f.olivier.wilder@gmail.com';                 // SMTP username
+        $mail->Password = 'olivierwild67 ';                           // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 587;                                    // TCP port to connect to
+
+        //Recipients
+        $mail->setFrom('f.olivier.wilder@gmail.com', 'Mailer');
+        $mail->addAddress($resa['mailClient'], $resa['nomClient']);     // Add a recipient
+        //$mail->addReplyTo($_POST['mail'], 'Information');
+
+        //Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'Refus de votre réservation au Havre de l\'Ill';
+        $mail->Body    = 'Votre réservation au Havre de l\'Ill du '.$resa['dateDebut'].' au '.$resa['dateFin'].' a été refusée par le propriétaire';
+        $mail->AltBody = 'Votre réservation au Havre de l\'Ill du '.$resa['dateDebut'].' au '.$resa['dateFin'].' a été refusée par le propriétaire';
+
+        return $mail->send(header('Location:/Administration/ReservationsEnAttente'));
+
+    }
+
 }

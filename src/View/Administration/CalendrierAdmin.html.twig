@@ -1,0 +1,125 @@
+{% extends 'Administration/Administration.html.twig' %}
+
+    {% block stylesheet %}
+        <link rel="stylesheet" href="/assets/css/admin.css">
+        <link rel="stylesheet" href="/assets/css/calendrier.css">
+    {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+
+        <h3>Calendrier des réservations :</h3>
+
+        <br>
+        {% if errors|length>0 %}
+            <div class="alert alert-danger">
+                {% for error in errors %}
+                    <strong>{{ error }}</strong><br>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if valids|length>0 %}
+            <div class="alert alert-success"><br>
+                {% for valid in valids %}
+                    <strong>{{ valid }}</strong>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if warnings|length>0 %}
+            <div class="alert alert-success"><br>
+                {% for warning in warnings %}
+                    <strong>{{ warning }}</strong>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <br>
+        <div class="row">
+            <div class="input-group mb-3">
+                <form class="form-group"  action="" method="POST">
+                    <select name="chambreselect" class="custom-select"  onchange="this.form.submit()">
+                        <option value="" {% if select=="" %}selected{% endif %}>Toutes les chambres</option>
+                        {% for chambre in chambres %}
+                            <option value="{{ chambre.id }}" {% if select==chambre.id %}selected{% endif %}>{{ chambre.titre }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
+
+
+            </div>
+        </div>
+        <!-- Calendrier-->
+        <div class="row center-block">
+            <br>
+            <div class="col-md-8 col-xs-7">
+                <h1>{{ monthTS }}</h1>
+            </div>
+            <div class="col-md-4 col-xs-5">
+                <p></p> <a href="/Administration/CalendrierAdmin/{{ previousMonth }}/{{ previousYear }}"
+                           class="btn-calender">&lt;</a>
+                <a href="/Administration/CalendrierAdmin/{{ nextMonth }}/{{ nextYear }}"
+                   class="btn-calender">&gt;</a></p>
+            </div>
+        </div>
+        <div class="row center-block">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <table class="calendar__table calendar__table--{{ month.getweeks() }}weeks">
+                    <tr>
+                        {% for day in days %}
+                            <th class="calendar__otherMonth">{{ day }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% set date = cloneStart.modify("-1 day") %}
+                    {% for key,infosDay in infosDays %}
+                        {% if key%7==0 %}
+                            <tr>
+                        {% endif %}
+                        {% set date = date.modify("+1 day") %}
+                        <td class="{% if (month.withinMonth(date)) %}{% if infosDay.reserve %}calendar_booked{% endif %}{% else %}calendar__otherMonth{% endif %} ">
+                            <div class="calendar__day ">{{ infosDay.date }}</div>
+                            {% if infosDay.reserve %}
+                            <form method="post" action="">
+                                <button type="submit" name="{{ infosDay.fullDate }}"><span data-feather="book-open"></span></button>
+                            </form>
+                            {%endif %}
+                        </td>
+                        {% if key%7==6 %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+        <!--Détails des réservations-->
+        <div class="row">
+            {% for resas in detailsResas %}
+            {% for resa in resas %}
+                <div class="jumbotron">
+                    <div class="row">
+
+                        <div class="col-md-9 text-center">
+                            <p>Nom du Client : {{ resa.prenomClient }} {{ resa.nomClient }}<br>
+                                Mail Client : {{ resa.mailClient }}<br>
+                                Telephone Client : {{ resa.telClient }}<br>
+                                Chambre réservée : {{ resa.chambre_titre }}<br>
+                                Dates réservées : Du {{ resa.dateDebut }} au {{ resa.dateFin }}</p>
+
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <form class="form-group"  action="" method="POST">
+                                <input type="hidden" name="idAnnulation" value="{{ resa.id }}">
+                                <input type="submit" class="btn btn-danger center-block" value="Annuler" name="Annuler"/>
+                            </form>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+        <br>
+    </div>
+{% endblock %}
+
+
+
