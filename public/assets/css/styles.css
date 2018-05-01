@@ -36,7 +36,7 @@ hr {
 }
 
 section {
-    padding-top: 150px;
+    padding-top: 130px;
     padding-bottom: 50px;
 }
 
@@ -128,8 +128,5 @@ text-align: center;
 
 /* Général version mobile */
 @media only screen and (max-width: 767px) {
-    section {
-        padding-top: 55px;
-        padding-bottom: 30px;
-    }
+
 }

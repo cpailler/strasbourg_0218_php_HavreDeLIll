@@ -23,48 +23,51 @@
 </head>
 
 <body>
+
 <header>
-    <nav class="navbar navbar-default navbar-fixed-top nav-justified">
-        <div class="container-fluid">
-            <!-- Brand and toggle(burger menu) get grouped for better mobile display -->
-            <div class="row">
-                <div class="col-md-12">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Burger menu</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+    <nav id="navbar">
+        <!-- Navbar Logo -->
+        <a href="/Accueil"><img class="logo"
+                                src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1522689405/Havre_de_l_Ill_rsg526.png"
+                                alt="logo"></a>
+        <div class="nav-wrapper">
+            <!-- Navbar Links -->
+            <ul id="menu">
+                <li><a href="/Chambres">NOS CHAMBRES</a></li>
+                <li><a href="/Reservation">RÉSERVATION</a></li>
+                <li><a href="/Localisation">LOCALISATION</a></li>
+                <li><a href="/Parlementaires"><img class="drapeauEurope"
+                                                   src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1521753995/Drapeau-Europe_k876hd.png"
+                                                   alt="drapeauEurope"> PARLEMENTAIRE</a></li>
 
-                    <a class="navbar-brand" href="#"><img class="logo"
-                                                          src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1522689405/Havre_de_l_Ill_rsg526.png"
-                                                          alt="logo"></a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/Accueil">ACCUEIL</a></li>
-                        <li><a href="/Chambres">NOS CHAMBRES</a></li>
-                        <li><a href="/Reservation">RÉSERVATION</a></li>
-                        <li><a href="/Localisation">LOCALISATION</a></li>
-                        <li><a href="/Parlementaires"><img class="drapeauEurope"
-                                                           src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1521753995/Drapeau-Europe_k876hd.png"
-                                                           alt="drapeauEurope"> PARLEMENTAIRE</a></li>
-                    </ul>
-                </div>
-
-                <!-- /.navbar-collapse -->
-                </div>
-            </div>
-            <!-- /.row -->
+            </ul>
         </div>
-        <!-- /.container-fluid -->
     </nav>
 
+
+    <!-- Menu Icon -->
+    <div class="menuIcon">
+        <span class="icon icon-bars"></span>
+        <span class="icon icon-bars overlay"></span>
+    </div>
+
+
+    <div class="overlay-menu">
+        <ul id="menu">
+            <li><a href="/Accueil">ACCUEIL</a></li>
+            <li><a href="/Chambres">NOS CHAMBRES</a></li>
+            <li><a href="/Reservation">RÉSERVATION</a></li>
+            <li><a href="/Localisation">LOCALISATION</a></li>
+            <li><a href="/Parlementaires"><img class="drapeauEurope"
+                                               src="http://res.cloudinary.com/tiffanym/image/upload/q_100/v1521753995/Drapeau-Europe_k876hd.png"
+                                               alt="drapeauEurope"> PARLEMENTAIRE</a></li>
+        </ul>
+
+    </div>
+
+
+
 </header>
-<!-- END HEADER-->
 
 {% block content %}{% endblock %}
 
@@ -126,13 +129,12 @@
                             </div>
                         </div>
                     </div>
+                </form>
             </div>
         </div>
-        </form>
     </div>
 </div>
-</div>
-</div>
+
 
 <!--Button  -->
 <footer>
@@ -163,6 +165,38 @@
 
 {% block javascript %}{% endblock %}
 <script>
+
+    // Navigation
+    // Responsive Toggle Navigation =============================================
+    let menuIcon = document.querySelector('.menuIcon');
+    let nav = document.querySelector('.overlay-menu');
+
+    menuIcon.addEventListener('click', () => {
+        if (nav.style.transform != 'translateX(0%)') {
+            nav.style.transform = 'translateX(0%)';
+            nav.style.transition = 'transform 0.2s ease-out';
+        } else {
+            nav.style.transform = 'translateX(-100%)';
+            nav.style.transition = 'transform 0.2s ease-out';
+        }
+    });
+
+
+    // Toggle Menu Icon ========================================
+    let toggleIcon = document.querySelector('.menuIcon');
+
+    toggleIcon.addEventListener('click', () => {
+        if (toggleIcon.className != 'menuIcon toggle') {
+            toggleIcon.className += ' toggle';
+        } else {
+            toggleIcon.className = 'menuIcon';
+        }
+    });
+
+
+
+
+
 
     $(document).ready(function () {
 
