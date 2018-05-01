@@ -587,7 +587,7 @@ class AdministrationController extends AbstractController
 
 
 
-        return $this->twig->render('Administration/ReservationsEnAttenteAdmin.twig', ['errors' => $errors, 'valids' => $valids]);
+        return $this->twig->render('Administration/ReservationsEnAttenteAdmin.html.twig', ['errors' => $errors, 'valids' => $valids]);
     }*/
 
     public function BloquerChambre(){
