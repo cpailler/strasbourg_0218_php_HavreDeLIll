@@ -128,8 +128,5 @@ text-align: center;
 
 /* Général version mobile */
 @media only screen and (max-width: 767px) {
-    section {
-        padding-top: 55px;
-        padding-bottom: 30px;
-    }
+
 }

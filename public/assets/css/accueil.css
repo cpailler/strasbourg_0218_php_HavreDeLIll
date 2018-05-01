@@ -1,60 +1,115 @@
 /* Carrousel */
 .carousel {
-    background: #2f4357;
+    background: white;
     margin-right: 0 auto;
     margin-left: 0 auto;
-    max-height: 600px;
+    height: 100%;
+    width: 100%;
     overflow: hidden;
 }
 
 .carousel .item {
     max-height: 600px; /* Prevent carousel from being distorted if for some reason image doesn't load */
-    min-width: 100%;
 }
 
 .carousel .item img {
     margin: 0 auto; /* Align slide image horizontally center */
+    height: auto;
+    display: block;
 }
 
 .slider {
     margin: 0px;
 }
 
+.carousel-indicators {
+    z-index:9;
+}
+
 section {
     padding-top: 115px;
 }
 
-/* Effet zoom sur image de page d'accueil seulement sur écran sup à 1024px */
-@media only screen and (min-width: 1024px) {
-    .column#zoomIn img {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-transition: .3s ease-in-out;
-        transition: .3s ease-in-out;
-    }
 
-    .column#zoomIn:hover img {
-        -webkit-transform: scale(1.3);
-        transform: scale(1.3);
-    }
-}
 
 /* Page accueil version mobile */
-@media only screen and (max-width: 767px) {
-
+@media only screen and (max-width: 988px) {
     .carousel {
-        max-height: 300px;
+        height: 100%;
+        width: 100%;
         overflow: hidden;
     }
 
+    .carousel .item {
+        max-height: 400px; /* Prevent carousel from being distorted if for some reason image doesn't load */
+    }
+
+    .carousel .item img {
+        margin: 0 auto; /* Align slide image horizontally center */
+        height: auto;
+        display: block;
+    }
 }
+
+@media only screen and (max-width: 808px) {
+    .carousel {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .carousel .item {
+        max-height: 300px; /* Prevent carousel from being distorted if for some reason image doesn't load */
+    }
+
+    .carousel .item img {
+        margin: 0 auto; /* Align slide image horizontally center */
+        height: auto;
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 602px) {
+    .carousel {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .carousel .item {
+        max-height: 250px; /* Prevent carousel from being distorted if for some reason image doesn't load */
+    }
+
+    .carousel .item img {
+        margin: 0 auto; /* Align slide image horizontally center */
+        height: auto;
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 602px) {
+    .carousel {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .carousel .item {
+        max-height: 250px; /* Prevent carousel from being distorted if for some reason image doesn't load */
+    }
+
+    .carousel .item img {
+        margin: 0 auto; /* Align slide image horizontally center */
+        height: 250px;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+
 
 /* Général version rétroprojecteur pourri 1024/768 */
 @media only screen and (max-width: 1024px) {
-    section {
-        padding-top: 106px;
-    }
-
     .carousel {
         max-height: 480px;
         overflow: hidden;
@@ -70,3 +125,19 @@ section {
     }
 }
 
+
+
+/* Effet zoom sur image de page d'accueil seulement sur écran sup à 1024px */
+@media only screen and (min-width: 1024px) {
+    .column#zoomIn img {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transition: .3s ease-in-out;
+        transition: .3s ease-in-out;
+    }
+
+    .column#zoomIn:hover img {
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+}
