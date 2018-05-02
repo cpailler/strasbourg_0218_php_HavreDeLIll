@@ -108,8 +108,8 @@ class GestionMailController extends AbstractController
         //Content
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'Refus de votre réservation au Havre de l\'Ill';
-        $mail->Body    = 'Votre réservation au Havre de l\'Ill du '.$resa['dateDebut'].' au '.$resa['dateFin'].' a été refusée par le propriétaire';
-        $mail->AltBody = 'Votre réservation au Havre de l\'Ill du '.$resa['dateDebut'].' au '.$resa['dateFin'].' a été refusée par le propriétaire';
+        $mail->Body    = 'Votre réservation au Havre de l\'Ill du '.$resa['dateDebut'].' au '.$resa['dateFin'].' a été refusée par le propriétaire.';
+        $mail->AltBody = 'Votre réservation au Havre de l\'Ill du '.$resa['dateDebut'].' au '.$resa['dateFin'].' a été refusée par le propriétaire.';
 
         return $mail->send(header('Location:/Administration/ReservationsEnAttente'));
 
