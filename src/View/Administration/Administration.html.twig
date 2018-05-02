@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <link rel="icon" href="/assets/images/favicon.png">
 
     <title>Pages d'Administration</title>
 
@@ -44,16 +44,44 @@
                             Tableau de bord <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <div class="alert alert-dark" role="alert">
-                    <h5  class="">
-                        <a class="nav-link" href="">
-                            <span data-feather="file"></span>
-                        <span>Accueil</span>
-                        <a class="d-flex align-items-center text-muted" href="">
+                    <li class="alert alert-dark" role="alert">
+                        <h5 class="">
+                            <a class="nav-link" href="">
+                                <span data-feather="calendar"></span>
+                                <span>Réservations</span>
+                            </a>
+                        </h5>
+                    </li>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Administration/CalendrierAdmin">
+                                <span data-feather="calendar"></span>
+                                Calendrier
+                            </a>
+                        </li>
 
-                        </a>
-                    </h5>
-                    </div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Administration/ReservationsEnAttente">
+                                <span data-feather="check-square"></span>
+                                A valider
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Administration/BloquerChambre">
+                                <span data-feather="slash"></span>
+                                Bloquer une chambre
+                            </a>
+                        </li>
+                    </ul>
+                    <li class="alert alert-dark" role="alert">
+                        <h5  class="">
+                            <a class="nav-link" href="">
+                                <span data-feather="file"></span>
+                            <span>Accueil</span>
+                            </a>
+                        </h5>
+                    </li>
                             <ul class="nav flex-column mb-2">
                                 <li class="nav-item">
                                     <a class="nav-link" href="/Administration/DiapoAccueil">
@@ -69,16 +97,14 @@
                                     </a>
                                 </li>
                             </ul>
-                    <div class="alert alert-dark" role="alert">
+                    <li class="alert alert-dark" role="alert">
                     <h5 class=" ">
                         <a class="nav-link" href="/Administration/Localisation">
                             <span data-feather="map-pin"></span>
                             <span>Localisation</span>
-                            <a class="d-flex align-items-center text-muted" href="#">
-
-                            </a>
+                        </a>
                     </h5>
-                    </div>
+                    </li>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
                             <a class="nav-link" href="/Administration/Localisation">
@@ -87,16 +113,14 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="alert alert-dark" role="alert">
+                    <li class="alert alert-dark" role="alert">
                     <h5 class="">
                         <a class="nav-link" href="">
                             <span data-feather="home"></span>
                             <span>Chambres</span>
-                            <a class="d-flex align-items-center text-muted" href="#">
-
-                            </a>
+                        </a>
                     </h5>
-                    </div>
+                    </li>
                         <ul class="nav flex-column mb-2">
                             <li class="nav-item">
                                 <a class="nav-link" href="/Administration/Chambres">
@@ -112,58 +136,22 @@
                                 </a>
                             </li>
                         </ul>
-                    <div class="alert alert-dark" role="alert">
+                    <li class="alert alert-dark" role="alert">
                     <h5 class="">
                         <a class="nav-link" href="">
                             <span data-feather="shield"></span>
                             <span>Parlementaires</span>
-                            <a class="d-flex align-items-center text-muted" href="#">
-
-                            </a>
+                        </a>
                     </h5>
-                    </div>
-                            <ul class="nav flex-column mb-2">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/Administration/Parlementaires">
-                                        <span data-feather="file-text"></span>
-                                        Articles
-                                    </a>
-                                </li>
-                            </ul>
-
-
-
-                    <div class="alert alert-dark" role="alert">
-                <h5 class="">
-                    <a class="nav-link" href="">
-                        <span data-feather="calendar"></span>
-                        <span>Réservations</span>
-                        <a class="d-flex align-items-center text-muted" href="#">
-
-                        </a>
-                </h5>
-                </div>
-                <ul class="nav flex-column mb-2">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Administration/CalendrierAdmin">
-                            <span data-feather="calendar"></span>
-                            Calendrier
-                        </a>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Administration/ReservationsEnAttente">
-                            <span data-feather="check-square"></span>
-                            A valider
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Administration/BloquerChambre">
-                            <span data-feather="slash"></span>
-                            Bloquer une chambre
-                        </a>
-                    </li>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Administration/Parlementaires">
+                                <span data-feather="file-text"></span>
+                                Articles
+                            </a>
+                        </li>
+                    </ul>
                 </ul>
             </div>
         </nav>
@@ -174,11 +162,12 @@
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                 <h1 class="h2">Tableau de bord</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-
-                    <button class="btn btn-sm btn-outline-secondary ">
-                        <span data-feather="calendar"></span>
-                       Réservation en Attente
-                    </button>
+                    <a href="/Administration/ReservationsEnAttente">
+                        <button href="/Administration/ReservationsEnAttente" class="btn btn-sm btn-outline-secondary ">
+                            <span data-feather="calendar"></span>
+                            Réservation en Attente
+                        </button>
+                    </a>
                 </div>
             </div>
 
