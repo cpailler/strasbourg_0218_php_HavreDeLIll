@@ -24,6 +24,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('POST', '/Contact/mail', 'GestionMail/envoiMail');
    // $r->addRoute('GET', '/Reservation/mail', 'Reservation/envoiMail');
     $r->addRoute('GET', '/Administration', 'Administration/index');
+    $r->addRoute('GET', '/MentionsLegales', 'MentionsLegales/index');
     $r->addRoute('GET', '/Administration/DiapoAccueil', 'Administration/DiapoAccueil');
     $r->addRoute('POST', '/Administration/DiapoAccueil', 'Administration/DiapoAccueil');
     $r->addRoute('GET', '/Administration/ArticlesAccueil', 'Administration/ArticlesAccueil');
@@ -44,6 +45,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/Administration/CalendrierAdmin', 'Administration/CalendrierAdmin');
     $r->addRoute('POST', '/Administration/CalendrierAdmin/{initMonth:\d+}/{initYear:\d+}', 'Administration/CalendrierAdmin');
     $r->addRoute('POST', '/Administration/CalendrierAdmin', 'Administration/CalendrierAdmin');
+
 
 });
 
